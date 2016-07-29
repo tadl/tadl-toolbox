@@ -1,0 +1,10 @@
+<%= render 'lists_menu' %>
+<div class="padding-all">
+	<% if !@lists.empty? %>
+		<% @lists.each do |list| %>
+			<p><%= list.name %></p>
+		<% end %>
+	<% else %>
+		<p>There currently are no lists saved.</p>
+	<% end  %>
+</div>

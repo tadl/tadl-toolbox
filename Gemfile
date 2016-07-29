@@ -20,6 +20,10 @@ gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'unicorn', group: :production
 gem 'dotenv-rails', :groups => [:development, :test]
+gem 'responders', '~> 2.0'
+gem 'addressable'
+gem 'httparty'
+
 
 # Include if you need background jobs and/or caching
 # gem 'sidekiq', '4.1.0'

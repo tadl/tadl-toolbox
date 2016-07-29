@@ -1,8 +1,8 @@
-<div id="user-widget">
-  <% if current_user %>
-    Welcome <strong><%= current_user.name %></strong>!
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-  <% else %>
-    <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
-  <% end %>
-</div>
+<h2>Home</h2>
+<p>Welcome to the TADL toolbox! This web application provides TADL staff members the ability to:</p>
+<ul>
+	<li>Manage Lists for the Website</li>
+	<li>Upload Covers</li>
+	<li>Attach Trailers</li>
+	<li>Write Reviews</li>
+</ul>

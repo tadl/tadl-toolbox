@@ -1,0 +1,14 @@
+<% if @message == 'success' %>
+	$('#new_list_form').hide()
+	var content = '<div class="alert alert-success" role="alert">'
+	content += '<h4>List succesfully saved!</h4>'
+	content += '<p><b>Name:</b> <%= escape_javascript(@list_name)%></p>'
+	content += '<p><b>Short Code:</b> <%= escape_javascript(@list_code)%> </p></div>'
+	content += '<div class="btn-group padding-all">'
+	content += '<a href="/new_list"><button type="button" class="btn btn-primary">Create Another List</button></a></div>'
+	content += '<div class="btn-group padding-all">' 
+	content += '<a href="/new_list"><button type="button" class="btn btn-default">Edit List</button></a></div>' 
+	$('#messages').html(content)
+<% else %>
+	$('#messages').html('<%= escape_javascript(@message)%>')
+<% end %>
