@@ -7,7 +7,7 @@ module ApplicationHelper
 		if item == 'home'
     		matches = ['/home','/']
     	elsif item == 'lists'
-    		matches = ['/lists','/new_list','/my_lists']
+    		matches = ['/lists','/new_list','/my_lists','/show_list']
     	else
     		return ''
     	end

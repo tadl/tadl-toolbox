@@ -1,11 +1,31 @@
 <%= render 'lists_menu' %>
 <div class="padding-all">
-	<p><b>List Name:</b> <%= @list.name %></p>
+	<p><b>List Name:</b> <%= @list.name %> <a href="/show_list.json?code=<%= @list.code %>">JSON</a></p>
 	<p><b>Short Code:</b> <%= @list.code %></p>
-	<p><b>Catalog Url:</b> <%= @list.url %></p>
+	<p><b>Updated On:</b> <%= @list.updated_at.strftime('%B %d %r') %></p>
+	<div class="btn-group padding-all">
+		<button type="button" class="btn btn-success" onclick="refresh_list('<%= @list.id %>')">Refresh List</button>
+	</div>
+	<div class="btn-group padding-all">
+		<a href="<%= @list.url %>" target="_blank">
+			<button type="button" class="btn btn-primary">Show in Catalog</button>
+		</a>
+	</div>
+	<div class="btn-group padding-all">
+		<button type="button" class="btn btn-danger">Delete List</button>
+	</div>
 	<p><b>List Items:</b></p>
 	<% @items.each do |i| %>
-		<img src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/<%= i['id']%>">
-		<p><%= i['title'] %> - <%= i['author'] %></p>
+		<div class="row">
+			<div class="col-sm-3">
+				<img class="img-thumbnail img-responsive item-preview" src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/<%= i['id']%>">
+			</div>
+			<div class="col-sm-9">
+				<p><b>Title:</b> <%= i['title'] %></p>  
+				<p><b>Author/Group:</b> <%= i['author'] %></p>
+				<p><b>Record ID:</b> <%= i['id'] %></p>
+				<p><a href="https://catalog.tadl.org/main/details?id=<%= i['id'] %>">View in Catalog</a></p>
+			</div>
+		</div>
 	<% end %>
 </div>

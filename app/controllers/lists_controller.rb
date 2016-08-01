@@ -1,4 +1,8 @@
 class ListsController < ApplicationController
+	before_action :authenticate_user!, :except => [:show_list]
+	before_filter(:only => :show_list) do |controller|
+   		authenticate_user! unless controller.request.format.json?
+ 	end
 	respond_to :html, :json, :js
   	def show_lists
   		@lists = List.all
@@ -18,17 +22,12 @@ class ListsController < ApplicationController
   			list.name = params['name']
   			list.url = params['url']
   			list.code = URI.encode(list.name.gsub(/\s+/, ''))
-  			list.created_by = current_user.id
+  			list.admin_id = current_user.id
   			if list.check_url == true
-  				confirmation = list.save
-  				if confirmation == true
-  					@list_id = list.id
-  					@list_code = list.code
-  					@list_name = list.name
-  					@message = 'success'
-  				else
-  					@message = list.errors.messages.values[0][0].to_s
-  				end
+  				@list_id = list.id
+  				@list_code = list.code
+  				@list_name = list.name
+  				@message = 'success'
   			else
   				@message = 'Invalid Url'
   			end
@@ -43,7 +42,7 @@ class ListsController < ApplicationController
   	end
 
   	def my_lists
-  		@lists = List.all
+  		@lists = current_user.lists.all
   	end
 
   	def show_list
@@ -57,4 +56,18 @@ class ListsController < ApplicationController
   	  	end
   	end
 
+  	def refresh_list
+  		if params['list_id']
+  			list_id = params['list_id'].to_i
+  			list = List.find(list_id)
+  			if list.check_url == true
+  				@message = 'success'
+  			else
+  				@message = 'fail'
+  			end
+  		end
+  		respond_to do |format|
+  	    	format.js
+  	  	end
+  	end
 end
