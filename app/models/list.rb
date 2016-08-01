@@ -26,7 +26,12 @@ class List < ActiveRecord::Base
 	def confirm_items(url)
 		response = HTTParty.get(url).parsed_response
 		if response['items']
-			check_covers_and_save_to_cache(response['items']) 
+			items = response['items']
+		elsif response['list']['items']
+			items = response['list']['items']
+		end
+		if items
+			check_covers_and_save_to_cache(items) 
 			return true
 		else
 			return false
@@ -35,6 +40,16 @@ class List < ActiveRecord::Base
 
 	def check_covers_and_save_to_cache(items)
 		results_with_images = Array.new
+		# See if we are looking at a list or a search
+		if self.url.include? 'view_list'
+			items_from_catalog = Array.new
+			items.each do |i|
+				url ='https://catalog.tadl.org/main/details.json?id=' + i['record_id']
+				response = HTTParty.get(url).parsed_response
+				items_from_catalog.push(response)
+			end
+			items = items_from_catalog
+		end
 		items.each do |i|
             url = 'https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/' + i['id'].to_s
             image = MiniMagick::Image.open(url) 

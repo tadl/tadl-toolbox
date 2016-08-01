@@ -17,7 +17,7 @@ class ListsController < ApplicationController
   			list = List.new
   			list.name = params['name']
   			list.url = params['url']
-  			list.code = URI.encode(list.name)
+  			list.code = URI.encode(list.name.gsub(/\s+/, ''))
   			list.created_by = current_user.id
   			if list.check_url == true
   				confirmation = list.save
