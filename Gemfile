@@ -31,7 +31,7 @@ gem 'httparty'
 # gem 'redis'
 
 # Include if we need image processing
-# gem 'mini_magick'
+gem 'mini_magick'
 
 # Include if we need multi-config
 # gem 'config'

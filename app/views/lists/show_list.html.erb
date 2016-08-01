@@ -1,0 +1,11 @@
+<%= render 'lists_menu' %>
+<div class="padding-all">
+	<p><b>List Name:</b> <%= @list.name %></p>
+	<p><b>Short Code:</b> <%= @list.code %></p>
+	<p><b>Catalog Url:</b> <%= @list.url %></p>
+	<p><b>List Items:</b></p>
+	<% @items.each do |i| %>
+		<img src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/<%= i['id']%>">
+		<p><%= i['title'] %> - <%= i['author'] %></p>
+	<% end %>
+</div>

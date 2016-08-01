@@ -45,4 +45,16 @@ class ListsController < ApplicationController
   	def my_lists
   		@lists = List.all
   	end
+
+  	def show_list
+  		if params['code']
+  			@items = Rails.cache.fetch(params['code'].to_s)
+  			@list = List.find_by code: params['code']
+  		end
+  		respond_to do |format|
+  			format.html
+  	    	format.json {render :json => {:items => @items}}
+  	  	end
+  	end
+
 end

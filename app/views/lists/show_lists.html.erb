@@ -2,7 +2,7 @@
 <div class="padding-all">
 	<% if !@lists.empty? %>
 		<% @lists.each do |list| %>
-			<p><%= list.name %></p>
+			<p><%= list.name %></p><a href="/show_list?code=<%= list.code %>"> view</a>
 		<% end %>
 	<% else %>
 		<p>There currently are no lists saved.</p>
