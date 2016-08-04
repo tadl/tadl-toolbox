@@ -52,7 +52,7 @@ class ListsController < ApplicationController
   		end
   		respond_to do |format|
   			format.html
-  	    	format.json {render :json => {:items => @items}}
+  	    	format.json {render :json => {:search_url=>  @list.url, :items => @items}}
   	  	end
   	end
 
@@ -64,6 +64,23 @@ class ListsController < ApplicationController
   				@message = 'success'
   			else
   				@message = 'fail'
+  			end
+  		end
+  		respond_to do |format|
+  	    	format.js
+  	  	end
+  	end
+
+  	def delete_list
+  		@message = 'fail'
+  		if params['list_id']
+  			list_id = params['list_id'].to_i
+  			list = List.find(list_id)
+  			if list.admin_id == current_user.id
+  				list.destroy
+  				@message = 'success'
+  			else
+  				@message = 'not your list'
   			end
   		end
   		respond_to do |format|

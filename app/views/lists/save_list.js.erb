@@ -7,7 +7,7 @@
 	content += '<div class="btn-group padding-all">'
 	content += '<a href="/new_list"><button type="button" class="btn btn-primary">Create Another List</button></a></div>'
 	content += '<div class="btn-group padding-all">' 
-	content += '<a href="/new_list"><button type="button" class="btn btn-default">Edit List</button></a></div>' 
+	content += '<a href="/show_list?code=<%= escape_javascript(@list_code)%>"><button type="button" class="btn btn-default">View List</button></a></div>' 
 	$('#messages').html(content)
 <% else %>
 	$('#messages').html('<%= escape_javascript(@message)%>')

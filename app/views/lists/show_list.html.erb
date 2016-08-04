@@ -1,5 +1,5 @@
 <%= render 'lists_menu' %>
-<div class="padding-all">
+<div id="list_details" class="padding-all">
 	<p><b>List Name:</b> <%= @list.name %> <a href="/show_list.json?code=<%= @list.code %>">JSON</a></p>
 	<p><b>Short Code:</b> <%= @list.code %></p>
 	<p><b>Updated On:</b> <%= @list.updated_at.strftime('%B %d %r') %></p>
@@ -11,9 +11,11 @@
 			<button type="button" class="btn btn-primary">Show in Catalog</button>
 		</a>
 	</div>
-	<div class="btn-group padding-all">
-		<button type="button" class="btn btn-danger">Delete List</button>
-	</div>
+	<% if @list.admin_id == current_user.id %>
+		<div class="btn-group padding-all">
+			<button id="delete_button" type="button" class="btn btn-danger" onclick="confirm_delete_list('<%= @list.id %>')">Delete List</button>
+		</div>
+	<% end %>
 	<p><b>List Items:</b></p>
 	<% @items.each do |i| %>
 		<div class="row">

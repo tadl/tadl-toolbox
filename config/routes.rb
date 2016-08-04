@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   match 'save_list', to: 'lists#save_list', as: 'save_list', via: [:get, :post]
   match 'show_list', to: 'lists#show_list', as: 'show_list', via: [:get, :post]
   match 'refresh_list', to: 'lists#refresh_list', as: 'refresh_list', via: [:get, :post]
+  match 'delete_list', to: 'lists#delete_list', as: 'delete_list', via: [:get, :post]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
