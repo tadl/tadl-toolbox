@@ -23,6 +23,9 @@ gem 'dotenv-rails', :groups => [:development, :test]
 gem 'responders', '~> 2.0'
 gem 'addressable'
 gem 'httparty'
+gem 'sidekiq', '4.1.0'
+gem 'sidekiq-cron', '~> 0.4.0'
+gem 'redis'
 
 
 # Include if you need background jobs and/or caching
