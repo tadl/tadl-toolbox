@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
+  #Lists
   match 'lists', to: 'lists#show_lists', as: 'lists', via: [:get, :post]
   match 'my_lists', to: 'lists#my_lists', as: 'my_lists', via: [:get, :post]
   match 'new_list', to: 'lists#create_lists', as: 'new_list', via: [:get, :post]
@@ -24,6 +25,8 @@ Rails.application.routes.draw do
   match 'show_list', to: 'lists#show_list', as: 'show_list', via: [:get, :post]
   match 'refresh_list', to: 'lists#refresh_list', as: 'refresh_list', via: [:get, :post]
   match 'delete_list', to: 'lists#delete_list', as: 'delete_list', via: [:get, :post]
+  #Covers
+  match 'covers', to: 'covers#covers_home', as: 'covers', via: [:get, :post]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
