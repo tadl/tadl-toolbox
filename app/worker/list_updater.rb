@@ -7,6 +7,6 @@ class ListUpdater < ApplicationController
   		l.check_url
   	end
   end
-  Sidekiq::Cron::Job.create(name: 'update lists - every 1 hour', cron: '00 * * * *', class: 'ListUpdater')
+  Sidekiq::Cron::Job.create(name: 'update lists - every 1 hour', cron: '*/5 * * * *', class: 'ListUpdater')
 
 end
