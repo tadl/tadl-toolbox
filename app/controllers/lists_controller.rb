@@ -52,7 +52,7 @@ class ListsController < ApplicationController
   		end
   		respond_to do |format|
   			format.html
-  	    	format.json {render :json => {:search_url=>  @list.url, :items => @items}}
+  	    	format.json {render :json => {:list_name=> @list.name, :search_url=>  @list.url, :items => @items}}
   	  	end
   	end
 

@@ -1,17 +1,4 @@
 Rails.application.routes.draw do
-  get 'lists/show_lists'
-
-  get 'lists/create_lists'
-
-  get 'lists/edit_lists'
-
-  get 'lists/my_lists'
-
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
   root 'main#index'
   match 'home', to: 'main#index', as: 'home', via: [:get, :post]
   match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
@@ -26,7 +13,7 @@ Rails.application.routes.draw do
   match 'refresh_list', to: 'lists#refresh_list', as: 'refresh_list', via: [:get, :post]
   match 'delete_list', to: 'lists#delete_list', as: 'delete_list', via: [:get, :post]
   #Covers
-  match 'covers', to: 'covers#covers_home', as: 'covers', via: [:get, :post]
+  match 'covers', to: 'covers#home', as: 'covers', via: [:get, :post]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
