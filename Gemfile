@@ -26,6 +26,7 @@ gem 'httparty'
 gem 'sidekiq', '4.1.0'
 gem 'sidekiq-cron', '~> 0.4.0'
 gem 'redis'
+gem 'dalli'
 
 
 # Include if you need background jobs and/or caching
