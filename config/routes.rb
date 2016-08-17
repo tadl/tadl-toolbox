@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   match 'delete_list', to: 'lists#delete_list', as: 'delete_list', via: [:get, :post]
   #Covers
   match 'covers', to: 'covers#home', as: 'covers', via: [:get, :post]
+  match 'add_cover', to: 'covers#add_manually', as: 'add_cover', via: [:get, :post]
+  match 'not_found_covers', to: 'covers#not_found', as: 'not_found_covers', via: [:get, :post]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
