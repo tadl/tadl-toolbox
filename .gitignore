@@ -16,3 +16,4 @@
 /log/*.log
 /tmp
 /sidekiq.log
+/public/jackets

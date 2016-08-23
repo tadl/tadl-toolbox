@@ -8,6 +8,8 @@ module ApplicationHelper
     		matches = ['/home','/']
     	elsif item == 'lists'
     		matches = ['/lists','/new_list','/my_lists','/show_list']
+        elsif item == 'covers'
+            matches = ['/covers']
     	else
     		return ''
     	end

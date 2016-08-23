@@ -27,15 +27,7 @@ gem 'sidekiq', '4.1.0'
 gem 'sidekiq-cron', '~> 0.4.0'
 gem 'redis'
 gem 'dalli'
-
-
-# Include if you need background jobs and/or caching
-# gem 'sidekiq', '4.1.0'
-# gem 'sidekiq-cron', '~> 0.4.0'
-# gem 'redis'
-
-# Include if we need image processing
+gem 'will_paginate', '~> 3.1.0'
+gem 'carrierwave'
 gem 'mini_magick'
-
-# Include if we need multi-config
-# gem 'config'
+gem 'remotipart', '~> 1.2'

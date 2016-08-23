@@ -1,0 +1,8 @@
+<%= form_tag('/cover_upload.js', remote: true,  multipart: true) do %>
+  <p>
+    <label>Upload File</label>
+    <%= file_field_tag 'file' %>
+    <%= hidden_field_tag 'record_id', @record_id %>
+    <%= submit_tag "Save" %>
+  </p>
+<% end %>
