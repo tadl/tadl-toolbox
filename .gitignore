@@ -17,3 +17,4 @@
 /tmp
 /sidekiq.log
 /public/jacket
+/public/upload
