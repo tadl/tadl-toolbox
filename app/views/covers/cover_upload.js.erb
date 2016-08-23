@@ -1,1 +1,7 @@
-alert("pizza");
+<% if @message == 'sucess' %>
+	alert('it worked!')
+<% else %>
+	<% @cover.errors.each do |attr, msg| %>
+  		alert('<%= msg %>') 
+	<% end %>
+<% end %>

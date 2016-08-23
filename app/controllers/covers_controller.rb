@@ -19,6 +19,11 @@ class CoversController < ApplicationController
   	def cover_upload
   		@cover = Cover.find_by record_id: params[:record_id]
   		@cover.coverart = params[:file]
-  		@cover.save!
+  		if @cover.valid? == true
+  			@message = 'success'
+  			@cover.save!
+  		else
+  			@message = 'fail'
+  		end
   	end
 end

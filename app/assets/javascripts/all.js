@@ -48,3 +48,24 @@ function upload_cover(record_id){
 function mark_not_found(record_id){
 	alert(record_id)
 }
+
+
+function preview_file(input, record_id) {
+  var target_div = '#img_prev_' + record_id
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $(target_div)
+        .attr('src', e.target.result)
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+  $(target_div).css('display','block')
+}
+
+function preview_url(input, record_id) {
+  var target_div = '#img_prev_' + record_id
+  var image_url = $(input).val()
+  $(target_div).attr('src', image_url)
+  $(target_div).css('display','block')
+}

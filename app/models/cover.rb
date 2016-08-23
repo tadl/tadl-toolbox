@@ -1,10 +1,15 @@
 class Cover < ActiveRecord::Base
+	attr_accessor :coverart_upload_width, :coverart_upload_height
 	require 'open-uri'
     require 'mini_magick'
     require 'carrierwave/orm/activerecord'
 	validates_uniqueness_of :record_id
-	validates :validate_minimum_image_size
 	mount_uploader :coverart, CoverartUploader
+	validate :check_coverart_dimensions, if :uploading?
+
+	def uploading?
+  		coverart_upload_width.present? && coverart_upload_height.present?
+	end
 
 	def check_for_cover(record_id)
         url = 'https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/' + record_id.to_s
@@ -20,13 +25,11 @@ class Cover < ActiveRecord::Base
         end
 	end
 
-
-
-
-  	def validate_minimum_image_size
-    	image = MiniMagick::Image.open(coverart.path)
-    	unless image[:width] > 1400 && image[:height] > 400
-      		errors.add :image, "should be 400x400px minimum!" 
-    	end
+	def check_coverart_dimensions
+		if !coverart_upload_height.nil? && coverart_upload_height > 150
+    		errors.add :coverart, "Image must be at least 400px in height" 
+  		end
   	end
+
+end
 end
