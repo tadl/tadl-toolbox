@@ -1,20 +1,26 @@
 <div id="cover_form_<%= @record_id %>">
 	<img id="img_prev_<%= @record_id %>" src="#" alt="your image" class="preview_image" style="display: none" />
 	<%= form_tag('/cover_upload', remote: true,  multipart: true) do %>
-	  <p>
+	 <p>
 	    <label>Enter Image URL:</label>
-	    <%= text_field_tag 'remote_coverart_url', '' , :onchange => "preview_url(this, '#{@record_id}')" %>
+	    <%= text_field_tag 'remote_coverart_url', '' , :id => 'url_' + @record_id.to_s %>
 	    <br>
 	    <label>Or Upload File:</label>
-	    <%= file_field_tag 'coverart', :onchange => "preview_file(this, '#{@record_id}')" %>
+	    <%= file_field_tag 'coverart', :id => 'file_' + @record_id.to_s  %>
 	    <%= hidden_field_tag 'record_id', @record_id %>
-	    <%= submit_tag "Save" %>
-	  </p>
+	    <div id="messages_<%= @record_id %>">
+		</div>
+		<div class="btn-group padding-all">
+			<button type="button" class="btn btn-primary" onclick="preview_image('<%= @record_id %>')">Preview</button>
+		</div>
+	    <div class="btn-group padding-all">
+	    	<%= button_tag(type: 'submit', class: "btn btn-success") do %>
+ 				Upload
+			<% end %>
+		</div>
+		<div class="btn-group padding-all">
+			<button type="button" class="btn btn-danger" onclick="cancel_upload_cover('<%= @record_id %>')">Cancel</button>
+		</div>
+	</p>
 	<% end %>
-	<div id="messages_<%= @record_id %>">
-
-	</div>
-	<div class="btn-group padding-all">
-		<button type="button" class="btn btn-danger" onclick="cancel_upload_cover('<%= @record_id %>')">Cancel</button>
-	</div>
 </div>

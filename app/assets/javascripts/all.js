@@ -48,9 +48,35 @@ function preview_file(input, record_id) {
   $(target_div).css('display','block')
 }
 
+
+
+
+
+
+
 function preview_url(input, record_id) {
   var target_div = '#img_prev_' + record_id
   var image_url = $(input).val()
   $(target_div).attr('src', image_url)
   $(target_div).css('display','block')
+}
+
+function preview_image(record_id){
+	var file_input = '#file_' + record_id
+	var url_input = '#url_' + record_id
+	var message_div = '#messages_' + record_id
+	var check_file = $(file_input).val()
+	var check_url = $(url_input).val()
+	$(message_div).html('') 
+	if(check_file){
+		$(file_input).show(function(){ 
+    		preview_file(this, record_id)
+		});
+	}else if(check_url){
+		$(url_input).show(function(){ 
+    		preview_url(this, record_id)
+		});
+	}else{
+		$(message_div).append('<p class="error_text">Error: No image selected for preview</p>') 
+	}
 }
