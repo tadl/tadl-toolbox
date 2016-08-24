@@ -29,21 +29,6 @@ function cancel_upload_cover(record_id){
 	$(target_show).css('display','block')
 }
 
-function upload_cover(record_id){
-	target_form = 'form_' + record_id
-	var formData = new FormData($(target_form)[0]);
-	$.ajax({
-    	url: "cover_upload",
-    	type: "POST",
-    	data: formData,
-    	async: false,
-    	cache: false,
-    	contentType: false,
-    	processData: false
-    });
-
-
-}
 
 function mark_not_found(record_id){
 	alert(record_id)

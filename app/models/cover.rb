@@ -26,7 +26,7 @@ class Cover < ActiveRecord::Base
 	end
 
 	def check_coverart_dimensions
-		if !coverart_upload_height.nil? && coverart_upload_height > 150
+		if !coverart_upload_height.nil? && coverart_upload_height < 400 
     		errors.add :coverart, "Image must be at least 400px in height" 
   		end
   	end

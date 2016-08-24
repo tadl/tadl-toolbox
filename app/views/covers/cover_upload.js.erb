@@ -1,7 +1,16 @@
-<% if @message == 'sucess' %>
-	alert('it worked!')
+var target_div =  <%= 'cover_' + @cover.record_id.to_s %>
+var message_div = <%= 'messages_' + @cover.record_id.to_s %>
+$(message_div).html('')
+<% if @message == 'success' %>
+		$(message_div).append('<p class="success_text">Cover was uploaded successfully</p>')
+		setTimeout("$(target_div).addClass('animated bounceOutRight')", 1000)
+		setTimeout('location.reload()', 1200)
 <% else %>
-	<% @cover.errors.each do |attr, msg| %>
-  		alert('<%= msg %>') 
+	<% if @cover.errors.any? %>
+		<% @cover.errors.each do |attr, msg| %>
+  			$(message_div).append('<p class="error_text">Error: <%= escape_javascript(msg) %></p>') 
+		<% end %>
+	<% else %>
+		$(message_div).append('<p class="error_text">Error: <%= escape_javascript(@message) %></p>') 
 	<% end %>
 <% end %>
