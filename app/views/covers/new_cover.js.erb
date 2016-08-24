@@ -1,0 +1,5 @@
+var target_show = '#cover_form_' + <%= @record_id %>	
+var target_hide = '#list_buttons_' + <%= @record_id %>
+
+$(target_hide).css('display','none')
+$(target_show).html("<%= escape_javascript(render partial: 'new_cover_form') %>");

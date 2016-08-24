@@ -1,0 +1,45 @@
+.padding-all{
+	padding: 10px;
+}
+
+#main-container{
+	margin-top: 10px;
+}
+
+#user-widget{
+	float: right;
+}
+
+#logo{
+	width: 40px;
+	margin: 10px;
+	float: left;
+}
+
+#site_name{
+	float: left;
+	margin-top: 30px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.item_preview{
+	max-width: 75px;
+}
+
+.preview_image{
+	max-height: 200px;
+	margin: 10px;
+}
+
+.error_text{
+	color: red;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.success_text{
+	color: green;
+	font-size: 16px;
+	font-weight: bold;
+}
