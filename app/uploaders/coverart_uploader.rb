@@ -13,7 +13,7 @@ class CoverartUploader < CarrierWave::Uploader::Base
   end
 
   def set_filename(model_id)
-    cover = Cover.find(model_id)
+    cover = Cover.find(model_id) rescue Cover.new
     return cover.record_id.to_s
   end 
 
