@@ -5,7 +5,7 @@ class CoverartUploader < CarrierWave::Uploader::Base
   storage :file
 
   def store_dir
-    ENV['MOUNT_POINT']+'jacket/orginal/r'
+    ENV['MOUNT_POINT']+'jacket/original/r'
   end
 
   def filename
