@@ -3,23 +3,14 @@
 <%= will_paginate @covers %>
 
 <% @covers.each do |c| %>
-	<div id="cover_<%= c.record_id %>">
-		<p><b>Title:</b> <%= c.title %></p>
-		<p><b>Artist:</b> <%= c.artist %></p>
-		<p><b>Item Type:</b> <%= c.item_type %></p>
-		<p><b>Release Date - Publisher:</b> <%= c.release_date %> - <%= c.publisher %></p>
-		<% if !c.abstract.nil? %>
-			<p><b>Abstract:</b> <%= c.abstract %></p>
-		<% end %>
-		<% if !c.track_list.nil? %>
-			<p><b>Track List:</b> <%= c.track_list %></p>
-		<% end %>
+	<div class="cover_details" id="cover_<%= c.record_id %>">
+		<%= render 'cover_details', :cover => c %> 
 		<div id="list_buttons_<%= c.record_id %>">
 			<div class="btn-group padding-all">
 				<button type="button" class="btn btn-success" onclick="show_upload_cover_form('<%= c.record_id %>')">Upload Cover</button>
 			</div>
 			<div class="btn-group padding-all">
-				<button type="button" class="btn btn-danger" onclick="mark_not_found('<%= c.record_id %>')">Not Found</button>
+				<button type="button" class="btn btn-danger" onclick="mark_not_found('<%= c.id %>')">Not Found</button>
 			</div>
 		</div>
 		<div id="cover_form_<%= c.record_id %>">

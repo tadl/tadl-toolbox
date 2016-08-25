@@ -5,7 +5,7 @@ class CoverartUploader < CarrierWave::Uploader::Base
   storage :file
 
   def store_dir
-    'jacket/orginal/r'
+    ENV['MOUNT_POINT']+'jacket/orginal/r'
   end
 
   def filename
@@ -24,7 +24,7 @@ class CoverartUploader < CarrierWave::Uploader::Base
       set_filename(model.id)
     end 
     def store_dir
-      'jacket/large/r'
+       ENV['MOUNT_POINT']+'jacket/large/r'
     end
   end
 
@@ -35,7 +35,7 @@ class CoverartUploader < CarrierWave::Uploader::Base
       set_filename(model.id)
     end 
     def store_dir
-      'jacket/medium/r'
+       ENV['MOUNT_POINT']+'jacket/medium/r'
     end
   end
 
@@ -46,7 +46,7 @@ class CoverartUploader < CarrierWave::Uploader::Base
       set_filename(model.id)
     end 
     def store_dir
-      'jacket/small/r'
+       ENV['MOUNT_POINT']+'jacket/small/r'
     end
   end
 

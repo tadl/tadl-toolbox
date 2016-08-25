@@ -10,7 +10,7 @@ class CoversController < ApplicationController
   	end
 
   	def not_found
-  		@covers = Cover.where(status: 'has cover').paginate(:page => params[:page], :per_page => 10)
+  		@covers = Cover.where(status: 'not found').paginate(:page => params[:page], :per_page => 10)
   	end
 
   	def add_manually
@@ -41,4 +41,12 @@ class CoversController < ApplicationController
   			@message = 'You must select an image for upload'
   		end
   	end
+
+  	def mark_not_found
+  		@cover = Cover.find(params[:id])
+  		@cover.status = 'not found'
+  		@cover.save!
+  	end
+
+
 end

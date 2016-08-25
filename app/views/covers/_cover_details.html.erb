@@ -1,0 +1,10 @@
+<p><b>Title:</b> <%= cover.title %></p>
+<p><b>Artist:</b> <%= cover.artist %></p>
+<p><b>Item Type:</b> <%= cover.item_type %></p>
+<p><b>Release Date - Publisher:</b> <%= cover.release_date %> - <%= cover.publisher %></p>
+<% if !cover.abstract.nil? %>
+	<p><b>Abstract:</b> <%= cover.abstract %></p>
+<% end %>
+<% if !cover.track_list.nil? %>
+	<p><b>Track List:</b> <%= cover.track_list %></p>
+<% end %>

@@ -30,8 +30,8 @@ function cancel_upload_cover(record_id){
 }
 
 
-function mark_not_found(record_id){
-	alert(record_id)
+function mark_not_found(cover_id){
+	$.post("mark_cover_not_found.js", {id: cover_id})
 }
 
 
@@ -47,12 +47,6 @@ function preview_file(input, record_id) {
   }
   $(target_div).css('display','block')
 }
-
-
-
-
-
-
 
 function preview_url(input, record_id) {
   var target_div = '#img_prev_' + record_id
