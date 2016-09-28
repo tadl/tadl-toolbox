@@ -3,7 +3,13 @@ class ListsController < ApplicationController
 	before_filter(:only => :show_list) do |controller|
    		authenticate_user! unless controller.request.format.json?
  	end
-	respond_to :html, :json, :js
+  before_filter :set_headers
+	respond_to :html, :json, :js, :only => [:show_list]
+
+    def set_headers
+      headers['Access-Control-Allow-Origin'] = '*'      
+    end  
+
   	def show_lists
   		@lists = List.all
   	end
