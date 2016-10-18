@@ -18,7 +18,7 @@ class ListsController < ApplicationController
   	end
 
   	def save_list
-  		@nlist_id = ''
+  		@list_id = ''
   		@list_name = ''
   		@list_code = ''
   		if params['url'].blank? || params['name'].blank?

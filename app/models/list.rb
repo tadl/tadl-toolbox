@@ -57,7 +57,7 @@ class List < ActiveRecord::Base
 		end
 		items.each do |i|
             url = 'https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/' + i['id'].to_s
-            image = MiniMagick::Image.open(url) 
+            image = MiniMagick::Image.open(url) rescue nil 
             if image != nil
                 if image.width > 2
                     results_with_images.push(i)
