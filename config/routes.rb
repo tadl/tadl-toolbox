@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   match 'show_list', to: 'lists#show_list', as: 'show_list', via: [:get, :post]
   match 'refresh_list', to: 'lists#refresh_list', as: 'refresh_list', via: [:get, :post]
   match 'delete_list', to: 'lists#delete_list', as: 'delete_list', via: [:get, :post]
+  match 'show_admins', to: 'lists#show_admins', as: 'show_admins', via: [:get, :post]
+  match 'change_list_owner', to: 'lists#change_list_owner', as: 'change_list_owner', via: [:get, :post]
   #Covers
   match 'covers', to: 'covers#home', as: 'covers', via: [:get, :post]
   match 'add_cover', to: 'covers#add_manually', as: 'add_cover', via: [:get, :post]

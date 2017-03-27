@@ -1,10 +1,12 @@
 function save_list(){
 	var list_name =  $('#list_name').val()
 	var list_url = $('#list_url').val()
+	$("#save_list_button").html("<i class='fa fa-spinner fa-spin'></i> Saving List")
 	$.post("save_list.js", {name: list_name, url: list_url})
 }
 
 function refresh_list(list_id){
+	$("#refresh_list_button").html("<i class='fa fa-spinner fa-spin'></i> Refreshing List")
 	$.post("refresh_list.js", {list_id: list_id})
 }
 
@@ -16,6 +18,22 @@ function confirm_delete_list(list_id){
 
 function delete_list(list_id){
 	$.post("delete_list.js", {list_id: list_id})
+}
+
+function show_admins_list(list_id){
+	$.post("show_admins.js", {list_id: list_id})
+}
+
+function confirm_change_list_owner(admin_name, admin_id, list_id){
+	$('#confirm_change_owner').css('display','block')
+	$('#confirm_change_owner').prepend('You are about to transfer ownership of this list to ' + admin_name)
+	var new_onclick = 'change_list_owner("'+ admin_id +'","'+ list_id +'")'
+	$("#confirm_change_owner_button").css('display','block')
+	$("#confirm_change_owner_button").attr("onclick", new_onclick)
+}
+
+function change_list_owner(admin_id,list_id){
+	$.post("change_list_owner.js", {list_id: list_id, new_owner_id: admin_id})
 }
 
 function show_upload_cover_form(record_id){

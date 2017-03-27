@@ -1,0 +1,7 @@
+<p><b>Transfer List Ownership To:</b><p>
+<% @admins.each do |a| %>
+	<a onclick="confirm_change_list_owner('<%= a.name %>','<%= a.id %>', '<%= @list_id %>')">
+		<%= a.name %>
+	</a> 
+	<br>
+<% end %>

@@ -1,10 +1,11 @@
 <%= render 'lists_menu' %>
 <div id="list_details" class="padding-all">
 	<p><b>List Name:</b> <%= @list.name %> <a href="/show_list.json?code=<%= @list.code %>">JSON</a></p>
+	<p><b>Created By:</b> <%= find_admin(@list.admin_id) %></p>
 	<p><b>Short Code:</b> <%= @list.code %></p>
 	<p><b>Updated On:</b> <%= @list.updated_at.strftime('%B %d %r') %></p>
 	<div class="btn-group padding-all">
-		<button type="button" class="btn btn-success" onclick="refresh_list('<%= @list.id %>')">Refresh List</button>
+		<button id="refresh_list_button" type="button" class="btn btn-success" onclick="refresh_list('<%= @list.id %>')">Refresh List</button>
 	</div>
 	<div class="btn-group padding-all">
 		<a href="<%= @list.url %>" target="_blank">
@@ -13,7 +14,25 @@
 	</div>
 	<% if @list.admin_id == current_user.id %>
 		<div class="btn-group padding-all">
-			<button id="delete_button" type="button" class="btn btn-danger" onclick="confirm_delete_list('<%= @list.id %>')">Delete List</button>
+			<button id="delete_button" type="button" class="btn btn-danger" onclick="confirm_delete_list('<%= @list.id %>')">
+				Delete List
+			</button>
+		</div>
+	<% end %>
+	<% if @list.admin_id == current_user.id %>
+		<div class="btn-group padding-all">
+			<button id="delete_button" type="button" class="btn btn-primary" onclick="show_admins_list('<%= @list.id %>')">
+				Change Owner
+			</button>
+		</div>
+		<div id="admin_list">
+		</div>
+		<div id="confirm_change_owner" style="display: none">
+			<div class="btn-group padding-all">
+				<button id="confirm_change_owner_button" type="button" class="btn btn-danger"0>
+					Confirm
+				</button>
+			</div>
 		</div>
 	<% end %>
 	<p><b>List Items:</b></p>

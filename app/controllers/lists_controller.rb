@@ -22,7 +22,7 @@ class ListsController < ApplicationController
   		@list_name = ''
   		@list_code = ''
   		if params['url'].blank? || params['name'].blank?
-  			@message = 'missing parameters'
+  			@message = 'Missing parameters'
   		else
   			list = List.new
   			list.name = params['name']
@@ -93,4 +93,36 @@ class ListsController < ApplicationController
   	    	format.js
   	  	end
   	end
+
+    def change_list_owner
+      if params['new_owner_id'].blank? || params['list_id'].blank?
+        @message = 'missing parameters'
+      else
+        new_owner_id = params['new_owner_id'].to_i
+        if Admin.find(new_owner_id)
+          list_id = params['list_id'].to_i
+          list = List.find(list_id)
+          if list.admin_id == current_user.id
+            list.admin_id = new_owner_id
+            list.save
+            @message = 'success'
+          else
+            @message = 'You do not have permission to change the owner of this list'
+          end
+        else
+          @message = 'list cannot be transfered. User not found'
+        end
+      end
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def show_admins
+      @list_id = params['list_id'].to_i
+      @admins = Admin.all
+      respond_to do |format|
+        format.js
+      end
+    end
 end

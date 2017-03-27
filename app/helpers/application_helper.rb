@@ -20,4 +20,10 @@ module ApplicationHelper
     	end
     	return active
 	end
+    
+    def find_admin(admin_id)
+        admin = Admin.find(admin_id)
+        admin_name = admin.name
+        return admin_name
+    end
 end

@@ -11,4 +11,5 @@
 	$('#messages').html(content)
 <% else %>
 	$('#messages').html('<%= escape_javascript(@message)%>')
+	$("#save_list_button").html("Save List")
 <% end %>
