@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   match 'new_cover', to: 'covers#new_cover', as: 'new_cover', via: [:get, :post]
   match 'cover_upload', to: 'covers#cover_upload', as: 'cover_upload', via: [:get, :post]
   match 'mark_cover_not_found', to: 'covers#mark_not_found', as: 'mark_cover_not_found', via: [:get, :post]
+  match 'load_cover', to: 'covers#load_cover', as: 'load_cover', via: [:get, :post]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

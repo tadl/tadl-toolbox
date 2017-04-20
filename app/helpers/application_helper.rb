@@ -9,7 +9,7 @@ module ApplicationHelper
     	elsif item == 'lists'
     		matches = ['/lists','/new_list','/my_lists','/show_list']
         elsif item == 'covers'
-            matches = ['/covers']
+            matches = ['/covers','/not_found_covers','/add_cover']
     	else
     		return ''
     	end

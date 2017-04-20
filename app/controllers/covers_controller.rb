@@ -14,8 +14,26 @@ class CoversController < ApplicationController
   	end
 
   	def add_manually
-  		
   	end
+
+    def load_cover
+      @cover = Cover.find_by record_id: params[:record_id]
+      if @cover.nil?
+        puts "looking for new cover"
+        @cover = Cover.new
+        if @cover.manual_load(params[:record_id])
+          puts @cover.artist
+          if @cover.valid? == true
+            @cover.save!
+          end
+          @message = 'success'
+        else
+          @message = "invalid record id"
+        end
+      else
+        @message = 'success'
+      end
+    end
 
   	def cover_upload
   		@cover = Cover.find_by record_id: params[:record_id]

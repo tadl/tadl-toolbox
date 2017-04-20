@@ -1,0 +1,5 @@
+<% if @message == 'success' %>
+	$('#record_details').html("<%= escape_javascript(render partial: 'cover_details', locals: {cover: @cover}) %>");
+<% else %>
+	alert('<%= @message %>')
+<% end %>

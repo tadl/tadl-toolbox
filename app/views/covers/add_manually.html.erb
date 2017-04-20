@@ -1,0 +1,14 @@
+<%= render 'covers_menu' %>
+<%= form_tag('/load_cover', remote: true,  multipart: true) do %>
+	<div class="input-group padding-all">
+	  <label for="record_id">Record ID: </label>
+	  <%= text_field_tag 'record_id', '' , :id => 'record_id' %>
+	</div>
+	<div class="btn-group padding-all">
+	    <%= button_tag(type: 'submit', class: "btn btn-success") do %>
+ 			Load Record
+		<% end %>
+	</div>
+<% end %>
+<div id="record_details">
+</div>

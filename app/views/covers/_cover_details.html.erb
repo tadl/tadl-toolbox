@@ -1,10 +1,31 @@
-<p><b>Title:</b> <%= cover.title %></p>
-<p><b>Artist:</b> <%= cover.artist %></p>
-<p><b>Item Type:</b> <%= cover.item_type %></p>
-<p><b>Release Date - Publisher:</b> <%= cover.release_date %> - <%= cover.publisher %></p>
-<% if !cover.abstract.nil? %>
-	<p><b>Abstract:</b> <%= cover.abstract %></p>
-<% end %>
-<% if !cover.track_list.nil? %>
-	<p><b>Track List:</b> <%= cover.track_list %></p>
-<% end %>
+<div class="cover_details" id="cover_<%= cover.record_id %>">
+	<p><b>Title:</b> <%= cover.title %></p>
+	<p><b>Artist:</b> <%= cover.artist %></p>
+	<p><b>Record ID:</b> <%= cover.record_id %> </p>
+	<p><b>Item Type:</b> <%= cover.item_type %></p>
+	<p><b>Release Date - Publisher:</b> <%= cover.release_date %> - <%= cover.publisher %></p>
+	<% if !cover.abstract.nil? %>
+		<p><b>Abstract:</b> <%= cover.abstract %></p>
+	<% end %>
+	<% if !cover.track_list.nil? %>
+		<p><b>Track List:</b> <%= cover.track_list %></p>
+	<% end %>
+	<div id="list_buttons_<%= cover.record_id %>">
+		<div class="btn-group padding-all">
+			<a href="https://catalog.tadl.org/main/details?id=<%= cover.record_id %>" target="new">
+				<button type="button" class="btn btn-default">View in Catalog</button>
+			</a>
+		</div>
+		<div class="btn-group padding-all">
+			<button type="button" class="btn btn-success" onclick="show_upload_cover_form('<%= cover.record_id %>')">Upload Cover</button>
+		</div>
+		<% if cover.status != 'not found' %>
+			<div class="btn-group padding-all">
+				<button type="button" class="btn btn-danger" onclick="mark_not_found('<%= cover.id %>')">Not Found</button>
+			</div>
+		<% end %>
+	</div>
+	<div id="cover_form_<%= cover.record_id %>">
+	</div>
+	<hr>
+</div>
