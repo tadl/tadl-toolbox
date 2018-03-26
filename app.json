@@ -16,7 +16,7 @@
             }
         ],
         "volumes": [
-            { "host": "/srv/toolbox", "app": "/srv/toolbox" }
+            { "host": "/srv/toolbox", "app": "/srv/toolbox", "phases": "build,deploy,run" }
         ]
     }
 }
