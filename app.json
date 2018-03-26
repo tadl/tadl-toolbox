@@ -14,6 +14,9 @@
                 "name": "redis",
                 "commands": ["redis:create redis-$APP", "redis:link redis-$APP $APP"]
             }
+        ],
+        "volumes":[
+            {"host":"/srv/toolbox","app":"/srv/toolbox"}
         ]
     }
 }
