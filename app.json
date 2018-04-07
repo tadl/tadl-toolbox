@@ -18,5 +18,10 @@
         "volumes": [
             { "host": "/srv/toolbox", "app": "/srv/toolbox", "phases": "build,deploy,run" }
         ]
+    },
+    "scripts": {
+        "dokku": {
+            "postdeploy": "rake populate_lists"
+        }
     }
 }
