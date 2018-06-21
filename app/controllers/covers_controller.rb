@@ -1,5 +1,6 @@
 class CoversController < ApplicationController
 	respond_to :html, :json, :js
+  before_action :authenticate_user!
 	skip_before_action :verify_authenticity_token
   	def home
   		@covers = Cover.where(status: 'needs cover').paginate(:page => params[:page], :per_page => 10)
