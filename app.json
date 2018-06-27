@@ -21,7 +21,7 @@
     },
     "scripts": {
         "dokku": {
-            "postdeploy": "rake populate_lists"
+            // "postdeploy": "rake populate_lists"
         }
     }
 }
