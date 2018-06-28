@@ -1,5 +1,7 @@
 class ReviewsController < ApplicationController
+  before_filter :set_headers
   respond_to :html, :json, :js
+      
   def goodreads
     if params[:isbn] && params[:isbn] != ''
       response = cache.get('goodreads_' + params[:isbn]) rescue nil
