@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   match 'load_cover', to: 'covers#load_cover', as: 'load_cover', via: [:get, :post]
   #Reviews
   match 'goodreads', to: 'reviews#goodreads', as: 'goodreads', via: [:get, :post], :defaults => { :format => 'json' }
+  #Trailers 
+  match 'trailer_queue', to: 'trailers#queue', as: 'trailer_queue', via: [:get, :post]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180628205048) do
+ActiveRecord::Schema.define(version: 20190401181609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,20 @@ ActiveRecord::Schema.define(version: 20180628205048) do
   end
 
   create_table "trailers", force: :cascade do |t|
+    t.integer  "record_id"
+    t.string   "added_by"
+    t.string   "youtube_url"
+    t.string   "release_date"
+    t.string   "title"
+    t.string   "artist"
+    t.string   "publisher"
+    t.text     "abstract"
+    t.string   "item_type"
+    t.text     "track_list"
+    t.boolean  "cant_find",    default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "admin_id"
   end
 
 end
