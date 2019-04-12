@@ -26,7 +26,8 @@ Rails.application.routes.draw do
   match 'goodreads', to: 'reviews#goodreads', as: 'goodreads', via: [:get, :post], :defaults => { :format => 'json' }
   #Trailers 
   match 'trailer_queue', to: 'trailers#queue', as: 'trailer_queue', via: [:get, :post]
-
+  match 'trailer_not_found', to: 'trailers#not_found', as: 'trailer_not_found', via: [:get, :post]
+  match 'trailer_by_id', to: 'trailers#by_id', as: 'trailer_by_id', via: [:get, :post]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

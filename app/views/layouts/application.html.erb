@@ -20,6 +20,7 @@
   					<li role="presentation" class="<%= active_menu('home') %>"><%= link_to "Home", home_path %></li>
   					<li role="presentation" class="<%= active_menu('lists') %>"><%= link_to "Lists", lists_path %></li>
   					<li role="presentation" class="<%= active_menu('covers') %>"><%= link_to "Covers", covers_path %></li>
+            <li role="presentation" class="<%= active_menu('trailers') %>"><%= link_to "Trailers", trailer_queue_path %></li>
   				<% else %>
   					<li role="presentation"><%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %></li>
   				<% end %>

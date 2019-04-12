@@ -9,7 +9,9 @@ module ApplicationHelper
     	elsif item == 'lists'
     		matches = ['/lists','/new_list','/my_lists','/show_list']
         elsif item == 'covers'
-            matches = ['/covers','/not_found_covers','/add_cover']
+          matches = ['/covers','/not_found_covers','/add_cover']
+        elsif item == 'trailers'
+          matches = ['/trailer_queue','/trailer_not_found','/trailer_by_id']
     	else
     		return ''
     	end

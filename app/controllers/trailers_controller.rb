@@ -8,13 +8,10 @@ class TrailersController < ApplicationController
 
 	def queue
     @trailers = Trailer.where(:youtube_url => nil, :cant_find => false).paginate(:page => params[:page], :per_page => 10)
-    @trailers_count = @trailers.count.to_s
-    @state = 'queue'
-    @page_title = @trailers_count +' Videos Need Trailers'
     if params[:page] == nil
-    @current_page = 1
+      @current_page = 1
     else
-    @current_page = params[:page]
+      @current_page = params[:page]
     end
     respond_with do |format|
       format.js {}
@@ -22,11 +19,45 @@ class TrailersController < ApplicationController
     end
 	end
 
-	def search_by_title
+  def not_found
+    @trailers = Trailer.where(:youtube_url => nil, :cant_find => true).paginate(:page => params[:page], :per_page => 10)
+    if params[:page] == nil
+      @current_page = 1
+    else
+      @current_page = params[:page]
+    end
+    respond_with do |format|
+      format.js {}
+      format.html {render :queue } 
+    end
+  end
+
+	def by_id
+    @trailer = Trailer.where(:record_id => params[:id].to_i)[0]
+    if @trailer.nil?
+      if params[:id] 
+        @trailer = Trailer.new
+        check_valid = @trailer.set_attributes(params[:id])
+      else
+        puts "got here"
+      end
+    end
+    respond_with do |format|
+      format.js {}
+      format.html {} 
+    end
 	end
 
-	def add_record
-	end
+  def get_trailer
+  end
 
+  def mark_not_found
+  end
+
+  def add_trailer
+  end
+
+  def remove_trailer
+  end
 
 end

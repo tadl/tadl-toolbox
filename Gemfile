@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'rails_12factor', group: :production
 
+gem 'carrierwave', '0.11.2'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem "bootstrap-sass", ">= 3.4.1"
@@ -28,7 +29,6 @@ gem 'sidekiq-cron', '~> 0.4.0'
 gem 'redis'
 gem 'dalli'
 gem 'will_paginate', '~> 3.1.0'
-gem 'carrierwave'
 gem 'mini_magick'
 gem 'remotipart', '~> 1.2'
 gem 'library_stdnums'
