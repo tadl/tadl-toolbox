@@ -12,6 +12,12 @@ module ApplicationHelper
           matches = ['/covers','/not_found_covers','/add_cover']
         elsif item == 'trailers'
           matches = ['/trailer_queue','/trailer_not_found','/trailer_by_id']
+        elsif item == 'reports'
+          matches = ['/reports']
+        elsif item == 'departments'
+          matches = ['/departments','/departments/new']
+        elsif item == 'stats'
+          matches = ['/stats','/stats/new']
     	else
     		return ''
     	end

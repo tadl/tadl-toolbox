@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Types of Stats</h1>
-
-<table>
+<h2>Types of Stats</h2>
+<%= link_to 'Create New Stat Type', new_stat_path %>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Code</th>
@@ -22,7 +22,6 @@
         <td><%= stat.group_name %></td>
         <td><%= stat.start_date %></td>
         <td><%= stat.end_date %></td>
-        <td><%= link_to 'Show', stat %></td>
         <td><%= link_to 'Edit', edit_stat_path(stat) %></td>
         <td><%= link_to 'Destroy', stat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -30,6 +29,4 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Stat', new_stat_path %>
+<%= link_to 'Create New Stat Type', new_stat_path %>
