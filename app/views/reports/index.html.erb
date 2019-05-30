@@ -1,1 +1,16 @@
-<h2>Create A New Report</h2>
+<h2>Soft Stats</h2>
+<div class="form-group">
+  <label for="department">Select Department</label>
+  <select id="deparment" class="form-control">
+    <% @departments.each do |d| %>
+      <option value="<%= d.id %>"><%= d.name %></option>
+    <% end %>
+  </select>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <%= month_calendar do |date| %>
+      <%= date.day %>
+    <% end %>
+  </div>
+</div>

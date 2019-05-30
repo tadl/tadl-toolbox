@@ -1,11 +1,10 @@
 class ReportsController < ApplicationController
-  before_action :set_report, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
   # GET /reports
   # GET /reports.json
   def index
-    @reports = Report.all
+    @departments = Department.all
   end
 
   # GET /reports/1
@@ -63,11 +62,6 @@ class ReportsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_report
-      @report = Report.find(params[:id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def report_params
       params.require(:report).permit(:stat_id, :value, :last_edit_by, :department_id)
