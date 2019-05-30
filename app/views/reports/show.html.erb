@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Stat:</strong>
+  <%= @report.stat_id %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @report.value %>
+</p>
+
+<p>
+  <strong>Last edit by:</strong>
+  <%= @report.last_edit_by %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @report.department_id %>
+</p>
+
+<%= link_to 'Edit', edit_report_path(@report) %> |
+<%= link_to 'Back', reports_path %>

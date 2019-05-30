@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stat_id: 1
+  value: 1
+  last_edit_by: 1
+  department_id: 1
+
+two:
+  stat_id: 1
+  value: 1
+  last_edit_by: 1
+  department_id: 1

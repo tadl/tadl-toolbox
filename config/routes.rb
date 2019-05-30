@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :reports
+  resources :departments
+  resources :stats
   root 'main#index'
   match 'home', to: 'main#index', as: 'home', via: [:get, :post]
   match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
