@@ -14,6 +14,15 @@ class ReportsController < ApplicationController
     end
   end
 
+  def show_report_form
+    @department = Department.find(params[:department_id])
+    @date = params[:date]
+    respond_to do |format|
+      format.js
+    end
+  end
+
+
   # GET /reports/1
   # GET /reports/1.json
   def show

@@ -92,3 +92,14 @@ function preview_image(record_id){
 		$(message_div).append('<p class="error_text">Error: No image selected for preview</p>') 
 	}
 }
+
+function reports_department_changed(){
+  var department_id = $('#department').val();
+  if(department_id != 'none'){
+    $('#report_form').html('')
+    $.post("show_calendar.js", {department_id: department_id})
+  }else{
+    $('#calendar').html('')
+    $('#report_form').html('')
+  }
+}

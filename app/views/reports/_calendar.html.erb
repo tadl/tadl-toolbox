@@ -1,6 +1,6 @@
 <div><strong>Select Date</strong></div>
 <div id="date">
   <%= month_calendar do |date| %>
-    <%= date.day %>
+    <%= link_to date.day, ('/show_report_form?date='+ date.strftime("%F") +'&department_id=' + @department.id.to_s), remote: true %> 
   <% end %>
 </div>

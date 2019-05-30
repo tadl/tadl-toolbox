@@ -2,7 +2,7 @@
 <div class="row">
   <div class="form-group col-md-4">
     <label for="department">Select Department</label>
-    <select id="department" class="form-control" onchange="department_changed()">
+    <select id="department" class="form-control" onchange="reports_department_changed()">
         <option value="none">Select Department</option>
       <% @departments.each do |d| %>
         <option value="<%= d.id %>"><%= d.name %></option>
@@ -12,14 +12,7 @@
   <div id="calendar" class="col-md-6">
   </div>
 </div>
-
-<script>
-  function department_changed(){
-    var department_id = $('#department').val();
-    if(department_id != 'none'){
-      $.post("show_calendar.js", {department_id: department_id})
-    }else{
-      $('#calendar').html('')
-    }
-  }
-</script>
+<div class="row">
+  <div id="report_form">
+  </div>
+</div>
