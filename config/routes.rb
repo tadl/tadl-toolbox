@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   match 'trailer_queue', to: 'trailers#queue', as: 'trailer_queue', via: [:get, :post]
   match 'trailer_not_found', to: 'trailers#not_found', as: 'trailer_not_found', via: [:get, :post]
   match 'trailer_by_id', to: 'trailers#by_id', as: 'trailer_by_id', via: [:get, :post]
+  match 'show_calendar', to: 'reports#show_calendar', as: 'show_calendar', via: [:get, :post], :defaults => { :format => 'js' }
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

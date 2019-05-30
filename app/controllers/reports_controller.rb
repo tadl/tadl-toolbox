@@ -7,6 +7,13 @@ class ReportsController < ApplicationController
     @departments = Department.all
   end
 
+  def show_calendar
+    @department = Department.find(params[:department_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # GET /reports/1
   # GET /reports/1.json
   def show
