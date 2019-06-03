@@ -106,3 +106,27 @@ function reports_department_changed(){
     $('#report_form').html('')
   }
 }
+
+function reports_submitt(){
+  var bad_data = false
+  var params = {}
+  var report_inputs = $("#report_form :input")
+  $.each(report_inputs, function(){
+    $(this).css('border','1px solid #ccc')
+    var field_name = this.id
+    var field_val = $(this).val()
+    //check for whole numbers
+    if(!field_val.match(/^[0-9]*$/)){
+      $(this).css('border','2px solid red')
+      bad_data = true
+    }
+    if(field_val && bad_data == false){
+      params[field_name] = field_val
+    }
+  });
+  if(bad_data == true){
+    alert('bad data')
+  }else{
+    alert(JSON.stringify(params))
+  }
+}
