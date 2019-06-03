@@ -106,8 +106,24 @@
 
 <% if @department.name == "ILL" || @department.name == "East Bay" || @department.name == "Kingsley" %>
   <h2>Interlibrary Loan</h2>
-  <p>Lending (Circ): MMLL, OCLC</p>
-  <p>Borrowing (Adult/Reference): requests, filled</p>
+  <h4 class="banner">Lending (Circulation)</h4>
+  <div class="row">
+    <div class="col col-xs-6">
+      <div class="form-group"> <label for="illlendinggmmll">MMLL</label> <input type="text" class="form-control" id="illlendinggmmll"> </div>
+    </div>
+    <div class="col col-xs-6">
+      <div class="form-group"> <label for="illlendingoclc">OCLC</label> <input type="text" class="form-control" id="illlendingoclc"> </div>
+    </div>
+  </div>
+  <h4 class="banner">Borrowing (Adult/Reference)</h4>
+  <div class="row">
+    <div class="col col-xs-6">
+      <div class="form-group"> <label for="illborrowingrequests">Requests</label> <input type="text" class="form-control" id="illborrowingrequests"> </div>
+    </div>
+    <div class="col col-xs-6">
+      <div class="form-group"> <label for="illborrowingfilled">Filled</label> <input type="text" class="form-control" id="illborrowingfilled"> </div>
+    </div>
+  </div>
 <% end %>
 
 <% if @department.name == "Sight and Sound" %>
