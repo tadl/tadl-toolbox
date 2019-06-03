@@ -2,8 +2,48 @@
 
 <% if @department.name == "Administration" || @department.name == "Adult/Reference" || @department.name == "Talking Book Library" || @department.name == "Sight and Sound" || @department.name == "Teen Services" || @department.name == "Youth Services" || @department.name == "East Bay" || @department.name == "Kingsley" %>
   <h2>Programs (by audience)</h2>
-  <p>Count: early, youth, teen, adult, family, outreach</p>
-  <p>Attendees: early, youth, teen, adult, family, outreach</p>
+  <h4 class="banner">Count</h4>
+  <div class="row">
+    <div class="col col-xs-2">
+      <div class="form-group"> <label for="programsearlycount">Early</label> <input type="text" class="form-control" id="programsearlycount"> </div>
+    </div>
+    <div class="col col-xs-2">
+      <div class="form-group"> <label for="programsyouthcount">Youth</label> <input type="text" class="form-control" id="programsyouthcount"> </div>
+    </div>
+    <div class="col col-xs-2">
+      <div class="form-group"> <label for="programsteencount">Teen</label> <input type="text" class="form-control" id="programsteencount"> </div>
+    </div>
+    <div class="col col-xs-2">
+      <div class="form-group"> <label for="programsadultcount">Adult</label> <input type="text" class="form-control" id="programsadultcount"> </div>
+    </div>
+    <div class="col col-xs-2">
+      <div class="form-group"> <label for="programsfamilycount">Family</label> <input type="text" class="form-control" id="programsfamilycount"> </div>
+    </div>
+    <div class="col col-xs-2">
+      <div class="form-group"> <label for="programsoutreachcount">Outreach</label> <input type="text" class="form-control" id="programsoutreachcount"> </div>
+    </div>
+  </div>
+  <h4 class="banner">Attendees</h4>
+  <div class="row">
+    <div class="col col-xs-2">
+      <div class="form-group"> <label for="programsearlyattendance">Early</label> <input type="text" class="form-control" id="programsearlyattendance"> </div>
+    </div>
+    <div class="col col-xs-2">
+      <div class="form-group"> <label for="programsyouthattendance">Youth</label> <input type="text" class="form-control" id="programsyouthattendance"> </div>
+    </div>
+    <div class="col col-xs-2">
+      <div class="form-group"> <label for="programsteenattendance">Teen</label> <input type="text" class="form-control" id="programsteenattendance"> </div>
+    </div>
+    <div class="col col-xs-2">
+      <div class="form-group"> <label for="programsadultattendance">Adult</label> <input type="text" class="form-control" id="programsadultattendance"> </div>
+    </div>
+    <div class="col col-xs-2">
+      <div class="form-group"> <label for="programsfamilyattendance">Family</label> <input type="text" class="form-control" id="programsfamilyattendance"> </div>
+    </div>
+    <div class="col col-xs-2">
+      <div class="form-group"> <label for="programsoutreachattendance">Outreach</label> <input type="text" class="form-control" id="programsoutreachattendance"> </div>
+    </div>
+  </div>
 <% end %>
 
 <% if @department.name == "Adult/Reference" || @department.name == "Talking Book Library" || @department.name == "Sight and Sound" || @department.name == "Teen Services" || @department.name == "Youth Services" || @department.name == "East Bay" || @department.name == "Kingsley" %>
