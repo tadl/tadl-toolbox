@@ -1,3 +1,38 @@
 <h3>Report for <%= @department.name %> for the date of <%= @date %></h3>
 
-<p>Conditional forms go here</p>
+<% if @department.name == "Admin" || @department.name == "Adult/Ref" || @department.name == "LBPH" || @department.name == "SS" || @department.name == "Teen" || @department.name == "Youth" || @department.name == "East Bay" || @department.name == "Kingsley" %>
+  <h2>Programs (by audience)</h2>
+  <p>Count: early, youth, teen, adult, family, outreach</p>
+  <p>Attendees: early, youth, teen, adult, family, outreach</p>
+<% end %>
+
+<% if @department.name == "Adult/Ref" || @department.name == "LBPH" || @department.name == "SS" || @department.name == "Teen" || @department.name == "Youth" || @department.name == "East Bay" || @department.name == "Kingsley" %>
+  <h2>Questions</h2>
+  <p>Reference: walkin, phone, digital, postal</p>
+  <p>Directional: walkin, phone, digital</p>
+  <p>Reader's Advisory: walkin, phone, digital</p>
+<% end %>
+
+<% if @department.name == "LBPH" %>
+  <h2>TBL Circulation</h2>
+  <p>local, regional, downloads</p>
+<% end %>
+
+<% if @department.name == "ILL" || @department.name == "East Bay" || @department.name == "Kingsley" %>
+  <h2>Interlibrary Loan</h2>
+  <p>Lending (Circ): MMLL, OCLC</p>
+  <p>Borrowing (Adult/Ref): requests, filled</p>
+<% end %>
+
+<% if @department.name == "SS" %>
+  <h2>Meeting Rooms</h2>
+  <p>McGuire Room: tadl, paid, unpaid</p>
+  <p>Thirlby Room: tadl, paid, unpaid</p>
+  <p>Study Room D: tadl, paid, unpaid</p>
+  <p>Attendees: McGuire, Thirlby, Study Room D</p>
+<% end %>
+
+<% if @department.name == "Tech Svcs" %>
+  <h2>Technical Services</h2>
+  <p>What stat is this?: adult, youth/teen, ssc, magazines, misc</p>
+<% end %>
