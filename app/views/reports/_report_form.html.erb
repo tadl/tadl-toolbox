@@ -1,4 +1,4 @@
-<h3>Report for <%= @department.name %> for the date <%= @date %></h3>
+<h3>Report for <%= @department.name %> for the date<span id="form_date"> <%= @date %></span></h3>
 
 <% if @department.name == "Administration" || @department.name == "Adult/Reference" || @department.name == "Talking Book Library" || @department.name == "Sight and Sound" || @department.name == "Teen Services" || @department.name == "Youth Services" || @department.name == "East Bay" || @department.name == "Kingsley" %>
   <h2>Programs (by audience)</h2>
