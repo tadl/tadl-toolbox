@@ -48,9 +48,45 @@
 
 <% if @department.name == "Adult/Reference" || @department.name == "Talking Book Library" || @department.name == "Sight and Sound" || @department.name == "Teen Services" || @department.name == "Youth Services" || @department.name == "East Bay" || @department.name == "Kingsley" %>
   <h2>Questions</h2>
-  <p>Reference: walkin, phone, digital, postal</p>
-  <p>Directional: walkin, phone, digital</p>
-  <p>Reader's Advisory: walkin, phone, digital</p>
+  <h4 class="banner">Reference</h4>
+  <div class="row">
+    <div class="col col-xs-3">
+      <div class="form-group"> <label for="questionsreferencewalkin">Walkin</label> <input type="text" class="form-control" id="questionsreferencewalkin"> </div>
+    </div>
+    <div class="col col-xs-3">
+      <div class="form-group"> <label for="questionsreferencephone">Phone</label> <input type="text" class="form-control" id="questionsreferencephone"> </div>
+    </div>
+    <div class="col col-xs-3">
+      <div class="form-group"> <label for="questionsreferencedigital">Digital</label> <input type="text" class="form-control" id="questionsreferencedigital"> </div>
+    </div>
+    <div class="col col-xs-3">
+      <div class="form-group"> <label for="questionsreferencepostal">Postal</label> <input type="text" class="form-control" id="questionsreferencepostal"> </div>
+    </div>
+  </div>
+  <h4 class="banner">Directional</h4>
+  <div class="row">
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="questionsdirectionalwalkin">Walkin</label> <input type="text" class="form-control" id="questionsdirectionalwalkin"> </div>
+    </div>
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="questionsdirectionalphone">Phone</label> <input type="text" class="form-control" id="questionsdirectionalphone"> </div>
+    </div>
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="questionsdirectionaldigital">Digital</label> <input type="text" class="form-control" id="questionsdirectionaldigital"> </div>
+    </div>
+  </div>
+  <h4 class="banner">Reader's Advisory</h4>
+  <div class="row">
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="questionsadvisorywalkin">Walkin</label> <input type="text" class="form-control" id="questionsadvisorywalkin"> </div>
+    </div>
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="questionsadvisoryphone">Phone</label> <input type="text" class="form-control" id="questionsadvisoryphone"> </div>
+    </div>
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="questionsadvisorydigital">Digital</label> <input type="text" class="form-control" id="questionsadvisorydigital"> </div>
+    </div>
+  </div>
 <% end %>
 
 <% if @department.name == "Talking Book Library" %>
