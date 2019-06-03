@@ -1,4 +1,4 @@
-<h3>Report for <%= @department.name %> for the date of <%= @date %></h3>
+<h3>Report for <%= @department.name %> for the date <%= @date %></h3>
 
 <% if @department.name == "Administration" || @department.name == "Adult/Reference" || @department.name == "Talking Book Library" || @department.name == "Sight and Sound" || @department.name == "Teen Services" || @department.name == "Youth Services" || @department.name == "East Bay" || @department.name == "Kingsley" %>
   <h2>Programs (by audience)</h2>
@@ -91,7 +91,17 @@
 
 <% if @department.name == "Talking Book Library" %>
   <h2>TBL Circulation</h2>
-  <p>local, regional, downloads</p>
+  <div class="row">
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="lbphcirclocal">Local</label> <input type="text" class="form-control" id="lbphcirclocal"> </div>
+    </div>
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="lbphcircregional">Regional</label> <input type="text" class="form-control" id="lbphcircregional"> </div>
+    </div>
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="lbphcircdigital">Digital</label> <input type="text" class="form-control" id="lbphcircdigital"> </div>
+    </div>
+  </div>
 <% end %>
 
 <% if @department.name == "ILL" || @department.name == "East Bay" || @department.name == "Kingsley" %>
