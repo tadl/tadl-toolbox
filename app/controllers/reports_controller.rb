@@ -20,7 +20,6 @@ class ReportsController < ApplicationController
     report_date = Date.parse params[:date]
     @reports = Report.where(department_id: @department.id, report_date: report_date)
     @reports.each do |r|
-      puts r.value.to_s
     end
     respond_to do |format|
       format.js
@@ -30,10 +29,9 @@ class ReportsController < ApplicationController
 
   def save_report
     @stats = Stat.all
-    @submitted_stats = []
     params.each do |k,v|
       if @stats.pluck(:code).include?(k)
-        stat = Stat.where(code: k).take
+        stat = @stats.where(code: k).take
         report = Report.where(stat_id: stat.id, department_id: params[:department_id], report_date: params[:report_date]).take
         if !report.nil? 
           report.update(report_params)
