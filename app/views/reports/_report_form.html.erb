@@ -180,6 +180,24 @@
 
 <% if @department.name == "Technical Services" %>
   <h2>Technical Services</h2>
-  <p>What stat is this?: adult, youth/teen, ssc, magazines, misc</p>
+  <h4 class="banner">Items Processed</h4>
+  <div class="row">
+    <div class="col col-xs-2">
+      <div class="form-group"> <label for="procadult">Adult</label> <input type="text" class="form-control" id="procadult"> </div>
+    </div>
+    <div class="col col-xs-2">
+      <div class="form-group"> <label for="procyouthteen">Youth/Teen</label> <input type="text" class="form-control" id="procyouthteen"> </div>
+    </div>
+    <div class="col col-xs-2">
+      <div class="form-group"> <label for="procssc">SSC</label> <input type="text" class="form-control" id="procssc"> </div>
+    </div>
+    <div class="col col-xs-2">
+      <div class="form-group"> <label for="procmag">Magazines</label> <input type="text" class="form-control" id="procmag"> </div>
+    </div>
+    <div class="col col-xs-2">
+      <div class="form-group"> <label for="procmisc">Misc</label> <input type="text" class="form-control" id="procmisc"> </div>
+    </div>
+  </div>
 <% end %>
+
 <button type="button" class="btn btn-success" onclick="reports_submitt()">Save</button>
