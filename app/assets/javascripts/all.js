@@ -111,6 +111,9 @@ function reports_department_changed(){
 
 function reports_submitt(){
   var bad_data = false
+  var department_id = $('#department').val()
+  var current_user = $.trim($('#current_user').text())
+  var report_date = $.trim($('#form_date').text())
   var params = {}
   var report_inputs = $("#report_form :input")
   $.each(report_inputs, function(){
@@ -129,6 +132,9 @@ function reports_submitt(){
   if(bad_data == true){
     alert('bad data')
   }else{
-    alert(JSON.stringify(params))
+    params['last_edit_by'] = current_user
+    params['report_date'] = report_date
+    params['department_id'] = department_id
+    $.post("save_report", params)
   }
 }

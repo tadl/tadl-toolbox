@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   match 'trailer_by_id', to: 'trailers#by_id', as: 'trailer_by_id', via: [:get, :post]
   match 'show_calendar', to: 'reports#show_calendar', as: 'show_calendar', via: [:get, :post], :defaults => { :format => 'js'}
   match 'show_report_form', to: 'reports#show_report_form', as: 'show_report_form', via: [:get, :post], :defaults => { :format => 'js'}
+  match 'save_report', to: 'reports#save_report', as: 'save_report', via: [:get, :post], :defaults => { :format => 'js'} 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
