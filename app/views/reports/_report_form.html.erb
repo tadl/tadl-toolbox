@@ -104,7 +104,7 @@
   </div>
 <% end %>
 
-<% if @department.name == "ILL" || @department.name == "East Bay" || @department.name == "Kingsley" %>
+<% if @department.name == "Interlibrary Loan" || @department.name == "East Bay" || @department.name == "Kingsley" %>
   <h2>Interlibrary Loan</h2>
   <h4 class="banner">Lending (Circulation)</h4>
   <div class="row">
@@ -128,10 +128,54 @@
 
 <% if @department.name == "Sight and Sound" %>
   <h2>Meeting Rooms</h2>
-  <p>McGuire Room: tadl, paid, unpaid</p>
-  <p>Thirlby Room: tadl, paid, unpaid</p>
-  <p>Study Room D: tadl, paid, unpaid</p>
-  <p>Attendees: McGuire, Thirlby, Study Room D</p>
+  <h4 class="banner">McGuire Room</h4>
+  <div class="row">
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="meetingsmcguiretadl">TADL</label> <input type="text" class="form-control" id="meetingsmcguiretadl"> </div>
+    </div>
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="meetingsmcguirepaid">Paid</label> <input type="text" class="form-control" id="meetingsmcguirepaid"> </div>
+    </div>
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="meetingsmcguireunpaid">Unpaid</label> <input type="text" class="form-control" id="meetingsmcguireunpaid"> </div>
+    </div>
+  </div>
+  <h4 class="banner">Thirlby Room</h4>
+  <div class="row">
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="meetingsthirlbytadl">TADL</label> <input type="text" class="form-control" id="meetingsthirlbytadl"> </div>
+    </div>
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="meetingsthirlbypaid">Paid</label> <input type="text" class="form-control" id="meetingsthirlbypaid"> </div>
+    </div>
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="meetingsthirlbyunpaid">Unpaid</label> <input type="text" class="form-control" id="meetingsthirlbyunpaid"> </div>
+    </div>
+  </div>
+  <h4 class="banner">Study Room D</h4>
+  <div class="row">
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="meetingsrmdtadl">TADL</label> <input type="text" class="form-control" id="meetingsrmdtadl"> </div>
+    </div>
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="meetingsrmdpaid">Paid</label> <input type="text" class="form-control" id="meetingsrmdpaid"> </div>
+    </div>
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="meetingsrmdunpaid">Unpaid</label> <input type="text" class="form-control" id="meetingsrmdunpaid"> </div>
+    </div>
+  </div>
+  <h4 class="banner">Attendees</h4>
+  <div class="row">
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="attendeesmcguire">McGuire</label> <input type="text" class="form-control" id="attendeesmcguire"> </div>
+    </div>
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="attendeesthirlby">Thirlby</label> <input type="text" class="form-control" id="attendeesthirlby"> </div>
+    </div>
+    <div class="col col-xs-4">
+      <div class="form-group"> <label for="attendeesrmd">Study Room D</label> <input type="text" class="form-control" id="attendeesrmd"> </div>
+    </div>
+  </div>
 <% end %>
 
 <% if @department.name == "Technical Services" %>
