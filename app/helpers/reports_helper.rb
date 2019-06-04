@@ -8,7 +8,7 @@ module ReportsHelper
   def check_for_report_on_date(date, department_id)
     reports = Report.where(department_id: department_id, report_date: date)
     if reports.size >= 1 
-      return '; font-weight: 900;'
+      return '; font-weight: 900; font-size: 14px;'
     else
       return nil
     end
