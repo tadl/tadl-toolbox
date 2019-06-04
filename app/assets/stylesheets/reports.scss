@@ -7,3 +7,17 @@
   color: #fff;
   padding: 5px 5px 5px 10px;
 }
+
+.calendar-heading {
+  font-size: 18px;
+  text-align: center;
+}
+
+.prev-month-link {
+  float: left;
+  margin-left: 10px;
+}
+.next-month-link {
+  float: right;
+  margin-right: 10px;
+}
