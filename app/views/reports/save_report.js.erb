@@ -1,1 +1,2 @@
 $("#messages").text("Report Saved!")
+$.post("show_calendar.js", {start_date: '<%= params[:report_date] %>', department_id: '<%= params[:department_id] %>'})
