@@ -53,16 +53,6 @@ class StatsController < ApplicationController
     end
   end
 
-  # DELETE /stats/1
-  # DELETE /stats/1.json
-  def destroy
-    @stat.destroy
-    respond_to do |format|
-      format.html { redirect_to stats_url, notice: 'Stat was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_stat
