@@ -125,8 +125,11 @@ function reports_submitt(){
       $(this).css('border','2px solid red')
       bad_data = true
     }
-    if(field_val && bad_data == false){
+    if(bad_data == false)
+    if(field_val){
       params[field_name] = field_val
+    }else{
+      params[field_name] = 0
     }
   });
   if(bad_data == true){

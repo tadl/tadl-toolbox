@@ -34,14 +34,21 @@ class ReportsController < ApplicationController
         stat = @stats.where(code: k).take
         report = Report.where(stat_id: stat.id, department_id: params[:department_id], report_date: params[:report_date]).take
         if !report.nil? 
-          report.update(report_params)
-        else
+          if v != '0'
+            report.update(report_params)
+            report.value = v
+            report.last_edit_by = Admin.find(params[:last_edit_by].to_i).email
+            report.save
+          else
+            report.destroy
+          end
+        elsif v != '0'
           report = Report.new(report_params)
           report.stat_id = stat.id
+          report.value = v
+          report.last_edit_by = Admin.find(params[:last_edit_by].to_i).email
+          report.save
         end
-        report.value = v
-        report.last_edit_by = Admin.find(params[:last_edit_by].to_i).email
-        report.save
       end
     end
     respond_to do |format|
