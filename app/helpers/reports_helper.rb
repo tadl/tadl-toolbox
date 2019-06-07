@@ -1,13 +1,18 @@
 module ReportsHelper
   def check_for_value(code, reports)
-    stat_id = Stat.where(code: code).first.id 
-    value = reports.where(stat_id: stat_id).first.value rescue nil
-    return value
+    stat_id = Stat.where(code: code).first.id
+    reports.each do |r|
+       puts 'lama ' + r.to_s
+    end 
+    report = reports.detect{|r| r.stat_id == stat_id}
+    if !report.nil?
+      return report.value
+    end
   end
 
-  def check_for_report_on_date(date, department_id)
-    reports = Report.where(department_id: department_id, report_date: date).first
-    if !reports.nil?
+  def check_for_report_on_date(date, reports)
+    report = reports.detect{|r| r.report_date.to_s == date}
+    if !report.nil?
       return '; font-weight: 900; font-size: 14px;'
     else
       return nil
