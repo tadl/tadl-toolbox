@@ -1,9 +1,6 @@
 module ReportsHelper
   def check_for_value(code, reports)
     stat_id = Stat.where(code: code).first.id
-    reports.each do |r|
-       puts 'lama ' + r.to_s
-    end 
     report = reports.detect{|r| r.stat_id == stat_id}
     if !report.nil?
       return report.value
