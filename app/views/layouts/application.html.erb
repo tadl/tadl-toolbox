@@ -27,7 +27,7 @@
               <li role="presentation" class="<%= active_menu('stats') %>"><%= link_to "Stat Types (super admin only)", stats_path %></li>
             <% end %>
   				<% else %>
-  					<li role="presentation"><%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %></li>
+  					<li role="presentation"><%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in", method: :post %></li>
   				<% end %>
 			</ul>
 		</div>

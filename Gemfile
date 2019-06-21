@@ -15,9 +15,10 @@ gem 'rails_12factor', group: :production
 gem 'carrierwave', '0.11.2'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
-gem "bootstrap-sass", ">= 3.4.1"
-gem "bootstrap_form", "~> 2.7"
-gem "simple_calendar", "~> 2.0"
+gem 'omniauth-rails_csrf_protection'
+gem 'bootstrap-sass', '>= 3.4.1'
+gem 'bootstrap_form', '~> 2.7'
+gem 'simple_calendar', '~> 2.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
