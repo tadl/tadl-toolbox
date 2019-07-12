@@ -10,5 +10,10 @@
   <%= @department.location %>
 </p>
 
+<p>
+  <strong>Short Code:</strong>
+  <%= @department.short_code %>
+</p>
+
 <%= link_to 'Edit', edit_department_path(@department) %> |
 <%= link_to 'Back', departments_path %>

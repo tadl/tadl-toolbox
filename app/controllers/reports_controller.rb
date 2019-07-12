@@ -38,8 +38,8 @@ class ReportsController < ApplicationController
     params.each do |k,v|
       if @stats.pluck(:code).include?(k)
         stat = @stats.where(code: k).take
-        report = Report.where(stat_id: stat.id, department_id: params[:department_id], report_date: params[:report_date]).to_a
-        if !report.nil? 
+        report = Report.where(stat_id: stat.id, department_id: params[:department_id], report_date: params[:report_date]).first
+        if !report.nil?
           if v != '0'
             report.update(report_params)
             report.value = v

@@ -7,6 +7,7 @@ task :departments_from_csv => :environment do
     department = Department.new
     department.name = x[0]
     department.location = x[1]
+    department.short_code = x[3]
     if x[2] == 'TRUE'
       department.active = true
     else
