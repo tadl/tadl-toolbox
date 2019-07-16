@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_issued: 2019-07-16
+  violationtype_id: 1
+  incident_id: 
+  patron_id: 
+
+two:
+  date_issued: 2019-07-16
+  violationtype_id: 1
+  incident_id: 
+  patron_id: 

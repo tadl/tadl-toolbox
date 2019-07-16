@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @violationtype.description %>
+</p>
+
+<p>
+  <strong>First offence:</strong>
+  <%= @violationtype.first_offence %>
+</p>
+
+<p>
+  <strong>Second offence:</strong>
+  <%= @violationtype.second_offence %>
+</p>
+
+<p>
+  <strong>Subsiquent offence:</strong>
+  <%= @violationtype.subsiquent_offence %>
+</p>
+
+<%= link_to 'Edit', edit_violationtype_path(@violationtype) %> |
+<%= link_to 'Back', violationtypes_path %>

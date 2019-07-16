@@ -1,0 +1,33 @@
+<%= form_for(@violationtype) do |f| %>
+  <% if @violationtype.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@violationtype.errors.count, "error") %> prohibited this violationtype from being saved:</h2>
+
+      <ul>
+      <% @violationtype.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :first_offence %><br>
+    <%= f.text_field :first_offence %>
+  </div>
+  <div class="field">
+    <%= f.label :second_offence %><br>
+    <%= f.text_field :second_offence %>
+  </div>
+  <div class="field">
+    <%= f.label :subsiquent_offence %><br>
+    <%= f.text_field :subsiquent_offence %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

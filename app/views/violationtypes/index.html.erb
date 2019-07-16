@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Violation Types</h1>
+<%= link_to 'Create New Violation Type', new_violationtype_path %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>First offence</th>
+      <th>Second offence</th>
+      <th>Subsiquent offence</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @violationtypes.each do |violationtype| %>
+      <tr>
+        <td><%= violationtype.description %></td>
+        <td><%= violationtype.first_offence %></td>
+        <td><%= violationtype.second_offence %></td>
+        <td><%= violationtype.subsiquent_offence %></td>
+        <td><%= link_to 'Edit', edit_violationtype_path(violationtype) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Create New Violation Type', new_violationtype_path %>

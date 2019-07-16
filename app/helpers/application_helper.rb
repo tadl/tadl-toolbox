@@ -18,6 +18,8 @@ module ApplicationHelper
           matches = ['/departments','/departments/new']
         elsif item == 'stats'
           matches = ['/stats','/stats/new']
+        elsif item == 'violationtypes'
+          matches = ['/violationtypes','/violationtypes/new']
     	else
     		return ''
     	end

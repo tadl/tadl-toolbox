@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190712183825) do
+ActiveRecord::Schema.define(version: 20190716194122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,15 @@ ActiveRecord::Schema.define(version: 20190712183825) do
     t.string   "short_code"
   end
 
+  create_table "incidents", force: :cascade do |t|
+    t.datetime "date_of"
+    t.string   "location"
+    t.string   "department"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "lists", force: :cascade do |t|
     t.string   "name"
     t.string   "code"
@@ -61,6 +70,22 @@ ActiveRecord::Schema.define(version: 20190712183825) do
     t.integer  "admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "patrons", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "middle_name"
+    t.string   "gender"
+    t.integer  "age"
+    t.boolean  "no_name"
+    t.string   "card_number"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "reports", force: :cascade do |t|
@@ -100,6 +125,29 @@ ActiveRecord::Schema.define(version: 20190712183825) do
     t.integer  "admin_id"
   end
 
+  create_table "violations", force: :cascade do |t|
+    t.date     "date_issued"
+    t.integer  "violationtype_id"
+    t.integer  "incident_id"
+    t.integer  "patron_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "violations", ["incident_id"], name: "index_violations_on_incident_id", using: :btree
+  add_index "violations", ["patron_id"], name: "index_violations_on_patron_id", using: :btree
+
+  create_table "violationtypes", force: :cascade do |t|
+    t.string   "description"
+    t.string   "first_offence"
+    t.string   "second_offence"
+    t.string   "subsiquent_offence"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_foreign_key "violations", "incidents"
+  add_foreign_key "violations", "patrons"
 
   create_view "soft_locations", sql_definition: <<-SQL
       SELECT departments.short_code AS shortname,
