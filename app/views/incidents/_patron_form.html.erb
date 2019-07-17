@@ -1,0 +1,65 @@
+<form class="padding-all">
+  <div class="row">
+    <div class="form-group col-sm-4">
+      <label for="first_name">Frist Name</label>
+      <input type="text" class="form-control" id="first_name" placeholder="Jane">
+    </div>
+    <div class="form-group col-sm-4">
+      <label for="middle_name">Middle Name</label>
+      <input type="text" class="form-control" id="middle_name" placeholder="Lee">
+    </div>
+    <div class="form-group col-sm-4">
+      <label for="last_name">Last Name</label>
+      <input type="text" class="form-control" id="last_name" placeholder="Lee">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-5">
+      <label for="first_name">Address</label>
+      <input type="text" class="form-control" id="address" placeholder="610 Woodmere Ave">
+    </div>
+    <div class="form-group col-sm-3">
+      <label for="middle_name">City</label>
+      <input type="text" class="form-control" id="city" placeholder="Traverse City">
+    </div>
+    <!-- This will be a select -->
+    <div class="form-group col-sm-2">
+      <label for="last_name">State</label>
+      <input type="text" class="form-control" id="state" placeholder="MI">
+    </div>
+    <div class="form-group col-sm-2">
+      <label for="last_name">Zip Code</label>
+      <input type="number" class="form-control" id="zip" placeholder="49686">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-5">
+      <label for="card">Card #</label>
+      <input type="text" class="form-control" id="card" placeholder="911108675309">
+      <a>Fill in form with data from Evergreen</a>
+    </div>
+    <!-- This will be a select -->
+    <div class="form-group col-sm-3">
+      <label for="gender">Gender</label>
+      <input type="text" class="form-control" id="gender" placeholder="Female">
+    </div>
+    <div class="form-group col-sm-3">
+      <label for="age">Aproximate Age</label>
+      <input type="number" class="form-control" id="age" placeholder="22">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-12">
+      <label for="physical_description">Physical Description</label>
+      <textarea class="form-control" id="physical_description" rows="3">
+      </textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-12">
+      <label for="Pictures">Picture</label>
+      <%= file_field_tag 'patron_image', accept: 'image/png,image/gif,image/jpeg'%>
+    </div>
+  </div>
+  <button type="button" class="btn btn-success btn-lg">Save Patron</button>
+</form>

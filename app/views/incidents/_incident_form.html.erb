@@ -1,1 +1,26 @@
-<h3> I am a form </h3>
+<h3>Patrons Involved:</h3>
+<a>Find a patron from previous incident</a>
+<div class="row">
+  <div class="col-sm-4">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"> No specific patrons listed in this report
+      </label>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"> Patron's name is unknown
+      </label>
+    </div>
+  </div>
+    <div class="col-sm-4">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"> Patron's address is unknown or homeless
+      </label>
+    </div>
+  </div>
+</div>
+<%= render 'patron_form' %>
