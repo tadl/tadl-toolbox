@@ -20,7 +20,9 @@ module ApplicationHelper
           matches = ['/stats','/stats/new']
         elsif item == 'violationtypes'
           matches = ['/violationtypes','/violationtypes/new']
-    	else
+        elsif item == 'incidents'
+          matches = ['/incidents','/new_incident']
+    	 else
     		return ''
     	end
     	matches.each do |m|

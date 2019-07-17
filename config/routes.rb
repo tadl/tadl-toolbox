@@ -35,6 +35,11 @@ Rails.application.routes.draw do
   match 'show_calendar', to: 'reports#show_calendar', as: 'show_calendar', via: [:get, :post], :defaults => { :format => 'js'}
   match 'show_report_form', to: 'reports#show_report_form', as: 'show_report_form', via: [:get, :post], :defaults => { :format => 'js'}
   match 'save_report', to: 'reports#save_report', as: 'save_report', via: [:get, :post], :defaults => { :format => 'js'} 
+  #Incidents
+  match 'incidents', to: 'incidents#list_incidents', as: 'incidents', via: [:get, :post]
+  match 'new_incident', to: 'incidents#new_incident', as: 'new_incident', via: [:get, :post]
+  match 'currently_suspended', to: 'incidents#currently_suspended', as: 'currently_suspended', via: [:get, :post]
+  match 'search_incidents', to: 'incidents#search_incidents', as: 'search_incidents', via: [:get, :post]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -1,0 +1,7 @@
+<h2>Incidents</h2>
+<ul class="nav nav-tabs">
+  <li role="presentation" class="<%= active_tab('/incidents') %>"><%= link_to "Incidents", incidents_path %></li>
+  <li role="presentation" class="<%= active_tab('/new_incident') %>"><%= link_to "Create New Incident Report", new_incident_path %></li>
+  <li role="presentation" class="<%= active_tab('/currently_suspended') %>"><%= link_to "Currently Suspended", currently_suspended_path %></li>
+   <li role="presentation" class="<%= active_tab('/search_incidents') %>"><%= link_to "Search", search_incidents_path %></li>
+</ul>
