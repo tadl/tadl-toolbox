@@ -1,26 +1,83 @@
 <h3>Patrons Involved:</h3>
 <a>Find a patron from previous incident</a>
-<div class="row">
+<div class="row patron_info">
   <div class="col-sm-4">
     <div class="checkbox">
       <label>
-        <input type="checkbox"> No specific patrons listed in this report
+        <input type="checkbox" id="no_patron" onchange="no_patron()"> No specific patrons listed in this report
       </label>
     </div>
   </div>
-  <div class="col-sm-4">
+  <div class="col-sm-4 patron_form">
     <div class="checkbox">
       <label>
-        <input type="checkbox"> Patron's name is unknown
+        <input type="checkbox" id="no_name" onchange="no_name()"> Patron's name is unknown
       </label>
     </div>
   </div>
-    <div class="col-sm-4">
+  <div class="col-sm-4 patron_form">
     <div class="checkbox">
       <label>
-        <input type="checkbox"> Patron's address is unknown or homeless
+        <input type="checkbox" id="no_address" onchange="no_address()"> Patron's address is unknown or homeless
       </label>
     </div>
   </div>
 </div>
-<%= render 'patron_form' %>
+<div class="patron_form">
+  <%= render 'patron_form', patron: Patron.new %>
+</div>
+<script>
+  function no_patron(){
+     if($('#no_patron').is(":checked")){
+      $('.patron_form').hide()
+     }else{
+      $('.patron_form').show()
+     }
+  }
+
+  function no_name(){
+    if($('#no_name').is(":checked")){
+      $('.name_block').hide()
+      $('#alias_block').show()
+     }else{
+      $('#alias_block').hide()
+      $('.name_block').show()
+     }
+  }
+
+  function no_address(){
+    if($('#no_address').is(":checked")){
+      $('.address_block').hide()
+     }else{
+      $('.address_block').show()
+     }
+  }
+
+  function save_patron(){
+    var patron_input = []
+    var patron_params = new FormData()
+    $(".patron_info :input").each(function(){
+      patron_input.push($(this));
+    });
+    $(patron_input).each(function(){
+      if($(this).attr('type') == 'checkbox'){
+        patron_params.append($(this).attr('id'), $(this).is(":checked"))
+      }else if($(this).attr('type') == 'file'){
+        var file_count = $(this)[0].files.length
+        for (var x = 0; x < file_count; x++) {
+          patron_params.append("patronpic[]", $(this)[0].files[x]);
+        }
+      }else{
+        patron_params.append($(this).attr('id'), $(this).val())
+      }
+    })
+
+    $.ajax({
+      type: "POST",
+      url: 'save_patron',
+      data: patron_params,
+      processData: false,
+      contentType: false
+    });
+  }
+</script>

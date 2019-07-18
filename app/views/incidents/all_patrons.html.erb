@@ -1,0 +1,9 @@
+<%= render 'incidents_menu' %>
+<div class="padding-all">
+  <% if !@patrons.empty? %>
+    <% @patrons.each do |p| %>
+      <%= render 'patron_stub', p: p %>
+    <% end %>
+  <% else %>
+  <% end  %>
+</div>

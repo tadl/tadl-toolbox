@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   match 'new_incident', to: 'incidents#new_incident', as: 'new_incident', via: [:get, :post]
   match 'currently_suspended', to: 'incidents#currently_suspended', as: 'currently_suspended', via: [:get, :post]
   match 'search_incidents', to: 'incidents#search_incidents', as: 'search_incidents', via: [:get, :post]
+  match 'save_patron', to: 'incidents#save_patron', as: 'save_patron', via: [:get, :post], :defaults => { :format => 'js'}
+  match 'all_patrons', to: 'incidents#all_patrons', as: 'all_patrons', via: [:get, :post]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
