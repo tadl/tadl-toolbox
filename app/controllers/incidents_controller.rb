@@ -14,6 +14,7 @@ class IncidentsController < ApplicationController
 
   def new_incident
     @incident = Incident.new
+    @patrons = Patron.all
   end
 
   def save_incident
@@ -62,11 +63,27 @@ class IncidentsController < ApplicationController
     end
   end
 
+  def patron_search
+    if params[:query] == ''
+      @patrons = Patron.all
+    else
+      @patrons = Patron.search_by_name_alias(params[:query])
+    end
+    if params[:age_range] && params[:age_range] != ''
+      age_range = params[:age_range].split(',')
+      @patrons = @patrons.where(age: age_range[0]..age_range[1])
+    end
+    if params[:gender] && params[:gender] != ''
+      @patrons = @patrons.where(gender: params[:gender])
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def eg_lookup
   end
 
-  def pg_lookup
-  end
 
   def new_violation
   end

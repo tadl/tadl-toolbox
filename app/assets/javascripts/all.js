@@ -144,9 +144,9 @@ function reports_submitt(){
 
 function no_patron(){
   if($('#no_patron').is(":checked")){
-    $('.patron_form').hide()
+    $('#patron_form').hide()
   }else{
-    $('.patron_form').show()
+    $('#patron_form').show()
   }
 }
 
@@ -236,4 +236,26 @@ function delete_patronpic(i){
 function make_primary_patronpic(i){
   var id = $('#id').val()
   $.get("make_primary_patron_pic", {i: i, id: id})
+}
+
+function show_patron_search(){
+  $('#patron_search').show()
+  $('#patron_form').hide()
+}
+
+function hide_patron_search(){
+  $('#patron_search').hide()
+  $('#patron_form').show()
+}
+
+function hide_patron_search(){
+  $('#patron_search').hide()
+  $('#patron_form').show()
+}
+
+function search_for_patron(){
+  var query = $('#patron_search_input').val()
+  var age_range = $('#age_range').val()
+  var gender = $('#gender').val()
+  $.get("patron_search", {query: query, age_range: age_range, gender: gender})
 }

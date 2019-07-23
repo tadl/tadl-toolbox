@@ -1,0 +1,33 @@
+<form class="padding-all">
+  <div class="row">
+    <div class="col-sm-11">
+      <input id="patron_search_input" oninput="search_for_patron()" type="search" class="form-control" placeholder="Search by name or alias">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 padding-all">
+      <select id="age_range" class="form-control" onchange="search_for_patron()">
+        <option value="">All Ages</option>
+        <option value="0,18">18 and Under</option>
+        <option value="19,29">19 to 29</option>
+        <option value="29,39">29 to 39</option>
+        <option value="40,49">40 to 49</option>
+        <option value="50,59">50 to 59</option>
+        <option value="60,140">60+</option>
+      </select>
+    </div>
+    <div class="col-sm-4 padding-all">
+      <select id="gender" class="form-control" onchange="search_for_patron()">
+        <option value="">All Genders</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Non-binary">Non-binary</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div id="patron_search_results">
+      <%= render "patron_search_results", patrons: @patrons %>
+    </div>
+  </div>
+</form>

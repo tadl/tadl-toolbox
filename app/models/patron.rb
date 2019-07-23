@@ -1,4 +1,10 @@
 class Patron < ActiveRecord::Base
+  include PgSearch::Model
+  pg_search_scope :search_by_name_alias, 
+                  against: [:first_name, :last_name, :middle_name, :alias],
+                  using: {
+                    tsearch: {prefix: true}
+                  }
   mount_uploaders :patronpic, PatronPicUploader
   has_many :violations
 

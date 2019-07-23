@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   match 'update_patron', to: 'incidents#update_patron', as: 'update_patron', via: [:get, :post], :defaults => { :format => 'js'}
   match 'delete_patron_pic', to: 'incidents#delete_patron_pic', as: 'delete_patron_pic', via: [:get, :post], :defaults => { :format => 'js'}
   match 'make_primary_patron_pic', to: 'incidents#make_primary_patron_pic', as: 'make_primary_patron_pic', via: [:get, :post], :defaults => {:format => 'js' }
+  match 'patron_search', to: 'incidents#patron_search', as: 'patron_search', via: [:get, :post], :defaults => {:format => 'js'}
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

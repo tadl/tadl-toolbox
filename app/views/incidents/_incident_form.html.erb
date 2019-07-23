@@ -1,5 +1,4 @@
 <h3>Patrons Involved:</h3>
-<a>Find a patron from previous incident</a>
 <div class="row patron_info">
   <div class="col-sm-4">
     <div class="checkbox">
@@ -9,8 +8,21 @@
     </div>
   </div>
 </div>
-<div class="patron_form">
-  <%= render 'no_toggles', patron: Patron.new %>
-  <%= render 'patron_form', patron: Patron.new %>
-  <button type="button" class="btn btn-success btn-lg" onclick="save_patron()">Save Patron</button>
+<div id="patrons_involved">
+</div>
+<div id="add_patrons">
+  <div id="patron_search" style="display:none">
+    <div class="row">
+      <div class="col-sm-4">
+        <a onclick="hide_patron_search()">Cancel search for patron</a>
+      </div>
+    </div>
+    <%= render 'patron_search_form' %>
+  </div>
+  <div id="patron_form">
+    <a onclick="show_patron_search()">Find a patron from previous incident</a>
+    <%= render 'no_toggles', patron: Patron.new %>
+    <%= render 'patron_form', patron: Patron.new %>
+    <button type="button" class="btn btn-success btn-lg" onclick="save_patron()">Save Patron and Add to Incident</button>
+  </div>
 </div>
