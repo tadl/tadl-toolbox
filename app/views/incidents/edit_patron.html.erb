@@ -1,0 +1,9 @@
+<%= render 'incidents_menu' %>
+<h4>Editing Patron</h4>
+<div id="patron_toggles">
+  <%= render 'no_toggles', patron: @patron %>
+</div>
+<div id="patron_form">
+  <%= render 'patron_form', patron: @patron %>
+</div>
+<button type="button" class="btn btn-success btn-lg" onclick="update_patron()">Update Patron</button>

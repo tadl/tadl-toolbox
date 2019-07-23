@@ -1,0 +1,18 @@
+<div class="row padding-all">
+  <% patron.patronpic.each_with_index do |pic, index| %>
+    <div class="col-sm-2">
+      <a href="<%= pic.url %>">
+        <% if index == 0 %>
+          <%= image_tag(pic.small.url, :class => 'img-responsive primary_image', :style => 'max-height: 100px') %>
+        <% else %>
+          <%= image_tag(pic.small.url, :class => 'img-responsive img-thumbnail padding-all', :style => 'max-height: 100px') %>
+        <% end %>
+      </a>
+      <a onclick="delete_patronpic('<%= index %>')">Delete</a>
+      <br>
+      <% if index != 0 %>
+        <a onclick="make_primary_patronpic('<%= index %>')">Make Primary</a>
+      <% end %>
+    </div>
+  <% end %>
+</div>

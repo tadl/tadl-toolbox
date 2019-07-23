@@ -1,1 +1,36 @@
-<h1>hello</h1>
+<div class="panel panel-danger">
+  <div class="panel-body">
+    <div class="row">
+      <div class='col-sm-3'>
+        <%= image_tag((p.primary_pic_small || asset_path('missing_pic.png')), :class => 'img-responsive img-thumbnail') %>
+      </div>
+      <div class='col-sm-9'>
+        <h4><%= p.full_name %></h4>
+        <b>Address:</b> <%= p.full_address %>
+        <% if p.age %>
+          <br>
+          <b>Age:</b> <%= p.age %>
+        <% end %>
+        <% if p.physical_description %>
+          <br>
+          <b>Physical Description:</b> <%= p.physical_description %>
+        <% end %>
+        <% if p.card_number %>
+          <br>
+          <b>Card #:</b> <%= p.card_number %>
+        <% end %>
+        <br>
+        <a href="/edit_patron?id=<%= p.id %>">Edit</a>
+      </div>
+    </div>
+    <% if p.patronpic.size > 1 %>
+      <div class="row padding-all">
+        <% p.other_pics.each do |pic| %>
+          <a href="<%= pic.url %>">
+            <%= image_tag(pic.small.url, :class => 'img-responsive img-thumbnail', :style => 'max-height: 100px') %>
+          </a>
+        <% end %>
+      </div>
+    <% end %>
+  </div>     
+</div>

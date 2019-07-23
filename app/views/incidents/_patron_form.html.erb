@@ -57,15 +57,19 @@
   <div class="row">
     <div class="form-group col-sm-12">
       <label for="physical_description">Physical Description</label>
-      <textarea class="form-control" id="physical_description" rows="3" value="<%= patron.physical_description %>">
-      </textarea>
+      <textarea class="form-control" id="physical_description" rows="3" value="<%= patron.physical_description %>"></textarea>
     </div>
   </div>
+  <% if patron.patronpic.size > 0 %>
+    <div id="patron_pics">
+      <%= render 'patron_pics', patron: patron %>
+    </div>
+  <% end %>
   <div class="row">
     <div class="form-group col-sm-12">
-      <label for="Pictures">Picture</label>
+      <label for="Pictures">Add Picture</label>
       <%= file_field_tag 'patronpic', multiple: true, accept: 'image/png,image/gif,image/jpeg'%>
     </div>
   </div>
+  <input type="hidden" id="id" value="<%= patron.id %>">
 </form>
-<button type="button" class="btn btn-success btn-lg">Save Patron</button>

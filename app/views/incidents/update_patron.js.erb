@@ -1,0 +1,3 @@
+alert('Patron Succesfully Updated!')
+$('#patron_form').html('<%= escape_javascript(render "patron_form", patron: @patron) %>')
+$('#patron_toggles').html('<%= escape_javascript(render "no_toggles", patron: @patron) %>')

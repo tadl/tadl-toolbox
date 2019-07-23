@@ -3,40 +3,35 @@ class PatronPicUploader < CarrierWave::Uploader::Base
   storage :file
 
   def store_dir
-    ENV['MOUNT_POINT']+'patronpics/'
+    ENV['MOUNT_POINT']+'patronpics'
   end
 
   def filename
-    set_filename(model.id)
+    "#{secure_token}.#{file.extension}" if original_filename.present?
   end
 
-  def set_filename(model_id)
-    patron = Patron.find(model_id) rescue Patron.new
-    return patron.id.to_s + rand(10 ** 20).to_s.rjust(10,'0') +'.jpg'
-  end
+  def secure_token
+    media_original_filenames_var = :"@#{mounted_as}_original_filenames"
 
+    unless model.instance_variable_get(media_original_filenames_var)
+      model.instance_variable_set(media_original_filenames_var, {})
+    end
+
+    unless model.instance_variable_get(media_original_filenames_var).map{|k,v| k }.include? original_filename.to_sym
+      new_value = model.instance_variable_get(media_original_filenames_var).merge({"#{original_filename}": SecureRandom.uuid})
+      model.instance_variable_set(media_original_filenames_var, new_value)
+    end
+
+    model.instance_variable_get(media_original_filenames_var)[original_filename.to_sym]
+  end
 
   def extension_whitelist
     %w(jpg jpeg gif png)
   end
 
-  version :original do
-    process :convert => 'jpg'
-    def full_filename (for_file = model.patronpic.file) 
-      set_filename(model.id)
-    end 
-    def store_dir
-       ENV['MOUNT_POINT']+'patronpics/original'
-    end
-  end
-
 
   version :large do
     process :resize_to_limit => [nil, 800]
-    process :convert => 'jpg'
-    def full_filename (for_file = model.partonpic.file) 
-      set_filename(model.id)
-    end 
     def store_dir
        ENV['MOUNT_POINT']+'patronpics/large'
     end
@@ -44,10 +39,6 @@ class PatronPicUploader < CarrierWave::Uploader::Base
 
   version :small do
     process :resize_to_limit => [nil, 300]
-    process :convert => 'jpg'
-    def full_filename (for_file = model.patronpic.file) 
-      set_filename(model.id)
-    end 
     def store_dir
        ENV['MOUNT_POINT']+'patronpics/small'
     end

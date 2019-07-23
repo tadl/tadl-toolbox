@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :departments
   resources :stats
   resources :violationtypes
-  root 'main#index'
+  root to: 'main#index'
   match 'home', to: 'main#index', as: 'home', via: [:get, :post]
   match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
@@ -42,6 +42,10 @@ Rails.application.routes.draw do
   match 'search_incidents', to: 'incidents#search_incidents', as: 'search_incidents', via: [:get, :post]
   match 'save_patron', to: 'incidents#save_patron', as: 'save_patron', via: [:get, :post], :defaults => { :format => 'js'}
   match 'all_patrons', to: 'incidents#all_patrons', as: 'all_patrons', via: [:get, :post]
+  match 'edit_patron', to: 'incidents#edit_patron', as: 'edit_patron', via: [:get, :post]
+  match 'update_patron', to: 'incidents#update_patron', as: 'update_patron', via: [:get, :post], :defaults => { :format => 'js'}
+  match 'delete_patron_pic', to: 'incidents#delete_patron_pic', as: 'delete_patron_pic', via: [:get, :post], :defaults => { :format => 'js'}
+  match 'make_primary_patron_pic', to: 'incidents#make_primary_patron_pic', as: 'make_primary_patron_pic', via: [:get, :post], :defaults => {:format => 'js' }
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

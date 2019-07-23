@@ -22,18 +22,50 @@ class IncidentsController < ApplicationController
   def new_patron
   end
 
-  def eg_lookup
-  end
-
-  def pg_lookup
-  end
-
   def save_patron
     @patron = Patron.new(patron_params)
     @patron.save!
     respond_to do |format|
       format.js
     end
+  end
+
+  def edit_patron
+    @patron = Patron.find(params[:id])
+  end
+
+  def update_patron
+    @patron = Patron.find(params[:id])
+    @patron.update(patron_params)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def delete_patron_pic
+    @patron = Patron.find(params[:id])
+    @i = params[:i].to_i
+    @patron.delete_patron_pic(@i)
+    @patron.save!
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def make_primary_patron_pic
+    @patron = Patron.find(params[:id])
+    @i = params[:i].to_i
+    @patron.make_primary_patron_pic(@i)
+    @patron.save!
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def eg_lookup
+  end
+
+  def pg_lookup
   end
 
   def new_violation

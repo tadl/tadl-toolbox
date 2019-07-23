@@ -141,3 +141,99 @@ function reports_submitt(){
     $.post("save_report", params)
   }
 }
+
+function no_patron(){
+  if($('#no_patron').is(":checked")){
+    $('.patron_form').hide()
+  }else{
+    $('.patron_form').show()
+  }
+}
+
+function no_name(){
+  if($('#no_name').is(":checked")){
+    $('.name_block').hide()
+    $('#alias_block').show()
+  }else{
+    $('#alias_block').hide()
+    $('.name_block').show()
+  }
+}
+
+function no_address(){
+  if($('#no_address').is(":checked")){
+    $('.address_block').hide()
+  }else{
+    $('.address_block').show()
+  }
+}
+
+
+function save_patron(){
+  var patron_input = []
+  var patron_params = new FormData()
+  $(".patron_info :input").each(function(){
+    patron_input.push($(this));
+  });
+  $(patron_input).each(function(){
+    if($(this).attr('type') == 'checkbox'){
+      patron_params.append($(this).attr('id'), $(this).is(":checked"))
+    }else if($(this).attr('type') == 'file'){
+      var file_count = $(this)[0].files.length
+      for (var x = 0; x < file_count; x++) {
+        patron_params.append("patronpic[]", $(this)[0].files[x]);
+      }
+    }else{
+      patron_params.append($(this).attr('id'), $(this).val())
+    }
+  })
+  $.ajax({
+    type: "POST",
+    url: 'save_patron',
+    data: patron_params,
+    processData: false,
+    contentType: false
+  });
+}
+
+
+function update_patron(){
+  var patron_input = []
+  var patron_params = new FormData()
+  $(".patron_info :input").each(function(){
+    patron_input.push($(this));
+  });
+  $(patron_input).each(function(){
+    if($(this).attr('type') == 'checkbox'){
+      patron_params.append($(this).attr('id'), $(this).is(":checked"))
+    }else if($(this).attr('id') == 'patronpic'){
+      if($(this).attr('type') == 'file'){
+        var file_count = $(this)[0].files.length
+        for (var x = 0; x < file_count; x++) {
+          patron_params.append("patronpic[]", $(this)[0].files[x]);
+        }
+      }else{
+        patron_params.append("patronpic[]", $(this).val());
+      }
+    }else{
+      patron_params.append($(this).attr('id'), $(this).val())
+    }
+  })
+  $.ajax({
+    type: "POST",
+    url: 'update_patron',
+    data: patron_params,
+    processData: false,
+    contentType: false
+  });
+}
+
+function delete_patronpic(i){
+  var id = $('#id').val()
+  $.get("delete_patron_pic.js", {i: i, id: id})
+}
+
+function make_primary_patronpic(i){
+  var id = $('#id').val()
+  $.get("make_primary_patron_pic", {i: i, id: id})
+}
