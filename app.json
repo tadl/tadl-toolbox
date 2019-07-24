@@ -4,16 +4,7 @@
     "website": "https://www.tadl.org/",
     "require": {
         "plugins": [
-            {
-                "name": "postgres",
-                "commands": ["postgres:create postgres-$APP", "postgres:link postgres-$APP $APP"]
-            }, {
-                "name": "memcached",
-                "commands": ["memcached:create memcached-$APP", "memcached:link memcached-$APP $APP"]
-            }, {
-                "name": "redis",
-                "commands": ["redis:create redis-$APP", "redis:link redis-$APP $APP"]
-            }
+            "postgres", "memcached", "redis"
         ],
         "volumes": [
             { "host": "/srv/toolbox", "app": "/srv/toolbox", "phases": "build,deploy,run" }
@@ -21,7 +12,6 @@
     },
     "scripts": {
         "dokku": {
-            // "postdeploy": "rake populate_lists"
             "postdeploy": "bundle exec rake db:migrate"
         }
     }
