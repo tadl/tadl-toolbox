@@ -1,9 +1,9 @@
-class PatronPicUploader < CarrierWave::Uploader::Base
+class IncidentpicUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
   storage :file
 
   def store_dir
-    ENV['MOUNT_POINT']+'patronpics'
+    ENV['MOUNT_POINT']+'incidentpics'
   end
 
   def filename
@@ -37,5 +37,4 @@ class PatronPicUploader < CarrierWave::Uploader::Base
   version :small do
     process :resize_to_limit => [nil, 200]
   end
-
 end

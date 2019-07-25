@@ -5,6 +5,10 @@
     </div>
     <div class='col-sm-9'>
       <h4><%= p.full_name %></h4>
+      <% if from_incident= true %>
+        <a onclick="add_patron_to_incident('<%= p.id %>')">Add Patron to This Incident</a>
+        <br>
+      <% end %>
       <b>Address:</b> <%= p.full_address %>
       <% if p.age %>
         <br>

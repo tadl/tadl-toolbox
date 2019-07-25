@@ -1,28 +1,80 @@
-<h3>Patrons Involved:</h3>
-<div class="row patron_info">
-  <div class="col-sm-4">
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" id="no_patron" onchange="no_patron()"> No specific patrons listed in this report
-      </label>
+<h3>Incident Description:</h3>
+<form class="padding-all">
+  <div class="row incident_info">
+    <div class="form-group col-sm-9">
+      <label for="title">Incident Title</label>
+      <input type="text" class="form-control" id="title" placeholder="Angry Patron Throws Book" value="<%= incident.title %>">
     </div>
   </div>
-</div>
-<div id="patrons_involved">
-</div>
-<div id="add_patrons">
-  <div id="patron_search" style="display:none">
-    <div class="row">
-      <div class="col-sm-4">
-        <a onclick="hide_patron_search()">Cancel search for patron</a>
+  <div class="row">
+    <div class="form-group col-sm-4">
+        <label for="date_of">Date & Time of Incident</label>
+        <div class='input-group date' id='datetimepicker1'>
+            <input id="date_of" type='text' class="form-control" value="<%= incident.date_of %>">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group col-sm-4 incident_info">
+      <label for="location">Date & Time of Incident</label>
+      <select id="location" class="form-control" onchange="incident_location_change()">
+        <option value="">Select a Location</option>
+        <option value="Woodmere">Woodmere</option>
+        <option value="Kingsley">Kingsley</option>
+        <option value="East Bay">East Bay</option>
+        <option value="Interlochen">Interlochen</option>
+        <option value="Fife Lake">Fife Lake</option>
+        <option value="Peninsula">Peninsula</option>
+      </select>
+    </div>
+    <div class="form-group col-sm-4 incident_info" id="department_select" style="display: none">
+      <label for="department">Department</label>
+      <select id="department" class="form-control">
+        <option value="">Select a Department</option>
+        <option value="Administration">Administration</option>
+        <option value="Adult/Reference">Adult/Reference</option>
+        <option value="Circulation">Circulation</option>
+        <option value="Facilities">Facilities</option>
+        <option value="Processing">Processing</option>
+        <option value="Public Computing Center">Public Computing Center</option>
+        <option value="Sight and Sound">Sight and Sound</option>
+        <option value="Talking Book Library">Talking Book Library</option>
+        <option value="Technology">Technology</option>
+        <option value="Teen Services">Teen Services</option>
+        <option value="Youth Services">Youth Services</option>
+      </select>
+    </div>
+  </div>
+  <div class="row incident_info">
+    <div class="form-group col-sm-12">
+      <label for="description">Incident Description</label>
+      <textarea class="form-control" id="description" rows="3" value="<%= incident.description %>"></textarea>
+    </div>
+  </div>
+  <div class="row incident_info">
+    <div class="form-group col-sm-12">
+      <label for="incidentpic">Add Pictures</label>
+      <%= file_field_tag 'incidentpic', multiple: true, accept: 'image/png,image/gif,image/jpeg'%>
+    </div>
+  </div>
+  <div class="row incident_info">
+    <div class="col-sm-4">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" id="no_patrons" onchange="no_patron()"> No specific patrons listed in this report
+        </label>
       </div>
     </div>
-    <%= render 'patron_search_form' %>
   </div>
-  <div id="patron_form">
-    <a onclick="show_patron_search()">Find a patron from previous incident</a>
-    <%= render 'no_toggles', patron: Patron.new %>
-    <%= render 'patron_form', patron: Patron.new %>
-    <button type="button" class="btn btn-success btn-lg" onclick="save_patron()">Save Patron and Add to Incident</button>
-  </div>
-</div>
+  <input type="hidden" class="incident_info" id="id" value="<%= incident.id %>">
+</form>
+
+
+
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker();
+    });
+</script>

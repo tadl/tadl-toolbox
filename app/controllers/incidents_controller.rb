@@ -18,6 +18,14 @@ class IncidentsController < ApplicationController
   end
 
   def save_incident
+    if params[:date_of]
+      params[:date_of] = params[:date_of].to_datetime 
+    end
+    @incident = Incident.new(incident_params)
+    @incident.save!
+    respond_to do |format|
+      format.js
+    end
   end
 
   def new_patron
@@ -95,10 +103,12 @@ class IncidentsController < ApplicationController
   end
 
   private
-
-      # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the white list through.
   def patron_params
       params.permit(:no_name, :no_address, :first_name, :middle_name, :last_name, :alias, :address, :city, :state, :zip, :card_number, :gender, :age, :physical_description, patronpic: [])
   end
 
+  def incident_params
+      params.permit(:date_of, :location, :department, :title, :description, :no_patrons, incidentpic: [])
+  end
 end

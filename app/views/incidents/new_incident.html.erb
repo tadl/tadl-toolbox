@@ -1,4 +1,8 @@
 <%= render 'incidents_menu' %>
 <div class="padding-all">
-  <%= render 'incident_form' %>
+  <div id="incident_portin">
+    <%= render "form_incident_portion", incident: @incident %>
+  </div>
+  <div id="patron_portion">
+  </div>
 </div>

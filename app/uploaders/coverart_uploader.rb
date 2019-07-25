@@ -15,39 +15,21 @@ class CoverartUploader < CarrierWave::Uploader::Base
   def set_filename(model_id)
     cover = Cover.find(model_id) rescue Cover.new
     return cover.record_id.to_s
-  end 
+  end
 
   version :large do
-    process :resize_to_limit => [nil, 400]
-    process :convert => 'jpg'
-    def full_filename (for_file = model.coverart.file) 
-      set_filename(model.id)
-    end 
-    def store_dir
-       ENV['MOUNT_POINT']+'jacket/large/r'
-    end
+    process resize_to_limit: [nil, 400]
+    process convert: 'jpg'
   end
 
   version :medium do
-    process :resize_to_limit => [nil, 200]
-    process :convert => 'jpg'
-    def full_filename (for_file = model.coverart.file) 
-      set_filename(model.id)
-    end 
-    def store_dir
-       ENV['MOUNT_POINT']+'jacket/medium/r'
-    end
+    process resize_to_limit: [nil, 200]
+    process convert: 'jpg'
   end
 
   version :small do
-    process :resize_to_limit => [nil, 100]
-    process :convert => 'jpg'
-    def full_filename (for_file = model.coverart.file) 
-      set_filename(model.id)
-    end 
-    def store_dir
-       ENV['MOUNT_POINT']+'jacket/small/r'
-    end
+    process resize_to_limit: [nil, 100]
+    process convert: 'jpg' 
   end
 
   def extension_white_list

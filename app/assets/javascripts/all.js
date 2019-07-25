@@ -143,9 +143,13 @@ function reports_submitt(){
 }
 
 function no_patron(){
-  if($('#no_patron').is(":checked")){
+  if($('#no_patrons').is(":checked")){
+    $('#save_incident_with_patron').hide()
+    $('#save_incident').show()
     $('#patron_form').hide()
   }else{
+    $('#save_incident_with_patron').show()
+    $('#save_incident').hide()
     $('#patron_form').show()
   }
 }
@@ -167,6 +171,40 @@ function no_address(){
     $('.address_block').show()
   }
 }
+
+
+function save_incident(){
+  var incident_input = []
+  var incident_params = new FormData()
+  $(".incident_info :input").each(function(){
+    incident_input.push($(this));
+  });
+  $(incident_input).each(function(){
+    if($(this).attr('type') == 'checkbox'){
+      incident_params.append($(this).attr('id'), $(this).is(":checked"))
+    }else if($(this).attr('type') == 'file'){
+      var file_count = $(this)[0].files.length
+      for (var x = 0; x < file_count; x++) {
+        incident_params.append("incidentpic[]", $(this)[0].files[x]);
+      }
+    }else{
+      incident_params.append($(this).attr('id'), $(this).val())
+    }
+  })
+  var date_of = $('#datetimepicker1').data("DateTimePicker").viewDate().format()
+  incident_params.append('date_of', date_of)
+  $.ajax({
+    type: "POST",
+    url: 'save_incident',
+    data: incident_params,
+    processData: false,
+    contentType: false
+  });
+}
+
+
+
+
 
 
 function save_patron(){
@@ -258,4 +296,13 @@ function search_for_patron(){
   var age_range = $('#age_range').val()
   var gender = $('#gender').val()
   $.get("patron_search", {query: query, age_range: age_range, gender: gender})
+}
+
+function incident_location_change(){
+  target_location = $('#location').val()
+  if(target_location == 'Woodmere'){
+    $('#department_select').show()
+  }else{
+    $('#department_select').hide()
+  }
 }

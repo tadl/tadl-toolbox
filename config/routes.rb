@@ -40,13 +40,13 @@ Rails.application.routes.draw do
   match 'new_incident', to: 'incidents#new_incident', as: 'new_incident', via: [:get, :post]
   match 'currently_suspended', to: 'incidents#currently_suspended', as: 'currently_suspended', via: [:get, :post]
   match 'search_incidents', to: 'incidents#search_incidents', as: 'search_incidents', via: [:get, :post]
-  match 'save_patron', to: 'incidents#save_patron', as: 'save_patron', via: [:get, :post], :defaults => { :format => 'js'}
   match 'all_patrons', to: 'incidents#all_patrons', as: 'all_patrons', via: [:get, :post]
   match 'edit_patron', to: 'incidents#edit_patron', as: 'edit_patron', via: [:get, :post]
   match 'update_patron', to: 'incidents#update_patron', as: 'update_patron', via: [:get, :post], :defaults => { :format => 'js'}
   match 'delete_patron_pic', to: 'incidents#delete_patron_pic', as: 'delete_patron_pic', via: [:get, :post], :defaults => { :format => 'js'}
   match 'make_primary_patron_pic', to: 'incidents#make_primary_patron_pic', as: 'make_primary_patron_pic', via: [:get, :post], :defaults => {:format => 'js' }
   match 'patron_search', to: 'incidents#patron_search', as: 'patron_search', via: [:get, :post], :defaults => {:format => 'js'}
+  match 'save_incident', to: 'incidents#save_incident', as: 'save_incident', via: [:get, :post], :defaults => { :format => 'js'}
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
