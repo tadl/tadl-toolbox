@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   #Incidents
   match 'incidents', to: 'incidents#list_incidents', as: 'incidents', via: [:get, :post]
   match 'new_incident', to: 'incidents#new_incident', as: 'new_incident', via: [:get, :post]
+  match 'edit_incident', to: 'incidents#edit_incident', as: 'edit_incident', via: [:get, :post]
   match 'currently_suspended', to: 'incidents#currently_suspended', as: 'currently_suspended', via: [:get, :post]
   match 'search_incidents', to: 'incidents#search_incidents', as: 'search_incidents', via: [:get, :post]
   match 'all_patrons', to: 'incidents#all_patrons', as: 'all_patrons', via: [:get, :post]
@@ -46,53 +47,9 @@ Rails.application.routes.draw do
   match 'delete_patron_pic', to: 'incidents#delete_patron_pic', as: 'delete_patron_pic', via: [:get, :post], :defaults => { :format => 'js'}
   match 'make_primary_patron_pic', to: 'incidents#make_primary_patron_pic', as: 'make_primary_patron_pic', via: [:get, :post], :defaults => {:format => 'js' }
   match 'patron_search', to: 'incidents#patron_search', as: 'patron_search', via: [:get, :post], :defaults => {:format => 'js'}
+  match 'save_patron', to: 'incidents#save_patron', as: 'save_patron', via: [:get, :post], :defaults => { :format => 'js'}
   match 'save_incident', to: 'incidents#save_incident', as: 'save_incident', via: [:get, :post], :defaults => { :format => 'js'}
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  match 'update_incident', to: 'incidents#update_incident', as: 'update_incident', via: [:get, :post], :defaults => { :format => 'js'}
+  match 'delete_incident_pic', to: 'incidents#delete_incident_pic', as: 'delete_incident_pic', via: [:get, :post], :defaults => { :format => 'js'}
+  match 'make_primary_incident_pic', to: 'incidents#make_primary_incident_pic', as: 'make_primary_incident_pic', via: [:get, :post], :defaults => {:format => 'js' }
 end

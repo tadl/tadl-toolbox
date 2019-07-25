@@ -1,5 +1,5 @@
 <div class="row padding-all">
-  <% patron.patronpic.each_with_index do |pic, index| %>
+  <% incident.incidentpic.each_with_index do |pic, index| %>
     <div class="col-sm-2">
       <a href="<%= pic.url %>">
         <% if index == 0 %>
@@ -8,10 +8,10 @@
           <%= image_tag(pic.small.url, :class => 'img-responsive img-thumbnail padding-all', :style => 'max-height: 100px') %>
         <% end %>
       </a>
-      <a onclick="delete_pic('<%= index %>','patron')">Delete</a>
+      <a onclick="delete_pic('<%= index %>','incident')">Delete</a>
       <br>
       <% if index != 0 %>
-        <a onclick="make_primary_pic('<%= index %>','patron')">Make Primary</a>
+        <a onclick="make_primary_pic('<%= index %>','incident')">Make Primary</a>
       <% end %>
     </div>
   <% end %>

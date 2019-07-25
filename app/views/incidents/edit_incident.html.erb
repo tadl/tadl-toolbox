@@ -1,0 +1,6 @@
+<%= render 'incidents_menu' %>
+<h4>Editing Incident</h4>
+<div id="incident_form">
+  <%= render 'incident_form', incident: @incident %>
+</div>
+<button type="button" class="btn btn-success btn-lg" onclick="save_incident(true)">Update Incident</button>

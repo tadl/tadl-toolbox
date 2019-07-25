@@ -1,7 +1,31 @@
-<h4><%= incident.title %></h4>
-<br>
-Description
-<%= incident.description %>
-<br>
-Date of:
-<%= incident.date_of %>
+<div class="panel panel-danger">
+  <div class="panel-body">
+    <div class="row">
+      <div class='col-sm-3'>
+        <%= image_tag((i.primary_pic_small || asset_path('missing_pic.png')), :class => 'img-responsive img-thumbnail') %>
+      </div>
+      <div class='col-sm-9'>
+        <h4><%= i.title %></h4>
+        <% if i.description %>
+          <br>
+          <b>Description:</b> <%= i.description %>
+        <% end %>
+        <% if i.date_of %>
+          <br>
+          <b>Date of:</b> <%= i.date_of %>
+        <% end %>
+        <br>
+        <a href="/edit_incident?id=<%= i.id %>">Edit</a>
+      </div>
+    </div>
+    <% if i.incidentpic.size > 1 %>
+      <div class="row padding-all">
+        <% i.other_pics.each do |pic| %>
+          <a href="<%= pic.url %>">
+            <%= image_tag(pic.small.url, :class => 'img-responsive img-thumbnail', :style => 'max-height: 100px') %>
+          </a>
+        <% end %>
+      </div>
+    <% end %>
+  </div>     
+</div>

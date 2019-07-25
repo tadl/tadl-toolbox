@@ -20,16 +20,25 @@ class CoverartUploader < CarrierWave::Uploader::Base
   version :large do
     process resize_to_limit: [nil, 400]
     process convert: 'jpg'
+    def store_dir
+      ENV['MOUNT_POINT']+'jacket/large/r'
+    end
   end
 
   version :medium do
     process resize_to_limit: [nil, 200]
     process convert: 'jpg'
+    def store_dir
+      ENV['MOUNT_POINT']+'jacket/medium/r'
+    end
   end
 
   version :small do
     process resize_to_limit: [nil, 100]
-    process convert: 'jpg' 
+    process convert: 'jpg'
+    def store_dir
+      ENV['MOUNT_POINT']+'jacket/small/r'
+    end 
   end
 
   def extension_white_list

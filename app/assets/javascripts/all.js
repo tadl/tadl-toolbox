@@ -173,7 +173,7 @@ function no_address(){
 }
 
 
-function save_incident(){
+function save_incident(update){
   var incident_input = []
   var incident_params = new FormData()
   $(".incident_info :input").each(function(){
@@ -193,18 +193,19 @@ function save_incident(){
   })
   var date_of = $('#datetimepicker1').data("DateTimePicker").viewDate().format()
   incident_params.append('date_of', date_of)
+  if(update == true){
+    var url = 'update_incident'
+  }else{
+    var url = 'save_incident'
+  }
   $.ajax({
     type: "POST",
-    url: 'save_incident',
+    url: url,
     data: incident_params,
     processData: false,
     contentType: false
   });
 }
-
-
-
-
 
 
 function save_patron(){
@@ -266,14 +267,24 @@ function update_patron(){
   });
 }
 
-function delete_patronpic(i){
+function delete_pic(i, model){
   var id = $('#id').val()
-  $.get("delete_patron_pic.js", {i: i, id: id})
+  if(model=='patron'){
+    var url = "delete_patron_pic.js"
+  }else{
+    var url = "delete_incident_pic.js"
+  }
+  $.get(url, {i: i, id: id})
 }
 
-function make_primary_patronpic(i){
+function make_primary_pic(i, model){
   var id = $('#id').val()
-  $.get("make_primary_patron_pic", {i: i, id: id})
+  if(model=='patron'){
+    var url = "make_primary_patron_pic.js"
+  }else{
+    var url = "make_primary_incident_pic.js"
+  }
+  $.get(url, {i: i, id: id})
 }
 
 function show_patron_search(){

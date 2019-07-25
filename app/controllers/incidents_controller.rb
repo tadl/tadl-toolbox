@@ -28,6 +28,38 @@ class IncidentsController < ApplicationController
     end
   end
 
+  def edit_incident
+    @incident = Incident.find(params[:id])
+  end
+
+  def update_incident
+    @incident = Incident.find(params[:id])
+    @incident.update(incident_params)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def delete_incident_pic
+    @incident = Incident.find(params[:id])
+    @i = params[:i].to_i
+    @incident.delete_incident_pic(@i)
+    @incident.save!
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def make_primary_incident_pic
+    @incident = Incident.find(params[:id])
+    @i = params[:i].to_i
+    @incident.make_primary_incident_pic(@i)
+    @incident.save!
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def new_patron
   end
 

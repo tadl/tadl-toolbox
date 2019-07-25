@@ -31,10 +31,16 @@ class IncidentpicUploader < CarrierWave::Uploader::Base
 
 
   version :large do
-    process :resize_to_limit => [nil, 800]
+    process :resize_to_limit => [nil, 1000]
+    def store_dir
+      ENV['MOUNT_POINT']+'incidentpics/large'
+    end
   end
 
   version :small do
     process :resize_to_limit => [nil, 200]
+    def store_dir
+      ENV['MOUNT_POINT']+'incidentpics/small'
+    end
   end
 end
