@@ -1,5 +1,6 @@
 class IncidentsController < ApplicationController
-  before_action :authenticate_user!,
+  before_action :authenticate_user!
+  before_action :super_admin!
   
   def list_incidents
     @incidents = Incident.all
@@ -21,6 +22,7 @@ class IncidentsController < ApplicationController
     if params[:date_of]
       params[:date_of] = params[:date_of].to_datetime 
     end
+    @from = params[:from].to_s
     @incident = Incident.new(incident_params)
     @incident.save!
     respond_to do |format|
@@ -33,6 +35,9 @@ class IncidentsController < ApplicationController
   end
 
   def update_incident
+    if params[:date_of]
+      params[:date_of] = params[:date_of].to_datetime 
+    end
     @incident = Incident.find(params[:id])
     @incident.update(incident_params)
     respond_to do |format|
@@ -64,6 +69,7 @@ class IncidentsController < ApplicationController
   end
 
   def save_patron
+    @from = params[:from].to_s
     @patron = Patron.new(patron_params)
     @patron.save!
     respond_to do |format|

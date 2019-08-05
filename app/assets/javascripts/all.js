@@ -173,7 +173,7 @@ function no_address(){
 }
 
 
-function save_incident(update){
+function save_incident(update, from){
   var incident_input = []
   var incident_params = new FormData()
   $(".incident_info :input").each(function(){
@@ -193,6 +193,7 @@ function save_incident(update){
   })
   var date_of = $('#datetimepicker1').data("DateTimePicker").viewDate().format()
   incident_params.append('date_of', date_of)
+  incident_params.append('from', from)
   if(update == true){
     var url = 'update_incident'
   }else{
@@ -208,7 +209,7 @@ function save_incident(update){
 }
 
 
-function save_patron(){
+function save_patron(update, from){
   var patron_input = []
   var patron_params = new FormData()
   $(".patron_info :input").each(function(){
@@ -226,41 +227,15 @@ function save_patron(){
       patron_params.append($(this).attr('id'), $(this).val())
     }
   })
+  patron_params.append('from', from)
+  if(update == true){
+    var url = 'update_update'
+  }else{
+    var url = 'save_patron'
+  }
   $.ajax({
     type: "POST",
-    url: 'save_patron',
-    data: patron_params,
-    processData: false,
-    contentType: false
-  });
-}
-
-
-function update_patron(){
-  var patron_input = []
-  var patron_params = new FormData()
-  $(".patron_info :input").each(function(){
-    patron_input.push($(this));
-  });
-  $(patron_input).each(function(){
-    if($(this).attr('type') == 'checkbox'){
-      patron_params.append($(this).attr('id'), $(this).is(":checked"))
-    }else if($(this).attr('id') == 'patronpic'){
-      if($(this).attr('type') == 'file'){
-        var file_count = $(this)[0].files.length
-        for (var x = 0; x < file_count; x++) {
-          patron_params.append("patronpic[]", $(this)[0].files[x]);
-        }
-      }else{
-        patron_params.append("patronpic[]", $(this).val());
-      }
-    }else{
-      patron_params.append($(this).attr('id'), $(this).val())
-    }
-  })
-  $.ajax({
-    type: "POST",
-    url: 'update_patron',
+    url: url,
     data: patron_params,
     processData: false,
     contentType: false

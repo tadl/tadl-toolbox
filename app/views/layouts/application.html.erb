@@ -21,9 +21,9 @@
   					<li role="presentation" class="<%= active_menu('lists') %>"><%= link_to "Lists", lists_path %></li>
   					<li role="presentation" class="<%= active_menu('covers') %>"><%= link_to "Covers", covers_path %></li>
             <li role="presentation" class="<%= active_menu('reports') %>"><%= link_to "Soft Stats", reports_path %></li>
-            <li role="presentation" class="<%= active_menu('incidents') %>"><%= link_to "Incidents", incidents_path %></li>
             <!-- <li role="presentation" class="<%= active_menu('trailers') %>"><%= link_to "Trailers", trailer_queue_path %></li> -->
             <% if super_admin %>
+              <li role="presentation" class="<%= active_menu('incidents') %>"><%= link_to "Incidents", incidents_path %></li>
               <li role="presentation" class="<%= active_menu('departments') %>"><%= link_to "Departments", departments_path %></li>
               <li role="presentation" class="<%= active_menu('stats') %>"><%= link_to "Stat Types", stats_path %></li>
               <li role="presentation" class="<%= active_menu('violationtypes') %>"><%= link_to "Violation Types", violationtypes_path %></li>

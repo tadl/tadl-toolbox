@@ -2,10 +2,10 @@
 <%= render "incident_form", incident: @incident %>
 <div class="row">
   <div class="col-sm-6" id="save_incident_with_patron">
-    <button type="button" class="btn btn-success btn-lg" onclick="save_incident(false)">Save Incident and Add Patron</button>
+    <button type="button" class="btn btn-success btn-lg" onclick="save_incident(false,'form_with_patron')">Save Incident and Add Patron</button>
   </div>
   <div class="col-sm-6" id="save_incident" style="display: none">
-    <button type="button" class="btn btn-success btn-lg" onclick="save_incident(false)">Save Incident</button>
+    <button type="button" class="btn btn-success btn-lg" onclick="save_incident(false, 'form_no_patron')">Save Incident</button>
   </div>
 </div>
 

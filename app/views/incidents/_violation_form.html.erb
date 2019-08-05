@@ -1,0 +1,13 @@
+<div id="patron_<%= patron.id.to_s %>">
+  <form class="padding-all">
+    <h4><%= patron.full_name %></h4>  
+    <div class="form-group col-sm-10 incident_info">
+      <label for="violation">Select Violation</label>
+      <select id="patron_<%= patron.id.to_s %>_violation" class="form-control">
+        <% violation_types.each do |v| %>
+          <option value="<%= v.id %>"><%= v.description %></option>
+        <% end %>
+      </select>
+    </div>
+  </form>
+</div>

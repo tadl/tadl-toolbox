@@ -1,1 +1,6 @@
-alert('lima_bean')
+<% if @from == 'form' %>
+  $('#violation_portion').append("<%= escape_javascript( render 'violation_form', patron: @patron, violation_types: Violationtype.all) %>")
+  $('#patron_portion').html('')
+<% elsif @from == 'edit'%>
+<% end %>
+  
