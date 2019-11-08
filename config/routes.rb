@@ -52,4 +52,6 @@ Rails.application.routes.draw do
   match 'update_incident', to: 'incidents#update_incident', as: 'update_incident', via: [:get, :post], :defaults => { :format => 'js'}
   match 'delete_incident_pic', to: 'incidents#delete_incident_pic', as: 'delete_incident_pic', via: [:get, :post], :defaults => { :format => 'js'}
   match 'make_primary_incident_pic', to: 'incidents#make_primary_incident_pic', as: 'make_primary_incident_pic', via: [:get, :post], :defaults => {:format => 'js' }
+  match 'add_patron_to_incident', to: 'incidents#add_patron_to_incident', as: 'add_patron_to_incident', via: [:get, :post], :defaults => {:format => 'js'}
+  match 'save_violations', to: 'incidents#save_violations', as: 'save_violations', via: [:get, :post], :defaults => {:format => 'js'}
 end

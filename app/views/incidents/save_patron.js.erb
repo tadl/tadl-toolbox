@@ -1,6 +1,6 @@
 <% if @from == 'form' %>
   $('#violation_portion').append("<%= escape_javascript( render 'violation_form', patron: @patron, violation_types: Violationtype.all) %>")
-  $('#patron_portion').html('')
+  $('#patron_portion').hide()
 <% elsif @from == 'edit'%>
 <% end %>
   

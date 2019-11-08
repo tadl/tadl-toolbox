@@ -38,6 +38,7 @@ class IncidentsController < ApplicationController
     if params[:date_of]
       params[:date_of] = params[:date_of].to_datetime 
     end
+    @from = params[:from].to_s
     @incident = Incident.find(params[:id])
     @incident.update(incident_params)
     respond_to do |format|
@@ -110,6 +111,7 @@ class IncidentsController < ApplicationController
   end
 
   def patron_search
+    @from_incident = params[:from_incident]
     if params[:query] == ''
       @patrons = Patron.all
     else
@@ -121,6 +123,27 @@ class IncidentsController < ApplicationController
     end
     if params[:gender] && params[:gender] != ''
       @patrons = @patrons.where(gender: params[:gender])
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def add_patron_to_incident
+    @patron = Patron.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def save_violations
+    violations = params[:violation_ids].split(',')
+    violations.each do |v|
+      violation = Violation.new
+      violation.violationtype_id = v
+      violation.patron_id = params[:patron_id]
+      violation.incident_id = params[:incident_id]
+      violation.save!
     end
     respond_to do |format|
       format.js

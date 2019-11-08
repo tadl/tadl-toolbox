@@ -147,10 +147,12 @@ function no_patron(){
     $('#save_incident_with_patron').hide()
     $('#save_incident').show()
     $('#patron_form').hide()
+    $('#add_patron').hide()
   }else{
     $('#save_incident_with_patron').show()
     $('#save_incident').hide()
     $('#patron_form').show()
+    $('#add_patron').show()
   }
 }
 
@@ -277,11 +279,11 @@ function hide_patron_search(){
   $('#patron_form').show()
 }
 
-function search_for_patron(){
+function search_for_patron(from_incident){
   var query = $('#patron_search_input').val()
   var age_range = $('#age_range').val()
   var gender = $('#gender').val()
-  $.get("patron_search", {query: query, age_range: age_range, gender: gender})
+  $.get("patron_search", {query: query, age_range: age_range, gender: gender, from_incident: from_incident})
 }
 
 function incident_location_change(){
@@ -291,4 +293,18 @@ function incident_location_change(){
   }else{
     $('#department_select').hide()
   }
+}
+
+function add_patron_to_incident(patron_id){
+  $.get("add_patron_to_incident", {id: patron_id})
+}
+
+function save_violations(patron_id){
+  var incident_id = $('#incident_id').text()
+  var violation_div = '#violations_' + patron_id  + ' input:checkbox:checked'
+  var violation_ids_raw = $(violation_div).map(function(){
+    return $(this).val();
+  }).get()
+  var violation_ids = violation_ids_raw.join(',')
+  $.get("save_violations",{patron_id: patron_id, incident_id: incident_id, violation_ids: violation_ids})
 }

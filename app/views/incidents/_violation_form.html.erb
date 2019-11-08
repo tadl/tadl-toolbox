@@ -1,13 +1,20 @@
 <div id="patron_<%= patron.id.to_s %>">
   <form class="padding-all">
     <h4><%= patron.full_name %></h4>  
-    <div class="form-group col-sm-10 incident_info">
-      <label for="violation">Select Violation</label>
-      <select id="patron_<%= patron.id.to_s %>_violation" class="form-control">
+    <div class="form-group col-sm-12" id="violations_<%= patron.id.to_s %>">
+      <label for="violation">Select Violation(s)</label>
         <% violation_types.each do |v| %>
-          <option value="<%= v.id %>"><%= v.description %></option>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" value="<%= v.id %>">
+                <%= v.description %>
+              </label>
+          </div>
         <% end %>
-      </select>
     </div>
+    <button type="button" class="btn btn-success btn-lg" onclick="save_violations('<%= patron.id.to_s %>')">
+      Save Violation(s)
+    </button>
+  </div>
   </form>
 </div>

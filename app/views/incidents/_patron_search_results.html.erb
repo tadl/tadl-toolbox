@@ -1,27 +1,29 @@
-<% patrons.each do |p| %>
-  <div class="row padding-all">
-    <div class='col-sm-3'>
-      <%= image_tag((p.primary_pic_small || asset_path('missing_pic.png')), :class => 'img-responsive img-thumbnail') %>
+<% if !patrons.nil? %>
+  <% patrons.each do |p| %>
+    <div class="row padding-all">
+      <div class='col-sm-3'>
+        <%= image_tag((p.primary_pic_small || asset_path('missing_pic.png')), :class => 'img-responsive img-thumbnail') %>
+      </div>
+      <div class='col-sm-9'>
+        <h4><%= p.full_name %></h4>
+        <% if @from_incident == 'true' %>
+          <a onclick="add_patron_to_incident('<%= p.id %>')">Add Patron to This Incident</a>
+          <br>
+        <% end %>
+        <b>Address:</b> <%= p.full_address %>
+        <% if p.age %>
+          <br>
+          <b>Age:</b> <%= p.age %>
+        <% end %>
+        <% if p.physical_description %>
+          <br>
+          <b>Physical Description:</b> <%= p.physical_description %>
+        <% end %>
+        <% if p.card_number %>
+          <br>
+          <b>Card #:</b> <%= p.card_number %>
+        <% end %>
+      </div>
     </div>
-    <div class='col-sm-9'>
-      <h4><%= p.full_name %></h4>
-      <% if from_incident= true %>
-        <a onclick="add_patron_to_incident('<%= p.id %>')">Add Patron to This Incident</a>
-        <br>
-      <% end %>
-      <b>Address:</b> <%= p.full_address %>
-      <% if p.age %>
-        <br>
-        <b>Age:</b> <%= p.age %>
-      <% end %>
-      <% if p.physical_description %>
-        <br>
-        <b>Physical Description:</b> <%= p.physical_description %>
-      <% end %>
-      <% if p.card_number %>
-        <br>
-        <b>Card #:</b> <%= p.card_number %>
-      <% end %>
-    </div>
-  </div>
+  <% end %>
 <% end %>
