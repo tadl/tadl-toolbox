@@ -2,6 +2,7 @@
   <div class="row incident_info">
     <div class="form-group col-sm-9">
       <label for="title">Incident Title</label>
+      <div id="incident_id" style="display:none"><%= incident.id %></div>
       <input type="text" class="form-control" id="title" placeholder="Angry Patron Throws Book" value="<%= incident.title %>">
     </div>
   </div>
@@ -62,15 +63,22 @@
       <%= file_field_tag 'incidentpic', multiple: true, accept: 'image/png,image/gif,image/jpeg'%>
     </div>
   </div>
-  <div class="row incident_info">
-    <div class="col-sm-4">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" id="no_patrons" onchange="no_patron()"> No specific patrons listed in this report
-        </label>
+  <% if incident.violations.count == 0 %>
+    <div class="row incident_info">
+      <div class="col-sm-4">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="no_patrons" onchange="no_patron()"> No specific patrons listed in this report
+          </label>
+        </div>
       </div>
     </div>
-  </div>
+  <% else %>
+    <% incident_violations = incident.violations.select('distinct on (patron_id) *') %>
+    <% incident_violations.each do |i| %>
+      <%= render 'patron_incident_violation_list', p: Patron.find(i.patron_id), i: incident %>
+    <% end %>
+  <% end %>
   <div class="incident_info">
     <input type="hidden" id="id" value="<%= incident.id %>">
   </div>

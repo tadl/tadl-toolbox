@@ -1,4 +1,21 @@
 <form class="padding-all patron_info">
+  <h4>Add a New Patron</h4><a onclick="show_patron_search()">Find a patron from previous incident</a>
+  <div class="row patron_info">
+    <div class="col-sm-6">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" id="no_name" <%if patron.no_name == true %>checked<% end %>> Patron's name is unknown
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-6 patron_form">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" id="no_address" <%if patron.no_address == true %>checked<% end %>> Patron's address is unknown or homeless
+        </label>
+      </div>
+    </div>
+  </div>
   <div class="row name_block">
     <div class="form-group col-sm-4">
       <label for="first_name">Frist Name</label>
@@ -73,3 +90,36 @@
   </div>
   <input type="hidden" id="id" value="<%= patron.id %>">
 </form>
+<button type="button" class="btn btn-success btn-lg" onclick="save_patron(false, 'form')">Save Patron and Add to Incident</button>
+<button type="button" class="btn btn-danger btn-lg" onclick="cancel_add_patron()">Cancel Adding Patron</button>
+
+<script>
+  function no_name(){
+    if($('#no_name').is(":checked")){
+      $('.name_block').hide()
+      $('#alias_block').show()
+    }else{
+      $('#alias_block').hide()
+      $('.name_block').show()
+    }
+  }
+
+  function no_address(){
+    if($('#no_address').is(":checked")){
+      $('.address_block').hide()
+    }else{
+      $('.address_block').show()
+    } 
+  }
+
+  $('body').on('click','#no_name',function(){
+    no_name()
+  });
+
+  $('body').on('click','#no_address',function(){
+    no_address()
+  });
+
+  no_name()
+  no_address()
+</script>

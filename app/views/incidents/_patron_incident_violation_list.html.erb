@@ -1,0 +1,10 @@
+<div id="patron_<%= p.id %>">
+  <%= p.full_name %><a onclick="edit_violations('<%= p.id %>')"> (Edit Incident Violations) </a>
+  <br>
+  <ul>
+    <% p.violations.where(:inciden_id == i.id).includes(:violationtype).order('violationtypes.description ASC').each do |v| %>
+      <li><%= v.violationtype.description %></li>
+    <% end %>
+  </ul>
+  <br>
+</div>

@@ -1,0 +1,1 @@
+$('#patron_<%= @patron.id %>').replaceWith("<%= escape_javascript( render 'violation_form', patron: @patron, incident: @incident, violation_types: Violationtype.all) %>")

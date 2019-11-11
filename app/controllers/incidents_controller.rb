@@ -38,7 +38,7 @@ class IncidentsController < ApplicationController
     if params[:date_of]
       params[:date_of] = params[:date_of].to_datetime 
     end
-    @from = params[:from].to_s
+    @from = params[:from]
     @incident = Incident.find(params[:id])
     @incident.update(incident_params)
     respond_to do |format|
@@ -71,6 +71,7 @@ class IncidentsController < ApplicationController
 
   def save_patron
     @from = params[:from].to_s
+    @incident = Incident.find(params[:incident_id])
     @patron = Patron.new(patron_params)
     @patron.save!
     respond_to do |format|
@@ -130,21 +131,43 @@ class IncidentsController < ApplicationController
   end
 
   def add_patron_to_incident
-    @patron = Patron.find(params[:id])
+    @patron = Patron.find(params[:patron_id])
+    @incident = Incident.find(params[:incident_id])
     respond_to do |format|
       format.js
     end
   end
 
   def save_violations
+    @patron = Patron.find(params[:patron_id].to_i)
+    @incident = Incident.find(params[:incident_id].to_i)
     violations = params[:violation_ids].split(',')
+    unchecked_violations = params[:unchecked_violation_ids].split(',')
     violations.each do |v|
       violation = Violation.new
       violation.violationtype_id = v
       violation.patron_id = params[:patron_id]
       violation.incident_id = params[:incident_id]
-      violation.save!
+      if violation.valid?
+        violation.save!
+      end
     end
+    @patron.violations.where(:incident_id == @incident.id).each do |v|
+      if unchecked_violations.include? v.violationtype_id.to_s
+        v.delete
+        puts "a Match"
+      else
+        puts 'no at match'
+      end
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def edit_violations
+    @patron = Patron.find(params[:patron_id].to_i)
+    @incident = Incident.find(params[:incident_id].to_i)
     respond_to do |format|
       format.js
     end

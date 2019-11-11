@@ -156,22 +156,10 @@ function no_patron(){
   }
 }
 
-function no_name(){
-  if($('#no_name').is(":checked")){
-    $('.name_block').hide()
-    $('#alias_block').show()
-  }else{
-    $('#alias_block').hide()
-    $('.name_block').show()
-  }
-}
-
-function no_address(){
-  if($('#no_address').is(":checked")){
-    $('.address_block').hide()
-  }else{
-    $('.address_block').show()
-  }
+function cancel_add_patron(){
+  $('#patron_portion').hide()
+  $("#add_patron").show()
+  $("#update_incident").show()
 }
 
 
@@ -201,6 +189,10 @@ function save_incident(update, from){
   }else{
     var url = 'save_incident'
   }
+  if(from == 'form_with_patron'){
+    $("#add_patron").hide()
+    $("#update_incident").hide()
+  }
   $.ajax({
     type: "POST",
     url: url,
@@ -229,6 +221,11 @@ function save_patron(update, from){
       patron_params.append($(this).attr('id'), $(this).val())
     }
   })
+  var incident_id = $('#incident_id').text()
+  if(incident_id){}else{
+    var incident_id = $('#incident_info').val()
+  }
+  patron_params.append('incident_id', incident_id)
   patron_params.append('from', from)
   if(update == true){
     var url = 'update_update'
@@ -266,18 +263,14 @@ function make_primary_pic(i, model){
 
 function show_patron_search(){
   $('#patron_search').show()
-  $('#patron_form').hide()
+  $('#new_patron_form').hide()
 }
 
 function hide_patron_search(){
   $('#patron_search').hide()
-  $('#patron_form').show()
+  $('#new_patron_form').show()
 }
 
-function hide_patron_search(){
-  $('#patron_search').hide()
-  $('#patron_form').show()
-}
 
 function search_for_patron(from_incident){
   var query = $('#patron_search_input').val()
@@ -296,15 +289,36 @@ function incident_location_change(){
 }
 
 function add_patron_to_incident(patron_id){
-  $.get("add_patron_to_incident", {id: patron_id})
+  var incident_id = $('#incident_id').text()
+  if(incident_id){}else{
+    var incident_id = $('#incident_info').val()
+  }
+  $.get("add_patron_to_incident", {patron_id: patron_id, incident_id: incident_id})
 }
 
 function save_violations(patron_id){
   var incident_id = $('#incident_id').text()
-  var violation_div = '#violations_' + patron_id  + ' input:checkbox:checked'
-  var violation_ids_raw = $(violation_div).map(function(){
+  if(incident_id){}else{
+    var incident_id = $('#id').val()
+  }
+  var violation_div = '#violations_' + patron_id  + ' input:checkbox'
+  var violation_ids_raw = $(violation_div+':checked').map(function(){
     return $(this).val();
-  }).get()
+  }).get();
+  var unchecked_violations_raw = $(violation_div).map(function(){
+    if(!this.checked){
+      return $(this).val();
+    }
+  }).get();
   var violation_ids = violation_ids_raw.join(',')
-  $.get("save_violations",{patron_id: patron_id, incident_id: incident_id, violation_ids: violation_ids})
+  var unchecked_violation_ids = unchecked_violations_raw.join(',')
+  $.get("save_violations",{patron_id: patron_id, incident_id: incident_id, violation_ids: violation_ids, unchecked_violation_ids: unchecked_violation_ids})
+}
+
+function edit_violations(patron_id){
+  var incident_id = $('#incident_id').text()
+  if(incident_id){}else{
+    var incident_id = $('#id').val()
+  }
+  $.get("edit_violations", {patron_id: patron_id, incident_id: incident_id})
 }

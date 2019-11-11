@@ -1,19 +1,20 @@
 <%= render 'incidents_menu' %>
 <h4>Editing Incident</h4>
 <div id="incident_portion">
-  <div id="incident_form">
+  <div id="incident_details">
     <%= render 'incident_form', incident: @incident %>
   </div>
-  <button type="button" class="btn btn-success btn-lg" onclick="save_incident(true,'edit')">Update Incident</button>
+  <div id="violation_portion">
+  </div>
+  <div id="patron_portion">
+    <div id="new_patron_form">
+    </div>
+    <div id="patron_search" style="display:none">
+      <%= render 'patron_search_form' %>
+    </div>
+  </div>
+  <button id="update_incident" type="button" class="btn btn-success btn-lg" onclick="save_incident(true,'edit')">Update Incident</button>
   <button style="display: none" id="add_patron" type="button" class="btn btn-success btn-lg" onclick="save_incident(true,'form_with_patron')">Add Patron(s)</button>
-</div>
-<div id="violation_portion">
-</div>
-<div id="patron_portion">
-  <div id="new_patron_form">
-  </div>
-  <div id="patron_search" style="display:none">
-  </div>
 </div>
 <script>
   no_patron()
