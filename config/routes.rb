@@ -55,4 +55,6 @@ Rails.application.routes.draw do
   match 'add_patron_to_incident', to: 'incidents#add_patron_to_incident', as: 'add_patron_to_incident', via: [:get, :post], :defaults => {:format => 'js'}
   match 'save_violations', to: 'incidents#save_violations', as: 'save_violations', via: [:get, :post], :defaults => {:format => 'js'}
   match 'edit_violations', to: 'incidents#edit_violations', as: 'edit_violations', via: [:get, :post], :defaults => {:format => 'js'}
+  match 'cancel_edit_violations', to: 'incidents#cancel_edit_violations', as: 'cancel_edit_violations', via: [:get, :post], :defaults => {:format => 'js'}
+  match 'remove_patron_from_incident', to: 'incidents#remove_patron_from_incident', as: 'remove_patron_from_incident', via: [:get, :post], :defaults => {:format => 'js'}
 end

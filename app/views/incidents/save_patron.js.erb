@@ -2,5 +2,6 @@
   $('#violation_portion').append("<%= escape_javascript( render 'violation_form', patron: @patron, incident: @incident, violation_types: Violationtype.all) %>")
   $('#patron_portion').hide()
 <% elsif @from == 'edit'%>
+  alert("Patron successfully updated!")
 <% end %>
   

@@ -15,7 +15,6 @@ class IncidentsController < ApplicationController
 
   def new_incident
     @incident = Incident.new
-    @patrons = Patron.all
   end
 
   def save_incident
@@ -39,7 +38,7 @@ class IncidentsController < ApplicationController
       params[:date_of] = params[:date_of].to_datetime 
     end
     @from = params[:from]
-    @incident = Incident.find(params[:id])
+    @incident = Incident.find(params[:incident_id])
     @incident.update(incident_params)
     respond_to do |format|
       format.js
@@ -80,6 +79,7 @@ class IncidentsController < ApplicationController
   end
 
   def edit_patron
+    @editing = true
     @patron = Patron.find(params[:id])
   end
 
@@ -114,7 +114,7 @@ class IncidentsController < ApplicationController
   def patron_search
     @from_incident = params[:from_incident]
     if params[:query] == ''
-      @patrons = Patron.all
+      @patrons = Patron.last(5)
     else
       @patrons = Patron.search_by_name_alias(params[:query])
     end
@@ -155,9 +155,6 @@ class IncidentsController < ApplicationController
     @patron.violations.where(:incident_id == @incident.id).each do |v|
       if unchecked_violations.include? v.violationtype_id.to_s
         v.delete
-        puts "a Match"
-      else
-        puts 'no at match'
       end
     end
     respond_to do |format|
@@ -168,6 +165,26 @@ class IncidentsController < ApplicationController
   def edit_violations
     @patron = Patron.find(params[:patron_id].to_i)
     @incident = Incident.find(params[:incident_id].to_i)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def cancel_edit_violations
+    @patron = Patron.find(params[:patron_id].to_i)
+    @incident = Incident.find(params[:incident_id].to_i)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def remove_patron_from_incident
+    @patron = Patron.find(params[:patron_id].to_i)
+    @patron.violations.each do |v|
+      if v.incident_id == params[:incident_id].to_i
+        v.delete
+      end
+    end
     respond_to do |format|
       format.js
     end

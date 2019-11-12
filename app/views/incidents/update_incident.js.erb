@@ -1,4 +1,5 @@
 <% if @from == 'form_with_patron' %>
+  $('#incident_id').html('<%= @incident.id %>')
   $('#patron_portion').show()
   $("#new_patron_form").html('<%= escape_javascript(render "patron_form", patron: Patron.new) %>')
 <% elsif @from == 'form_no_patron' || @from == "edit" %>

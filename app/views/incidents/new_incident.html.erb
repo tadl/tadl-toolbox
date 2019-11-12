@@ -1,10 +1,21 @@
 <%= render 'incidents_menu' %>
-<div class="padding-all">
-  <div id="incident_portion">
-    <%= render "form_incident_portion", incident: @incident %>
+<h4>New Incident</h4>
+<div id="incident_portion">
+  <div id="incident_details">
+    <%= render 'incident_form', incident: @incident %>
   </div>
   <div id="violation_portion">
   </div>
   <div id="patron_portion">
+    <div id="new_patron_form">
+    </div>
+    <div id="patron_search" style="display:none">
+      <%= render 'patron_search_form' %>
+    </div>
   </div>
+  <button id="save_incident" type="button" class="btn btn-success btn-lg" onclick="save_incident(false,'form_no_patron')">Save Incident</button>
+  <button style="display: none" id="add_patron" type="button" class="btn btn-success btn-lg" onclick="save_incident(false,'form_with_patron')">Add Patron</button>
 </div>
+<script>
+  no_patron()
+</script>

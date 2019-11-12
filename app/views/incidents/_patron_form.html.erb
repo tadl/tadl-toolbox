@@ -1,5 +1,7 @@
 <form class="padding-all patron_info">
-  <h4>Add a New Patron</h4><a onclick="show_patron_search()">Find a patron from previous incident</a>
+  <% if !@editing %>
+    <h4>Add a New Patron</h4><a onclick="show_patron_search()">Find a patron from previous incident</a>
+  <% end %>
   <div class="row patron_info">
     <div class="col-sm-6">
       <div class="checkbox">
@@ -90,9 +92,12 @@
   </div>
   <input type="hidden" id="id" value="<%= patron.id %>">
 </form>
-<button type="button" class="btn btn-success btn-lg" onclick="save_patron(false, 'form')">Save Patron and Add to Incident</button>
-<button type="button" class="btn btn-danger btn-lg" onclick="cancel_add_patron()">Cancel Adding Patron</button>
-
+<% if !@editing %>
+  <button type="button" class="btn btn-success btn-lg" onclick="save_patron(false, 'form')">Save Patron and Add to Incident</button>
+  <button type="button" class="btn btn-danger btn-lg" onclick="cancel_add_patron()">Cancel Adding Patron</button>
+<% else %>
+  <button type="button" class="btn btn-success btn-lg" onclick="save_patron(true, 'edit')">Update Patron</button>
+<% end %>
 <script>
   function no_name(){
     if($('#no_name').is(":checked")){

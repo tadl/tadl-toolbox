@@ -9,6 +9,13 @@ task :violationtypes_from_csv => :environment do
     v.first_offence = x[1]
     v.second_offence = x[2]
     v.subsiquent_offence = x[3]
+    if x[0][0] == 'A'
+      v.track = 'A'
+    elsif x[0][0] == 'B'
+      v.track = 'B'
+    else
+      v.track = 'None'
+    end
     v.save!
   end
 end

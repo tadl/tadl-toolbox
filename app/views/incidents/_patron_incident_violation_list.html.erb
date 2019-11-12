@@ -1,10 +1,14 @@
-<div id="patron_<%= p.id %>">
-  <%= p.full_name %><a onclick="edit_violations('<%= p.id %>')"> (Edit Incident Violations) </a>
-  <br>
-  <ul>
-    <% p.violations.where(:inciden_id == i.id).includes(:violationtype).order('violationtypes.description ASC').each do |v| %>
-      <li><%= v.violationtype.description %></li>
-    <% end %>
-  </ul>
-  <br>
-</div>
+<% if check_for_violations(p.id, i.id) %>
+  <div id="patron_<%= p.id %>">
+    <%= p.full_name %>
+    <a onclick="edit_violations('<%= p.id %>')"> (Edit Incident Violations) </a>
+    <a onclick="remove_patron_from_incident('<%= p.id %>')"> (Remove Patron from Incident) </a>
+    <br>
+    <ul>
+      <% p.violations.where(incident_id: i.id).includes(:violationtype).order('violationtypes.description ASC').each do |v| %>
+        <li><%= v.violationtype.description %></li>
+      <% end %>
+    </ul>
+    <br>
+  </div>
+<% end %>

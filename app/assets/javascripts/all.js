@@ -184,7 +184,9 @@ function save_incident(update, from){
   var date_of = $('#datetimepicker1').data("DateTimePicker").viewDate().format()
   incident_params.append('date_of', date_of)
   incident_params.append('from', from)
-  if(update == true){
+  var incident_id = $('#incident_id').text()
+  incident_params.append('incident_id', incident_id)
+  if(incident_id){
     var url = 'update_incident'
   }else{
     var url = 'save_incident'
@@ -228,7 +230,7 @@ function save_patron(update, from){
   patron_params.append('incident_id', incident_id)
   patron_params.append('from', from)
   if(update == true){
-    var url = 'update_update'
+    var url = 'update_patron'
   }else{
     var url = 'save_patron'
   }
@@ -313,12 +315,40 @@ function save_violations(patron_id){
   var violation_ids = violation_ids_raw.join(',')
   var unchecked_violation_ids = unchecked_violations_raw.join(',')
   $.get("save_violations",{patron_id: patron_id, incident_id: incident_id, violation_ids: violation_ids, unchecked_violation_ids: unchecked_violation_ids})
+  $('#update_incident').show()
+  $('#add_patron').show()
+  $('#save_incident').show()
 }
 
 function edit_violations(patron_id){
+  $('#update_incident').hide()
+  $('#add_patron').hide()
+  $('#save_incident').hide()
   var incident_id = $('#incident_id').text()
   if(incident_id){}else{
     var incident_id = $('#id').val()
   }
   $.get("edit_violations", {patron_id: patron_id, incident_id: incident_id})
+}
+
+function cancel_edit_violations(patron_id){
+  $('#update_incident').show()
+  $('#add_patron').show()
+  $('#save_incident').show()
+  var incident_id = $('#incident_id').text()
+  if(incident_id){}else{
+    var incident_id = $('#id').val()
+  }
+  $.get("cancel_edit_violations", {patron_id: patron_id, incident_id: incident_id})
+}
+
+function remove_patron_from_incident(patron_id){
+  var confirmation = confirm("Are you sure you want to remove this patron from this incident?")
+  if(confirmation == true){
+    var incident_id = $('#incident_id').text()
+    if(incident_id){}else{
+      var incident_id = $('#id').val()
+    }
+    $.get("remove_patron_from_incident", {patron_id: patron_id, incident_id: incident_id})
+  }
 }

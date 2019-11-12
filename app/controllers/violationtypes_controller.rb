@@ -71,6 +71,6 @@ class ViolationtypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def violationtype_params
-      params.require(:violationtype).permit(:description, :first_offence, :second_offence, :subsiquent_offence)
+      params.require(:violationtype).permit(:description, :first_offence, :second_offence, :subsiquent_offence, :track)
     end
 end

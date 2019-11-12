@@ -5,6 +5,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Track</th>
       <th>Description</th>
       <th>First offence</th>
       <th>Second offence</th>
@@ -16,6 +17,7 @@
   <tbody>
     <% @violationtypes.each do |violationtype| %>
       <tr>
+        <td><%= violationtype.track %></td>
         <td><%= violationtype.description %></td>
         <td><%= violationtype.first_offence %></td>
         <td><%= violationtype.second_offence %></td>

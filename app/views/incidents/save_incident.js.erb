@@ -1,6 +1,7 @@
 <% if @from == 'form_with_patron' %>
-  $("#incident_portion").html("<%= escape_javascript(render 'incident_stub', i: @incident) %>")
-  $("#patron_portion").append('<%= escape_javascript(render "form_patron_portion", patron: Patron.new) %>')
-<% elsif @from == 'form_no_patron' %>
+  $('#patron_portion').show()
+  $("#new_patron_form").html('<%= escape_javascript(render "patron_form", patron: Patron.new) %>')
+  $('#incident_id').html('<%= @incident.id %>')
+<% elsif @from == 'form_no_patron' || @from == "edit" %>
   $("#incident_portion").html("<%= escape_javascript(render 'incident_stub', i: @incident) %>")
 <% end %>
