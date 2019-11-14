@@ -202,6 +202,11 @@ class IncidentsController < ApplicationController
     end
   end
 
+  def generate_suspension_letter
+    @patron = Patron.find(params[:patron_id].to_i)
+  end
+
+
   def eg_lookup
   end
 

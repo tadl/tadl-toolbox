@@ -92,20 +92,17 @@ class Patron < ActiveRecord::Base
 
     if !violations.nil?
       not_none_violations = violations.where.not('violationtypes.track = ?', 'None')
-      last_date = not_none_violations.maximum('date_issued')
-      latest_incident = not_none_violations.where(date_issued: last_date).first
+      latest_violation = not_none_violations.order('date_issued').last
     end
-    puts (self.violations.count)
 
     if !self.suspension.nil? && self.suspension.end_date >= (Date.today - 2.years)
-      puts 'got here 1'
-      violations_a = violations.where('violationtypes.track = ? AND date_issued >= ?', 'A', (latest_incident.date_issued - 2.years))
-      violations_b = violations.where('violationtypes.track = ? AND date_issued >= ?', 'B', (latest_incident.date_issued - 2.years))
+      violations_a = violations.where('violationtypes.track = ? AND date_issued >= ?', 'A', (latest_violation.date_issued - 2.years))
+      violations_b = violations.where('violationtypes.track = ? AND date_issued >= ?', 'B', (latest_violation.date_issued - 2.years))
       suspension = self.suspension
     elsif !self.suspension.nil? && self.suspension.end_date <= (Date.today - 2.years)
-      puts 'got here 2'
       violations_a = violations.where('violationtypes.track = ?', 'A')
       violations_b = violations.where('violationtypes.track = ?', 'B')
+      original_end_date =  self.suspension.end_date
       self.suspension.delete!
       suspension = Suspension.new
       suspension.patron_id = self.id
@@ -148,11 +145,30 @@ class Patron < ActiveRecord::Base
         b_suspension = 1.year
       end
 
-      suspension.start_date = latest_incident.date_issued
-      if a_suspension > b_suspension
-        suspension.end_date = latest_incident.date_issued + a_suspension
+      suspension.start_date = latest_violation.date_issued
+      latest_incident = Incident.find(latest_violation.incident_id)
+      
+      latest_primary_violation_track = 'B'
+
+      latest_incident.violations.where(patron_id: self.id).each do |v|
+        if v.violationtype.track == 'A'
+          latest_primary_violation_track = 'A'
+        end
+      end
+
+      if latest_primary_violation_track == 'A'
+        if b_suspension > a_suspension
+          latest_primary_violation_track = 'B'
+        end 
+      end
+
+      if latest_primary_violation_track == 'A'
+        suspension.end_date = latest_violation.date_issued + a_suspension
       else
-        suspension.end_date = latest_incident.date_issued + b_suspension
+        suspension.end_date = latest_violation.date_issued + b_suspension
+      end
+      if original_end_date && (suspension.end_date < original_end_date)
+        suspension.end_date = original_end_date
       end
       suspension.save!
     end
