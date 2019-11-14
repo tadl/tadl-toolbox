@@ -202,8 +202,13 @@ class IncidentsController < ApplicationController
     end
   end
 
-  def generate_suspension_letter
+  def suspension_letter
     @patron = Patron.find(params[:patron_id].to_i)
+    filename = @patron.full_name + ' - suspension letter.docx'
+    attachment = 'attachment; filename="'+ filename +'"'
+    respond_to do |format|
+      format.docx { headers["Content-Disposition"] = attachment}
+    end
   end
 
 

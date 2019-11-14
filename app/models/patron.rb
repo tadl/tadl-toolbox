@@ -99,6 +99,8 @@ class Patron < ActiveRecord::Base
       violations_a = violations.where('violationtypes.track = ? AND date_issued >= ?', 'A', (latest_violation.date_issued - 2.years))
       violations_b = violations.where('violationtypes.track = ? AND date_issued >= ?', 'B', (latest_violation.date_issued - 2.years))
       suspension = self.suspension
+      original_end_date =  self.suspension.end_date
+      suspension.violations_from_date = latest_violation.date_issued - 2.years
     elsif !self.suspension.nil? && self.suspension.end_date <= (Date.today - 2.years)
       violations_a = violations.where('violationtypes.track = ?', 'A')
       violations_b = violations.where('violationtypes.track = ?', 'B')
@@ -173,6 +175,30 @@ class Patron < ActiveRecord::Base
       suspension.save!
     end
 
+  end
+
+  def last_violation
+    violations = self.violations.joins(:violationtype)
+    not_none_violations = violations.where.not('violationtypes.track = ?', 'None')
+    latest_violation = not_none_violations.order('date_issued').last
+    return latest_violation
+  end
+
+  def last_incident_violations
+    last_violation = self.last_violation
+    last_incident = Incident.find(last_violation.incident_id)
+    return last_incident.violations
+  end
+
+  def suspension_from_multiple_incidents
+    violations = self.violations.joins(:violationtype)
+    not_none_violations = violations.where.not('violationtypes.track = ?', 'None')
+    if !self.suspension.violations_from_date.nil?
+      violations = not_none_violations.where('date_issued >= ? AND incident_id != ?', self.suspension.violations_from_date, self.last_violation.incident_id)
+    else
+      violations = not_none_violations.where('incident_id != ?', self.last_incident.id)
+    end
+    return violations
   end
 
 

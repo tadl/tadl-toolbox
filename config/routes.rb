@@ -57,4 +57,5 @@ Rails.application.routes.draw do
   match 'edit_violations', to: 'incidents#edit_violations', as: 'edit_violations', via: [:get, :post], :defaults => {:format => 'js'}
   match 'cancel_edit_violations', to: 'incidents#cancel_edit_violations', as: 'cancel_edit_violations', via: [:get, :post], :defaults => {:format => 'js'}
   match 'remove_patron_from_incident', to: 'incidents#remove_patron_from_incident', as: 'remove_patron_from_incident', via: [:get, :post], :defaults => {:format => 'js'}
+  match 'suspension_letter', to: 'incidents#suspension_letter', as: 'suspension_letter', via: [:get, :post], :defaults => {:format => 'docx'}
 end

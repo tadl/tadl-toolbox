@@ -1,0 +1,61 @@
+docx.font do
+  name 'Droid Serif'
+end
+
+docx.p Date.today.strftime("%B %d, %Y")
+docx.p
+docx.p
+if @patron.no_name == false
+ docx.p @patron.full_name
+end
+if @patron.no_address == false
+  docx.p @patron.address
+  docx.p @patron.city + ', ' + @patron.state + ' ' +@patron.zip.to_s
+  docx.p
+end
+
+docx.p "Greetings,"
+docx.p
+docx.p "On " + @patron.last_violation.date_issued.strftime('%B %d, %Y') + " you violated the following rules in the Library's behavior policy:"
+docx.p
+
+@patron.last_incident_violations.each do |v|
+  docx.p v.violationtype.description do
+    style 'custom_style'
+    bold true
+  end
+end
+
+if @patron.suspension_from_multiple_incidents.count >= 1
+  docx.p 
+  docx.p "Your past violations include:"
+  docx.p 
+  @patron.suspension_from_multiple_incidents.each do |v|
+    docx.p  v.date_issued.strftime("%m/%d/%Y") + " " + v.violationtype.description do
+      style 'custom_style'
+      bold true
+    end
+  end
+end
+
+docx.p
+docx.p "Because of your past behavior, you are now suspended from all facilities of the Traverse Area
+District Library for one year. You may not borrow materials, use public computing facilities,
+restrooms, or step into any TADL facility or on TADL property until the end of this suspension,
+which will be until " + @patron.suspension.end_date.strftime("%B %d, %Y") + "."
+docx.p
+docx.p "You have the right to appeal this suspension to the TADL Board, and if you decide to take this
+course of action, you must do so in writing within 10 days of your receipt of this letter of
+notification. When the appeal is received, the Board will either schedule a special meeting or
+hear your appeal in a regular meeting, whichever is earliest, and will notify you when that
+hearing is scheduled."
+docx.p
+docx.p "Sincerely,"
+docx.p
+docx.p
+docx.p
+docx.p "Michele P. Howard"
+docx.p "Director"
+docx.p
+docx.p
+docx.p "Enclosure: TADL Policy 4.1 – Notice of Suspension &amp; Behavior Policy with Appeal Process"

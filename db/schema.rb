@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191114164735) do
+ActiveRecord::Schema.define(version: 20191114191621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,11 +119,12 @@ ActiveRecord::Schema.define(version: 20191114164735) do
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "patron_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.text     "track"
     t.integer  "track_a_id"
     t.integer  "track_b_id"
+    t.date     "violations_from_date"
   end
 
   create_table "trailers", force: :cascade do |t|
