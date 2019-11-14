@@ -2,19 +2,28 @@
   <div class="panel-body">
     <div class="row">
       <div class='col-sm-3'>
-        <%= image_tag((i.primary_pic_small || asset_path('missing_pic.png')), :class => 'img-responsive img-thumbnail') %>
+        <img src="<%= incident_picture_helper(i) %>" class='img-responsive img-thumbnail'>
       </div>
       <div class='col-sm-9'>
         <h4><%= i.title %></h4>
+        <% if i.date_of %>
+          <b>Date/Time of Incident:</b> <%= i.date_of.strftime("%A %m/%d/%Y at  %I:%M %p ") %>
+          <br>
+        <% end %>
         <% if i.description %>
           <br>
-          <b>Description:</b> <%= i.description %>
-        <% end %>
-        <% if i.date_of %>
+          <b>Description:</b>
           <br>
-          <b>Date of:</b> <%= i.date_of %>
+          <%= i.description %>
+          <br>
         <% end %>
         <br>
+        <% if i.violations %>
+          <% incident_violations = i.violations.select('distinct on (patron_id) *') %>
+          <% incident_violations.each do |ic| %>
+            <%= render 'patron_incident_violation_list', p: Patron.find(ic.patron_id), i: i, editable: false %>
+          <% end %>
+        <% end %>
         <a href="/edit_incident?id=<%= i.id %>">Edit</a>
       </div>
     </div>

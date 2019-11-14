@@ -40,6 +40,15 @@ class IncidentsController < ApplicationController
     @from = params[:from]
     @incident = Incident.find(params[:incident_id])
     @incident.update(incident_params)
+    affected_patrons = []
+    @incident.violations.each do |v|
+      v.date_issued = @incident.date_of
+      v.save!
+      affected_patrons.push(v.patron)
+    end
+    affected_patrons.uniq.each do |p|
+      p.generate_suspension
+    end
     respond_to do |format|
       format.js
     end
@@ -148,15 +157,17 @@ class IncidentsController < ApplicationController
       violation.violationtype_id = v
       violation.patron_id = params[:patron_id]
       violation.incident_id = params[:incident_id]
+      violation.date_issued = @incident.date_of
       if violation.valid?
         violation.save!
       end
     end
-    @patron.violations.where(:incident_id == @incident.id).each do |v|
+    @patron.violations.where(incident_id: @incident.id).each do |v|
       if unchecked_violations.include? v.violationtype_id.to_s
         v.delete
       end
     end
+    @patron.generate_suspension
     respond_to do |format|
       format.js
     end
@@ -185,6 +196,7 @@ class IncidentsController < ApplicationController
         v.delete
       end
     end
+    @patron.generate_suspension
     respond_to do |format|
       format.js
     end

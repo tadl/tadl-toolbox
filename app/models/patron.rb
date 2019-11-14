@@ -7,6 +7,7 @@ class Patron < ActiveRecord::Base
                   }
   mount_uploaders :patronpic, PatronPicUploader
   has_many :violations
+  has_one :suspension
 
   def full_name
     if self.no_name == false
@@ -72,6 +73,91 @@ class Patron < ActiveRecord::Base
     self[:patronpic].unshift(target_pic)
   end
 
+
+  def suspended?
+    if self.suspension
+      return true
+    else
+      return false
+    end
+  end
+
+  def generate_suspension
+    if self.violations.count == 0 && self.suspension
+      self.suspension.delete
+      return
+    end
+
+    violations = self.violations.joins(:violationtype)
+
+    if !violations.nil?
+      not_none_violations = violations.where.not('violationtypes.track = ?', 'None')
+      last_date = not_none_violations.maximum('date_issued')
+      latest_incident = not_none_violations.where(date_issued: last_date).first
+    end
+    puts (self.violations.count)
+
+    if !self.suspension.nil? && self.suspension.end_date >= (Date.today - 2.years)
+      puts 'got here 1'
+      violations_a = violations.where('violationtypes.track = ? AND date_issued >= ?', 'A', (latest_incident.date_issued - 2.years))
+      violations_b = violations.where('violationtypes.track = ? AND date_issued >= ?', 'B', (latest_incident.date_issued - 2.years))
+      suspension = self.suspension
+    elsif !self.suspension.nil? && self.suspension.end_date <= (Date.today - 2.years)
+      puts 'got here 2'
+      violations_a = violations.where('violationtypes.track = ?', 'A')
+      violations_b = violations.where('violationtypes.track = ?', 'B')
+      self.suspension.delete!
+      suspension = Suspension.new
+      suspension.patron_id = self.id
+    elsif not_none_violations.count >= 1
+      violations_a = violations.where('violationtypes.track = ?', 'A')
+      violations_b = violations.where('violationtypes.track = ?', 'B')
+      suspension = Suspension.new
+      suspension.patron_id = self.id
+    end
+
+    if suspension
+      violations_a_count = (violations_a.uniq{|v| v.incident.id}).count
+      violations_b_count = (violations_b.uniq{|v| v.incident.id}).count
+
+      if violations_a_count == 0
+        a_suspension = 0.days
+      elsif violations_a_count == 1
+        a_suspension = 6.months
+      elsif violations_a_count > 1
+        a_suspension = 1.year
+      end
+
+      if violations_b_count == 0
+        b_suspension = 0.days
+      elsif violations_b_count == 1
+        test_for_plus = false
+        violations_b.each do |v|
+          if (v.violationtype.description[0,2] == 'B1') || (v.violationtype.description[0,2] == 'B2')
+            test_for_plus = true
+          end
+        end
+        if test_for_plus
+          b_suspension = 1.week
+        else
+          b_suspension = 1.day
+        end
+      elsif violations_b_count == 2
+        b_suspension = 1.month
+      elsif violations_b_count > 2
+        b_suspension = 1.year
+      end
+
+      suspension.start_date = latest_incident.date_issued
+      if a_suspension > b_suspension
+        suspension.end_date = latest_incident.date_issued + a_suspension
+      else
+        suspension.end_date = latest_incident.date_issued + b_suspension
+      end
+      suspension.save!
+    end
+
+  end
 
 
 end

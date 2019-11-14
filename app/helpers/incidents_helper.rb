@@ -16,4 +16,22 @@ module IncidentsHelper
       return false
     end
   end
+
+  def incident_picture_helper(incident)
+    url = ''
+    if incident.primary_pic_small
+      url = incident.primary_pic_small
+    elsif incident.violations
+      incident.violations.each do |v|
+        if v.patron.primary_pic_small
+          url = v.patron.primary_pic_small
+        end
+      end
+    end
+    if url == ''
+      url = asset_path('missing_pic.png')
+    end
+    return url
+  end
+
 end
