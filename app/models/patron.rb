@@ -75,7 +75,7 @@ class Patron < ActiveRecord::Base
 
 
   def suspended?
-    if self.suspension
+    if !self.suspension.nil? && self.suspension.end_date > Date.today
       return true
     else
       return false
@@ -99,12 +99,10 @@ class Patron < ActiveRecord::Base
       violations_a = violations.where('violationtypes.track = ? AND date_issued >= ?', 'A', (latest_violation.date_issued - 2.years))
       violations_b = violations.where('violationtypes.track = ? AND date_issued >= ?', 'B', (latest_violation.date_issued - 2.years))
       suspension = self.suspension
-      original_end_date =  self.suspension.end_date
       suspension.violations_from_date = latest_violation.date_issued - 2.years
     elsif !self.suspension.nil? && self.suspension.end_date <= (Date.today - 2.years)
       violations_a = violations.where('violationtypes.track = ?', 'A')
       violations_b = violations.where('violationtypes.track = ?', 'B')
-      original_end_date =  self.suspension.end_date
       self.suspension.delete!
       suspension = Suspension.new
       suspension.patron_id = self.id
@@ -118,6 +116,9 @@ class Patron < ActiveRecord::Base
     if suspension
       violations_a_count = (violations_a.uniq{|v| v.incident.id}).count
       violations_b_count = (violations_b.uniq{|v| v.incident.id}).count
+
+      last_violation_a_date = Incident.find((violations_a.uniq{|v| v.incident.id}).order('date_issued').last.incident_id).date_of rescue nil
+      last_violation_b_date = Incident.find((violations_b.uniq{|v| v.incident.id}).order('date_issued').last.incident_id).date_of rescue nil
 
       if violations_a_count == 0
         a_suspension = 0.days
@@ -147,31 +148,26 @@ class Patron < ActiveRecord::Base
         b_suspension = 1.year
       end
 
-      suspension.start_date = latest_violation.date_issued
-      latest_incident = Incident.find(latest_violation.incident_id)
-      
-      latest_primary_violation_track = 'B'
+      if !last_violation_a_date.nil?
+        a_suspension_end_date = last_violation_a_date + a_suspension
+      end
 
-      latest_incident.violations.where(patron_id: self.id).each do |v|
-        if v.violationtype.track == 'A'
-          latest_primary_violation_track = 'A'
+      if !last_violation_b_date.nil?
+        b_suspension_end_date = last_violation_b_date + b_suspension
+      end
+
+      if a_suspension_end_date && b_suspension_end_date
+        if a_suspension_end_date >= b_suspension_end_date
+          suspension.end_date = a_suspension_end_date
+        elsif a_suspension_end_date <= b_suspension_end_date
+          suspension.end_date = b_suspension_end_date
         end
+      elsif a_suspension_end_date
+        suspension.end_date = a_suspension_end_date
+      elsif b_suspension_end_date
+        suspension.end_date = b_suspension_end_date
       end
 
-      if latest_primary_violation_track == 'A'
-        if b_suspension > a_suspension
-          latest_primary_violation_track = 'B'
-        end 
-      end
-
-      if latest_primary_violation_track == 'A'
-        suspension.end_date = latest_violation.date_issued + a_suspension
-      else
-        suspension.end_date = latest_violation.date_issued + b_suspension
-      end
-      if original_end_date && (suspension.end_date < original_end_date)
-        suspension.end_date = original_end_date
-      end
       suspension.save!
     end
 
@@ -199,6 +195,19 @@ class Patron < ActiveRecord::Base
       violations = not_none_violations.where('incident_id != ?', self.last_incident.id)
     end
     return violations
+  end
+
+  def as_json(options={})
+    super(
+      :except => [:created_at, :updated_at],
+      :include => {
+        :suspension => {:only => [:end_date]},
+        :violations => {
+          :only => [:date_issued, :incident_id],
+          :methods => [:violation_description, :incident_title],
+        },
+      }
+    )
   end
 
 

@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   match 'incidents', to: 'incidents#list_incidents', as: 'incidents', via: [:get, :post]
   match 'new_incident', to: 'incidents#new_incident', as: 'new_incident', via: [:get, :post]
   match 'edit_incident', to: 'incidents#edit_incident', as: 'edit_incident', via: [:get, :post]
-  match 'currently_suspended', to: 'incidents#currently_suspended', as: 'currently_suspended', via: [:get, :post]
+  match 'suspended', to: 'incidents#suspended', as: 'suspended', via: [:get, :post]
   match 'search_incidents', to: 'incidents#search_incidents', as: 'search_incidents', via: [:get, :post]
   match 'all_patrons', to: 'incidents#all_patrons', as: 'all_patrons', via: [:get, :post]
   match 'edit_patron', to: 'incidents#edit_patron', as: 'edit_patron', via: [:get, :post]

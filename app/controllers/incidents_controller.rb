@@ -219,7 +219,11 @@ class IncidentsController < ApplicationController
   def new_violation
   end
 
-  def currently_susupended
+  def suspended
+    @patrons = Patron.includes(:suspension).where("suspensions.end_date > ?", Date.today).references(:suspensions).order('suspensions.end_date DESC')
+    respond_to do |format|
+      format.json {render :json => @patrons }
+    end
   end
 
   def search_incidents
