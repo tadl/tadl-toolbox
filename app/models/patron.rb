@@ -7,6 +7,7 @@ class Patron < ActiveRecord::Base
                   }
   mount_uploaders :patronpic, PatronPicUploader
   has_many :violations
+  has_many :incidents, through: :violations
   has_one :suspension
 
   def full_name
@@ -98,8 +99,8 @@ class Patron < ActiveRecord::Base
     if !self.suspension.nil? && self.suspension.end_date >= (Date.today - 2.years)
       violations_a = violations.where('violationtypes.track = ? AND date_issued >= ?', 'A', (latest_violation.date_issued - 2.years))
       violations_b = violations.where('violationtypes.track = ? AND date_issued >= ?', 'B', (latest_violation.date_issued - 2.years))
-      suspension = self.suspension
       suspension.violations_from_date = latest_violation.date_issued - 2.years
+      suspension = self.suspension
     elsif !self.suspension.nil? && self.suspension.end_date <= (Date.today - 2.years)
       violations_a = violations.where('violationtypes.track = ?', 'A')
       violations_b = violations.where('violationtypes.track = ?', 'B')
@@ -159,13 +160,17 @@ class Patron < ActiveRecord::Base
       if a_suspension_end_date && b_suspension_end_date
         if a_suspension_end_date >= b_suspension_end_date
           suspension.end_date = a_suspension_end_date
+          suspension.track = 'A'
         elsif a_suspension_end_date <= b_suspension_end_date
           suspension.end_date = b_suspension_end_date
+          suspension.track = 'B'
         end
       elsif a_suspension_end_date
         suspension.end_date = a_suspension_end_date
+        suspension.track = 'A'
       elsif b_suspension_end_date
         suspension.end_date = b_suspension_end_date
+        suspension.track = 'B'
       end
 
       suspension.save!
@@ -178,6 +183,11 @@ class Patron < ActiveRecord::Base
     not_none_violations = violations.where.not('violationtypes.track = ?', 'None')
     latest_violation = not_none_violations.order('date_issued').last
     return latest_violation
+  end
+
+  def last_incident
+    last_incident = Incident.find(last_violation.incident_id)
+    return last_incident
   end
 
   def last_incident_violations

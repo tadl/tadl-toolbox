@@ -1,6 +1,7 @@
 class IncidentsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :super_admin!
+  before_action :authenticate_user!, :except => [:suspended]
+  before_action :super_admin!, :except => [:suspended]
+  before_action :auth_or_secret, :only => [:suspended]
   
   def list_incidents
     @incidents = Incident.all
@@ -23,6 +24,7 @@ class IncidentsController < ApplicationController
     end
     @from = params[:from].to_s
     @incident = Incident.new(incident_params)
+    @incident.admin_id = current_user.id
     @incident.save!
     respond_to do |format|
       format.js
@@ -211,6 +213,17 @@ class IncidentsController < ApplicationController
     end
   end
 
+  def publish_incident
+    incident_id = params[:incident_id].to_i
+    @incident = Incident.find(incident_id)
+    @incident.published = true
+    @incident.send_email
+    @incident.save!
+    respond_to do |format|
+      format.js
+    end
+  end
+
 
   def eg_lookup
   end
@@ -222,6 +235,7 @@ class IncidentsController < ApplicationController
   def suspended
     @patrons = Patron.includes(:suspension).where("suspensions.end_date > ?", Date.today).references(:suspensions).order('suspensions.end_date DESC')
     respond_to do |format|
+      format.html
       format.json {render :json => @patrons }
     end
   end

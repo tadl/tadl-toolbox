@@ -39,8 +39,8 @@ if @patron.suspension_from_multiple_incidents.count >= 1
 end
 
 docx.p
-docx.p "Because of your past behavior, you are now suspended from all facilities of the Traverse Area
-District Library for one year. You may not borrow materials, use public computing facilities,
+docx.p "Because of your behavior, you are now suspended from all facilities of the Traverse Area
+District Library. You may not borrow materials, use public computing facilities,
 restrooms, or step into any TADL facility or on TADL property until the end of this suspension,
 which will be until " + @patron.suspension.end_date.strftime("%B %d, %Y") + "."
 docx.p
@@ -58,4 +58,4 @@ docx.p "Michele P. Howard"
 docx.p "Director"
 docx.p
 docx.p
-docx.p "Enclosure: TADL Policy 4.1 – Notice of Suspension &amp; Behavior Policy with Appeal Process"
+docx.p "Enclosure: TADL Policy 4.1 – Notice of Suspension & Behavior Policy with Appeal Process"

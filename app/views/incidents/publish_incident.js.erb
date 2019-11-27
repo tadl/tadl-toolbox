@@ -1,0 +1,3 @@
+alert("Incident has been published and email sent.")
+var target_div = '#incident_' + <%= @incident.id.to_s %>
+$(target_div).html("<%= escape_javascript(render 'incident_stub', i: @incident) %>")

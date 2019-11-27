@@ -3,7 +3,7 @@
     <%= p.full_name %>
     <% if p.suspended? %>
       - <b>Suspended</b> <%= p.suspension.end_date %>
-      - <a href="/suspension_letter?patron_id=<%= p.id %>">Suspension Letter</a>
+      - <a target="_blank" href="/suspension_letter?patron_id=<%= p.id %>">Suspension Letter</a>
     <% end %>
     <% if editable %>
       <br> 

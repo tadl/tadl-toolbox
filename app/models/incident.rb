@@ -1,6 +1,8 @@
 class Incident < ActiveRecord::Base
   mount_uploaders :incidentpic, IncidentpicUploader
   has_many :violations
+  has_many :patrons, through: :violations
+  belongs_to :admin
 
   def primary_pic_small
     if self.incidentpic.size != 0
@@ -43,4 +45,9 @@ class Incident < ActiveRecord::Base
     self[:incidentpic].delete(target_pic)
     self[:incidentpic].unshift(target_pic)
   end
+
+  def send_email
+    IncidentMailer.incident_email(self).deliver_now
+  end
+
 end

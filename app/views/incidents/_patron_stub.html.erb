@@ -6,13 +6,18 @@
       </div>
       <div class='col-sm-9'>
         <h4><%= p.full_name %></h4>
+        <% if p.suspended? %>
+          <b>Suspended Until:</b> <%= p.suspension.end_date %>
+          - <a href="/suspension_letter?patron_id=<%= p.id %>">Suspension Letter</a>
+          <br>
+        <% end %>
         <b>Address:</b> <%= p.full_address %>
         <% if p.age %>
           <br>
           <b>Age:</b> <%= p.age %>
+          <br>
         <% end %>
         <% if p.physical_description %>
-          <br>
           <b>Physical Description:</b> <%= p.physical_description %>
         <% end %>
         <% if p.card_number %>

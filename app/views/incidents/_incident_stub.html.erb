@@ -25,6 +25,12 @@
           <% end %>
         <% end %>
         <a href="/edit_incident?id=<%= i.id %>">Edit</a>
+        <br>
+        <% if i.published == false %>
+          <% if i.admin_id == current_user.id || super_admin %> 
+            <a onclick="publish_incident('<%= i.id %>')">Publish and Send Email</a>
+          <% end %>
+        <% end %>
       </div>
     </div>
     <% if i.incidentpic.size > 1 %>

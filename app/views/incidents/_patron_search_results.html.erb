@@ -10,6 +10,10 @@
           <a onclick="add_patron_to_incident('<%= p.id %>')">Add Patron to This Incident</a>
           <br>
         <% end %>
+        <% if p.suspended? %>
+          <b>Suspended Until:</b> <%= p.suspension.end_date %>
+          <br>
+        <% end %>
         <b>Address:</b> <%= p.full_address %>
         <% if p.age %>
           <br>
@@ -22,6 +26,15 @@
         <% if p.card_number %>
           <br>
           <b>Card #:</b> <%= p.card_number %>
+          <br>
+        <% end %>
+        <% if p.violations %>
+          <b>Previous Incidents</b>
+          <br>
+          <% p.incidents.uniq.each do |i|%>
+            <%= i.title %>
+            <br>
+          <% end %>
         <% end %>
       </div>
     </div>

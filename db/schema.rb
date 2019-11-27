@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191118215103) do
+ActiveRecord::Schema.define(version: 20191127200908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,11 +59,13 @@ ActiveRecord::Schema.define(version: 20191118215103) do
     t.string   "location"
     t.string   "department"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "title"
     t.json     "incidentpic"
     t.boolean  "no_patrons"
+    t.boolean  "published",   default: false
+    t.integer  "admin_id"
   end
 
   create_table "lists", force: :cascade do |t|
@@ -119,9 +121,10 @@ ActiveRecord::Schema.define(version: 20191118215103) do
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "patron_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.text     "track"
+    t.date     "violations_from_date"
   end
 
   create_table "trailers", force: :cascade do |t|

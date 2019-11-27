@@ -352,3 +352,7 @@ function remove_patron_from_incident(patron_id){
     $.get("remove_patron_from_incident", {patron_id: patron_id, incident_id: incident_id})
   }
 }
+
+function publish_incident(incident_id){
+  $.get("publish_incident", {incident_id: incident_id})
+}

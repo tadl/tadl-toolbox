@@ -2,7 +2,9 @@
 <div class="padding-all">
   <% if !@incidents.empty? %>
     <% @incidents.each do |i| %>
-      <%= render 'incident_stub', i: i %>
+      <div id="incident_<%= i.id %>">
+        <%= render 'incident_stub', i: i %>
+      </div>
     <% end %>
   <% else %>
     <p>There currently are no incidents saved.</p>
