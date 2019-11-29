@@ -1,2 +1,2 @@
 var target_div = '#patron_<%= escape_javascript(@patron.id.to_s)%>'
-$(target_div).html("<%= escape_javascript(render 'patron_incident_violation_list', p: @patron, i: @incident) %>")
+$(target_div).html("<%= escape_javascript(render 'patron_incident_violation_list', p: @patron, i: @incident, editable: true, no_suspension_letter: false) %>")

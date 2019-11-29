@@ -5,6 +5,26 @@
   </head>
   <body>
     <h1><%= @incident.title %></h1>
-    <p>This is a test email</p>
+    <% if @incident.date_of %>
+      <b>Date/Time of Incident:</b> <%=  @incident.date_of.strftime("%A %m/%d/%Y at  %I:%M %p ") %>
+      <br>
+    <% end %>
+    <% if @incident.admin %>
+      <b>Reported By: <%=  @incident.admin.name %></b>
+      <br>
+    <% end %>
+    <% if  @incident.description %>
+      <br>
+      <b>Description:</b>
+      <br>
+      <%=  @incident.description %>
+      <br>
+    <% end %>
+    <% if @incident.violations %>
+      <% incident_violations = @incident.violations.select('distinct on (patron_id) *') %>
+      <% incident_violations.each do |ic| %>
+        <%= render 'incidents/patron_incident_violation_list', p: Patron.find(ic.patron_id), i: @incident, editable: false, no_suspension_letter: true %>
+      <% end %>
+    <% end %>
   </body>
 </html>

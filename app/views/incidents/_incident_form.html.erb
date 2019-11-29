@@ -76,7 +76,7 @@
   <% else %>
     <% incident_violations = incident.violations.select('distinct on (patron_id) *') %>
     <% incident_violations.each do |i| %>
-      <%= render 'patron_incident_violation_list', p: Patron.find(i.patron_id), i: incident, editable: true %>
+      <%= render 'patron_incident_violation_list', p: Patron.find(i.patron_id), i: incident, editable: true, no_suspension_letter: true %>
     <% end %>
   <% end %>
   <div class="incident_info">
