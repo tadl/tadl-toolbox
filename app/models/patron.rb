@@ -193,7 +193,7 @@ class Patron < ActiveRecord::Base
   def last_incident_violations
     last_violation = self.last_violation
     last_incident = Incident.find(last_violation.incident_id)
-    return last_incident.violations
+    return last_incident.violations.where(patron_id: self.id)
   end
 
   def suspension_from_multiple_incidents

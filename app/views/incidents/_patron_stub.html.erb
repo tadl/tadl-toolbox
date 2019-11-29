@@ -8,7 +8,7 @@
         <h4><%= p.full_name %></h4>
         <% if p.suspended? %>
           <b>Suspended Until:</b> <%= p.suspension.end_date %>
-          - <a href="/suspension_letter?patron_id=<%= p.id %>">Suspension Letter</a>
+          - <a href="/suspension_letter?patron_id=<%= p.id %>" target="_blank">Suspension Letter</a>
           <br>
         <% end %>
         <b>Address:</b> <%= p.full_address %>

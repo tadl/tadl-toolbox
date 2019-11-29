@@ -1,2 +1,7 @@
-$('#violation_portion').append("<%= escape_javascript( render 'violation_form', patron: @patron, incident: @incident, violation_types: Violationtype.all) %>")
+<% if @patron.incidents.include? @incident %>
+  var target_div = '#patron_<%= escape_javascript(@patron.id.to_s)%>'
+  $(target_div).html("<%= escape_javascript( render 'violation_form', patron: @patron, incident: @incident, violation_types: Violationtype.all) %>")
+<% else %>
+  $('#violation_portion').append("<%= escape_javascript( render 'violation_form', patron: @patron, incident: @incident, violation_types: Violationtype.all) %>")
+<% end %>
 $('#patron_portion').hide()
