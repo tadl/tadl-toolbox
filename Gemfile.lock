@@ -65,8 +65,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.5)
-    connection_pool (2.2.2)
+    concurrent-ruby (1.1.9)
+    connection_pool (2.2.5)
     crass (1.0.4)
     dalli (2.7.10)
     declarative (0.0.10)
@@ -170,6 +170,8 @@ GEM
     public_suffix (3.1.1)
     raabro (1.1.6)
     rack (1.6.11)
+    rack-protection (2.1.0)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.11.1)
@@ -243,10 +245,10 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    sidekiq (4.1.0)
-      concurrent-ruby (~> 1.0)
-      connection_pool (~> 2.2, >= 2.2.0)
-      redis (~> 3.2, >= 3.2.1)
+    sidekiq (5.2.0)
+      connection_pool (~> 2.2, >= 2.2.2)
+      rack-protection (>= 1.5.0)
+      redis (>= 3.3.5, < 5)
     sidekiq-cron (0.4.3)
       redis-namespace (>= 1.5.2)
       rufus-scheduler (>= 2.0.24)
@@ -319,7 +321,7 @@ DEPENDENCIES
   sass-rails (>= 3.2)
   scenic
   sdoc (~> 0.4.0)
-  sidekiq (= 4.1.0)
+  sidekiq (= 5.2.0)
   sidekiq-cron (~> 0.4.0)
   simple_calendar (~> 2.0)
   spring
