@@ -3,7 +3,7 @@
     <h4><%= patron.full_name %></h4>  
     <div class="form-group col-sm-12" id="violations_<%= patron.id.to_s %>">
       <label for="violation">Select Violation(s)</label>
-        <% violation_types.each do |v| %>
+        <% violation_types.order(:description).each do |v| %>
           <div class="checkbox">
             <label>
               <input type="checkbox" value="<%= v.id %>" <%= test_for_existing_violation(patron.id, incident.id, v.id) %>>

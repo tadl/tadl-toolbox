@@ -21,6 +21,8 @@
       <br>
     <% end %>
     <% if @incident.violations %>
+      <b>Patron(s) Involved:
+      <br>
       <% incident_violations = @incident.violations.select('distinct on (patron_id) *') %>
       <% incident_violations.each do |ic| %>
         <%= render 'incidents/patron_incident_violation_list', p: Patron.find(ic.patron_id), i: @incident, editable: false, no_suspension_letter: true %>

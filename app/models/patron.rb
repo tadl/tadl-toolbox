@@ -207,6 +207,11 @@ class Patron < ActiveRecord::Base
     return violations
   end
 
+  def unique_incidents
+    incidents = self.incidents.select("DISTINCT ON (incidents.id) incidents.*")
+    return incidents
+  end
+
   def as_json(options={})
     super(
       :except => [:created_at, :updated_at],

@@ -15,7 +15,7 @@ class List < ActiveRecord::Base
 	 			url = split_url[0] + '.json?' + split_url[1] rescue good_url = false
 	 		end
 	 		puts url
-            if (Addressable::URI.parse(self.url).host == 'catalog.tadl.org' || Addressable::URI.parse(self.url).host == 'catalog.sbbdl.org' || Addressable::URI.parse(self.url).host == 'catalog.apps.tadl.org') && confirm_items(url) == true
+            if (Addressable::URI.parse(self.url).host == 'catalog.tadl.org' || Addressable::URI.parse(self.url).host == 'catalog.sbbdl.org' || Addressable::URI.parse(self.url).host == 'catalog.apps.tadl.org' || Addressable::URI.parse(self.url).host == 'catalog.kalkaskalibrary.org' ) && confirm_items(url) == true
 	 			good_url = true
 	 		else
 	 			puts "bad"
