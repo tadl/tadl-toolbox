@@ -27,7 +27,7 @@ gem 'dotenv-rails', :groups => [:development, :test]
 gem 'responders', '~> 2.0'
 gem 'addressable'
 gem 'httparty'
-gem 'sidekiq', '4.1.0'
+gem 'sidekiq', '5.2.8'
 gem 'sidekiq-cron', '~> 0.4.0'
 gem 'redis'
 gem 'dalli'
