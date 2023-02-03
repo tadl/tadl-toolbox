@@ -56,6 +56,9 @@ class ListsController < ApplicationController
   			@items = Rails.cache.fetch(params['code'].to_s)
   			@list = List.find_by code: params['code']
   		end
+		if params['shuffle'] == 'true' || params['shuffle'].nil?
+			@items = @items.shuffle
+		end
   		respond_to do |format|
   			format.html
   	    	format.json {render :json => {:list_name=> @list.name, :search_url=>  @list.url, :items => @items}}

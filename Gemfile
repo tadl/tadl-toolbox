@@ -13,7 +13,7 @@ gem 'spring',        group: :development
 gem 'rails_12factor', group: :production
 
 gem 'carrierwave', '1.3.0'
-gem 'omniauth'
+gem 'omniauth', '1.9.2'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'bootstrap-sass', '>= 3.4.1'
@@ -41,3 +41,4 @@ gem 'pg_search'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem 'caracal-rails'
+gem 'nokogiri', '1.10.4'
